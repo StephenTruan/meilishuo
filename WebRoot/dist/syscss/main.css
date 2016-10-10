@@ -1,0 +1,153 @@
+/**最外层容器**/
+		.container{
+			width: 1346px;
+			height: 5000px;
+			padding: 0px;
+			font-family: SimHei;
+		}
+		/**最外层容器 内部第一层div**/
+		.container div{
+			padding: 0px;
+			margin-bottom: 0px;
+		}
+		.container a{text-decoration: none;color: #aaaaaa;}
+		.container a:HOVER{color: #ff6699;}
+		
+		
+		/**底部**/
+		#footer{height: 260px;background-color: #dddddd;}
+		
+		
+		
+		
+		/****************右侧下方主题*********************/
+		#body_dv1_bottom{
+			height: 28%;width: 80%;padding-top: 15px;
+		}
+		/**右侧下方主题的单项**/
+		.body_dv1_bottom_item{
+			width: 18%;margin-left:2%;height: 97.5%;
+		}
+		/**每日新款**/
+		#body_dv2{
+			height: 400px;
+			margin-top: 20px;
+		}
+		/**正在流行**/
+		#body_dv3{
+			height: 200px;
+		}
+		/**新品精选**/
+		#body_dv4{
+			height: 760px;
+		}
+		/**明星同款**/
+		#body_dv5{
+			height: 450px;
+		}
+		/**时尚美装**/
+		#body_dv6{
+			height: 450px;
+		}
+		/**Hi范儿**/
+		#body_dv7{
+			height: 400px;
+		}
+		/**好店推荐**/
+		#body_dv8{
+			height: 350px;
+		}
+		/**新店驾到**/
+		#body_dv9{
+			height: 1180px;
+		}
+		
+		
+		
+		/**************** 单项 *******************/
+		.body_dv2_item{
+			width: 32%;height: 350px;margin-right: 2%;;
+		}
+		.body_dv3_item{
+			width: 15%;height: 150px;margin-right: 2%;
+		}
+		.body_dv4_item{
+			width: 18%;height: 45%;margin-right: 2.5%;margin-top: 6px;
+		}
+		.body_dv5_item{
+			width: 32%;height: 400px;margin-right: 2%;
+		}
+		.body_dv6_item{
+			width: 32%;height: 400px;margin-right: 2%;
+		}
+		.body_dv7_item{
+			width: 32%;height: 300px;margin-right: 2%;
+		}
+		.body_dv8_item{
+			width: 32%;height: 300px;margin-right: 2%;
+		}
+		.body_dv9_item{
+			width: 18%;height: 30%;margin-right: 2.5%;margin-top: 6px;
+		}
+		
+		
+
+		
+		/**好店推荐此	效果**/
+		#dv8_hover{
+			background-color: black;position: absolute;z-index: 2220px;top: 0px;opacity:0.5;
+		}
+		/**好店推荐此	按钮	效果**/
+		#dv8_hover button{
+			width: 100px;line-height: 40px;color: #ffffff;background-color: black;
+			border: 1px solid #ffffff;margin-left: 36%;margin-top: 50px;
+		}
+		/**好店推荐此	按钮光标覆盖	效果**/
+		#dv8_hover button:HOVER{
+			color: black;background-color: #ffffff;
+			border: 1px solid #ffffff;margin-left: 36%;margin-top: 50px;
+		}
+		
+		
+		/*********************页面图片***********************/
+		#body_dv1_bottom div img{
+			width: 100%;height: 100%;
+		}
+		#body_dv2 div img{
+			width: 100%;height: 100%;
+		}
+		#body_dv3 div img{
+			width: 100%;height: 100%;
+		}
+		#body_dv4 div img{
+			width: 100%;height: 86%;
+		}
+		#body_dv5 div img{
+			width: 100%;height: 88%;
+		}
+		#body_dv6 div img{
+			width: 100%;height: 88%;
+		}
+		#body_dv7 div img{
+			width: 100%;height: 88%;
+		}
+		#body_dv8 div img{
+			width: 100%;height: 100%;
+		}
+		#body_dv9 div img{
+			width: 100%;height: 86%;
+		}
+		
+		.body_dv2_item div img{
+			width: 100%;height: 100%;
+		}
+		
+		
+		
+		/************************滚动广告	左侧导航延伸菜单**************************/
+		.left_item_list{
+			position: absolute;z-index: 7;background-color: #ffffff;width: 300px;height: 200px;
+			border: 1px solid #cccccc;border-left: 0px solid #cccccc;
+		}
+		
+		
