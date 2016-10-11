@@ -17,6 +17,8 @@
 						">
 
 
+	<import resource="specification.xml"/>
+
 	
 	<!-- 用注解方式 -->
 	<context:annotation-config></context:annotation-config>
@@ -27,12 +29,28 @@
 	<!-- 与ModelService中的daoMap相对应，用了注解@Resource(name="daoMap") -->
 	<util:map id="daoMap" map-class="java.util.HashMap">
 		<entry key="goodsInfoDAO" value-ref="goodsInfoDAO"></entry>
-		<entry key="clothingColarDAO" value-ref="clothingColarDAO"></entry>
+		<entry key="clothingCollarDAO" value-ref="clothingCollarDAO"></entry>
 		<entry key="clothingElementDAO" value-ref="clothingElementDAO"></entry>
 		<entry key="clothingSizeDAO" value-ref="clothingSizeDAO"></entry>
 		<entry key="clothingTypeversionDAO" value-ref="clothingTypeversionDAO"></entry>
 		<entry key="materialDAO" value-ref="materialDAO"></entry>
 		<entry key="typeinfoDAO" value-ref="typeinfoDAO"></entry>
+	</util:map>
+	
+	<!-- 规格 -->
+	<util:map id="specificationMap" map-class="java.util.LinkedHashMap" >
+		<entry key="类目" value-ref="typeinfo_sps"></entry>
+		<entry key="衣长" value-ref="clothingsize_sps"></entry>
+		<entry key="版型" value-ref="clothingTypeversion_sps"></entry>
+		<entry key="领型" value-ref="clothingCollar_sps"></entry>
+		<entry key="元素" value-ref="clothingElement_sps"></entry>
+		
+		<entry key="裙长" value-ref="clothingSkirtsize_sps"></entry>
+		<entry key="腰线高度" value-ref="clothingLineheight_sps"></entry>
+		<entry key="材质" value-ref="material_sps"></entry>
+		<entry key="裙子厚度" value-ref="clothingSkirthoudu_sps"></entry>
+		<entry key="裙摆" value-ref="clothingSkirtbaixing_sps"></entry>
+		<entry key="开衩" value-ref="clothingSkirtkaicha_sps"></entry>
 	</util:map>
 	
 	<!-- 配置数据源 -->

@@ -8,17 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.meilishuo.entity.ClothingCollar;
-import org.meilishuo.entity.ClothingElement;
-import org.meilishuo.entity.ClothingLineheight;
-import org.meilishuo.entity.ClothingSize;
-import org.meilishuo.entity.ClothingTypeversion;
 import org.meilishuo.entity.Goodsinfo;
 import org.meilishuo.entity.Typeinfo;
 import org.meilishuo.mdservice.ModelService;
@@ -30,25 +28,51 @@ import com.opensymphony.xwork2.ActionContext;
 
 @Controller
 @Namespace(value = "/mls/crol/mainAction")
+@ParentPackage("struts-default")
 @Results(value = {
 		@Result(name = "infoes", location = "/shangyi.jsp") 
 		})
+@Lazy(true)
 public class MainAction extends BaseAction {
-	
+	//显示规格  key
 	private String itemkey;
+	//已被选中规格 key
 	private String itemkey_checked;
 	
+	//规格文本
 	private String itemtext;
 	
+	
+	//筛选条件（属性名称）
 	private String critera_propertyname;
+	//筛选条件（属性值）
 	private String critera_propertyvalue;
+	
+	//被取消的筛选条件（属性名称）
 	private String critera_propertyname_remove;
 	
+	private Typeinfo typeinfo;
+	
+	
+	
+	@Resource(name="specificationMap")
+	private Map<String, ItemList> specificationMap;
 	
 	
 	
 	
-	
+	public Typeinfo getTypeinfo() {
+		return typeinfo;
+	}
+	public void setTypeinfo(Typeinfo typeinfo) {
+		this.typeinfo = typeinfo;
+	}
+	public Map<String, ItemList> getSpecificationMap() {
+		return specificationMap;
+	}
+	public void setSpecificationMap(Map<String, ItemList> specificationMap) {
+		this.specificationMap = specificationMap;
+	}
 	public String getCritera_propertyname_remove() {
 		return critera_propertyname_remove;
 	}
@@ -95,28 +119,41 @@ public class MainAction extends BaseAction {
 	@Action(value="getInfoes")
 	public String showGoodsInfoes() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnsupportedEncodingException{
 		
+		
+		if(typeinfo!=null){
+			typeinfo=(Typeinfo) getService().getInfoByID(getService().TYPEINFO, typeinfo.getTpid());
+			System.out.println(typeinfo.getTpname());
+			System.out.println(typeinfo.getSpecificationses());
+		}
+		
+		
+		if(1>0)
+			return null;
+		
+		
+		
 		//负责收集规格选项的容器  从session作用域获取------>规格容器
 		Map<String, List> items = (Map<String, List>) ActionContext.getContext().getSession().get("items");
 		
 		
 		//如果不存在则从数据库提取相关规格数据
 		if(items==null){
-			List list_typeinfo = new ItemList("Tpid", "Tpname", getService().getInfoByProperties(ModelService.TYPEINFO, Restrictions.eq("tpparentid", 1)));
-			List list_clothingSize = new ItemList("Csid", "Csname", getService().getInfoByProperties(ModelService.CLOTHINGSIZE, Restrictions.eq("tpid", 1)));
-			List list_clothingCollat = new ItemList("Ccid", "Cctext", getService().getInfoByProperties(ModelService.CLOTHINGCOLAR, Restrictions.eq("tpid", 1)));
-			List list_clothingTypeversion = new ItemList("Ctid", "Cttext", getService().getInfoByProperties(ModelService.CLOTHINGTYPEVERSION, Restrictions.eq("tpid", 1)));
-			List list_clothingElement = new ItemList("Ceid", "Cetext", getService().getInfoByProperties(ModelService.CLOTHINGELEMENT, Restrictions.eq("tpid", 1)));
-			
-			items = new LinkedHashMap<String, List>();
-			
-			items.put("类目", list_typeinfo);
-			items.put("版型", list_clothingTypeversion);
-			items.put("衣长", list_clothingSize);
-			items.put("领型", list_clothingCollat);
-			items.put("元素", list_clothingElement);
-			
-			ActionContext.getContext().getSession().put("items", items);
-			
+//			List list_typeinfo = new ItemList("Tpid", "Tpname", "typeinfo.tpid", getService().getInfoByProperties(ModelService.TYPEINFO, Restrictions.eq("tpparentid", 1)));
+//			List list_clothingSize = new ItemList("Csid", "Csname", "csid", getService().getInfoByProperties(ModelService.CLOTHINGSIZE, Restrictions.eq("tpid", 1)));
+//			List list_clothingCollat = new ItemList("Ccid", "Cctext", "ccid", getService().getInfoByProperties(ModelService.CLOTHINGCOLAR, Restrictions.eq("tpid", 1)));
+//			List list_clothingTypeversion = new ItemList("Ctid", "Cttext", "ctid", getService().getInfoByProperties(ModelService.CLOTHINGTYPEVERSION, Restrictions.eq("tpid", 1)));
+//			List list_clothingElement = new ItemList("Ceid", "Cetext", "ceid", getService().getInfoByProperties(ModelService.CLOTHINGELEMENT, Restrictions.eq("tpid", 1)));
+//			
+//			items = new LinkedHashMap<String, List>();
+//			
+//			items.put("类目", list_typeinfo);
+//			items.put("版型", list_clothingTypeversion);
+//			items.put("衣长", list_clothingSize);
+//			items.put("领型", list_clothingCollat);
+//			items.put("元素", list_clothingElement);
+//			
+//			ActionContext.getContext().getSession().put("items", items);
+//			
 		}
 		
 		//收集 已选的规格显示选项 的容器，从session作用域获取------->已选容器
@@ -135,7 +172,7 @@ public class MainAction extends BaseAction {
 		if(itemkey!=null){
 			
 			//将itemkey的value放入到  已选容器    同时从  规格容器  中删除
-			items_checked.put(itemkey+":"+itemtext, items.remove(itemkey));
+			items_checked.put(itemkey+":"+itemtext+","+critera_propertyname, items.remove(itemkey));
 			
 		}
 		
@@ -150,9 +187,9 @@ public class MainAction extends BaseAction {
 					items.put(itemkey_checked, items_checked.remove(k));
 					
 					String ck = k.split(",")[1];
-					Map mp = (Map)ActionContext.getContext().getSession().get("criteriaMap");
+					Map mp = (Map) ActionContext.getContext().getSession().get("criteriaMap");
 					mp.remove(ck);
-
+					
 					break;
 				}
 			}
@@ -166,21 +203,17 @@ public class MainAction extends BaseAction {
 		Criterion criterion = null;
 		
 		//添加筛选项
-		if(this.critera_propertyname != null){
+		if(this.critera_propertyname != null || critera_propertyname_remove != null){
 			
 			Map criteriaMap = (Map) ActionContext.getContext().getSession().get("criteriaMap");
-			
 			if(criteriaMap == null){
 				criteriaMap = new LinkedHashMap();
-				ActionContext.getContext().getSession().put("criteriaMap", criteriaMap);
+				ActionContext.getContext().getSession().put("criteriaMap",criteriaMap);
+				
 			}
-			criteriaMap.put("critera_propertyname", new Integer(critera_propertyvalue));
-			
+			criteriaMap.put(critera_propertyname, new Integer(critera_propertyvalue));
 			criterion = Restrictions.allEq(criteriaMap);
-			
 		}
-		
-		//移除筛选项
 		else if(critera_propertyname_remove != null){
 			Map criteriaMap = (Map) ActionContext.getContext().getSession().get("criteriaMap");
 			
@@ -192,9 +225,7 @@ public class MainAction extends BaseAction {
 				
 				criterion = Restrictions.in("typeinfo", types);
 			}
-		}
-		//默认无筛选项
-		else{
+		}else{
 			List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", 1));
 			
 			criterion = Restrictions.in("typeinfo", types);

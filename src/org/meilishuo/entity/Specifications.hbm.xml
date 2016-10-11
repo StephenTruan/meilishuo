@@ -13,11 +13,6 @@
         <property name="sptext" type="java.lang.String">
             <column name="sptext" length="50" not-null="true" unique="true" />
         </property>
-        <set name="typeinfoandspecificationses" inverse="true">
-            <key>
-                <column name="spid" not-null="true" />
-            </key>
-            <one-to-many class="org.meilishuo.entity.Typeinfoandspecifications" />
-        </set>
+        
     </class>
 </hibernate-mapping>

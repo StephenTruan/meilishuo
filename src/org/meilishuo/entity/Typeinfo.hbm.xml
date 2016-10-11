@@ -19,11 +19,12 @@
         <property name="tpparentid" type="java.lang.Integer">
             <column name="tpparentid" />
         </property>
-        <set name="typeinfoandspecificationses" inverse="true">
-            <key>
-                <column name="tpid" not-null="true" />
-            </key>
-            <one-to-many class="org.meilishuo.entity.Typeinfoandspecifications" />
-        </set>
+        
+        <map name="specificationses" table="typeinfoandspecifications" order-by="tpid" lazy="false">
+        	<key column="tpid"></key>
+        	<map-key type="string" column="sptext"></map-key>
+        	<many-to-many column="spid" class="org.meilishuo.entity.Specifications"></many-to-many>
+        </map>
+        
     </class>
 </hibernate-mapping>

@@ -15,7 +15,7 @@ public class Specifications  implements java.io.Serializable {
 
      private Integer spid;
      private String sptext;
-     private Set typeinfoandspecificationses = new HashSet(0);
+    
 
 
     // Constructors
@@ -27,12 +27,6 @@ public class Specifications  implements java.io.Serializable {
 	/** minimal constructor */
     public Specifications(String sptext) {
         this.sptext = sptext;
-    }
-    
-    /** full constructor */
-    public Specifications(String sptext, Set typeinfoandspecificationses) {
-        this.sptext = sptext;
-        this.typeinfoandspecificationses = typeinfoandspecificationses;
     }
 
    
@@ -54,14 +48,7 @@ public class Specifications  implements java.io.Serializable {
         this.sptext = sptext;
     }
 
-    public Set getTypeinfoandspecificationses() {
-        return this.typeinfoandspecificationses;
-    }
-    
-    public void setTypeinfoandspecificationses(Set typeinfoandspecificationses) {
-        this.typeinfoandspecificationses = typeinfoandspecificationses;
-    }
-   
+  
 
 
 

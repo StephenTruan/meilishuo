@@ -10,6 +10,17 @@ import java.io.Serializable;
 public class Item {
 	private Serializable id;
 	private Serializable text;
+	
+	private Serializable property_name;
+	
+	
+	
+	public Serializable getProperty_name() {
+		return property_name;
+	}
+	public void setProperty_name(Serializable property_name) {
+		this.property_name = property_name;
+	}
 	public Serializable getId() {
 		return id;
 	}
@@ -25,9 +36,10 @@ public class Item {
 	public Item() {
 		// TODO Auto-generated constructor stub
 	}
-	public Item(Object id, Object text) {
+	public Item(Object id, Object text, Object property_name) {
 		this.id = (Serializable) id;
 		this.text = (Serializable) text;
+		this.property_name = (Serializable) property_name;
 	}
 	
 }

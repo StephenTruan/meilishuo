@@ -1,6 +1,8 @@
 package org.meilishuo.entity;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -17,7 +19,8 @@ public class Typeinfo  implements java.io.Serializable {
      private String tpname;
      private Integer tplevel;
      private Integer tpparentid;
-     private Set typeinfoandspecificationses = new HashSet(0);
+     
+     private Map<String, Specifications> specificationses;
 
 
     // Constructors
@@ -33,11 +36,11 @@ public class Typeinfo  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public Typeinfo(String tpname, Integer tplevel, Integer tpparentid, Set typeinfoandspecificationses) {
+    public Typeinfo(String tpname, Integer tplevel, Integer tpparentid, Map specificationses) {
         this.tpname = tpname;
         this.tplevel = tplevel;
         this.tpparentid = tpparentid;
-        this.typeinfoandspecificationses = typeinfoandspecificationses;
+        this.specificationses = specificationses;
     }
 
    
@@ -75,13 +78,14 @@ public class Typeinfo  implements java.io.Serializable {
         this.tpparentid = tpparentid;
     }
 
-    public Set getTypeinfoandspecificationses() {
-        return this.typeinfoandspecificationses;
-    }
+	public Map<String, Specifications> getSpecificationses() {
+		return specificationses;
+	}
+
+	public void setSpecificationses(Map<String, Specifications> specificationses) {
+		this.specificationses = specificationses;
+	}
     
-    public void setTypeinfoandspecificationses(Set typeinfoandspecificationses) {
-        this.typeinfoandspecificationses = typeinfoandspecificationses;
-    }
    
 
 

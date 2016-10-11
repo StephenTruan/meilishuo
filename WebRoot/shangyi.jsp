@@ -101,7 +101,7 @@
 	  	
 	  	<div class="col-lg-10 col-lg-offset-1" style="margin-top: 20px;">
 	  		<cc:forEach items="${sessionScope.items_checked }" var="item_checked">
-	  			<a class="btn btn-default item_checked" href="/meilishuo/mls/crol/mainAction/getInfoes?itemkey_checked=${fn:split(item_checked.key,':')[0] }&critera_propertyname_remove=${fn:split(item_checked.key,':')[1] }">${item_checked.key }<i class="glyphicon glyphicon-remove"></i></a>
+	  			<a class="btn btn-default item_checked" href="/meilishuo/mls/crol/mainAction/getInfoes?itemkey_checked=${fn:split(item_checked.key,':')[0] }&critera_propertyname_remove=${fn:split(item_checked.key,',')[1] }">${fn:split(item_checked.key,",")[0] }<i class="glyphicon glyphicon-remove"></i></a>
 	  		</cc:forEach>
 	  		${fn:length(requestScope.infoes) }
 	  	</div>
@@ -119,7 +119,7 @@
 	      		<div style="float: left;width: 86%;" role="item_infoes">
 	      			<cc:forEach items="${item.value }" var="info" varStatus="idx2">
 	      				<cc:set var="size" value="${idx2.count }"></cc:set>
-		      			<a href="/meilishuo/mls/crol/mainAction/getInfoes?itemkey=${item.key }&itemtext=${info.text }&critera_propertyname=${info.text }&critera_propertyvalue=${info.id }">${info.text }</a>
+		      			<a href="/meilishuo/mls/crol/mainAction/getInfoes?itemkey=${item.key }&itemtext=${info.text }&critera_propertyname=${info.property_name }&critera_propertyvalue=${info.id }">${info.text }</a>
 		      		</cc:forEach>
 	      		</div>    
 	      		 		

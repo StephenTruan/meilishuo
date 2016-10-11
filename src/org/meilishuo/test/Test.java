@@ -9,23 +9,31 @@ import org.meilishuo.dao.GoodsInfoDAO;
 import org.meilishuo.entity.ClothingSize;
 import org.meilishuo.entity.Goodsimage;
 import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Specifications;
 import org.meilishuo.entity.Typeinfo;
 import org.meilishuo.interfaces.DAO;
 import org.meilishuo.mdservice.ModelService;
+import org.meilishuo.webtool.Item;
+import org.meilishuo.webtool.ItemList;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Test {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		ApplicationContext app = new ClassPathXmlApplicationContext("app1.xml");
 		
-		ModelService service = app.getBean("modelService",ModelService.class);
+//		ModelService service = app.getBean("modelService",ModelService.class);
 		
-		List<Typeinfo> ts = service.getInfoByProperties(service.TYPEINFO, Restrictions.eq("tpparentid", 1));
+		Map<String, ItemList> mp = (Map<String, ItemList>) app.getBean("specificationMap");
 		
-		List<Goodsinfo> g = service.getInfoByProperties(service.GOODSINFO, Restrictions.in("typeinfo", ts));
+		ItemList<Item> itm = mp.get("ÀàÄ¿");
 		
-		System.out.println(g.size());
+		itm.invoke(1);
+		
+		for (Object o : itm) {
+			Item i = (Item) o;
+			System.out.println(i.getText());
+		}
 		
 	}
 }
