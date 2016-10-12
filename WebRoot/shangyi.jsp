@@ -89,7 +89,7 @@
   
   <body>
     <div class="container">
-    
+    	
 	    <!-- =====================上层div（登录注册以及个人中心，logo 搜索，导航）========================= -->
 	    <jsp:include page="/main/top.jsp"></jsp:include>
 		<!-- ================================右侧浮动菜单========================================= -->
@@ -100,10 +100,11 @@
 	  	
 	  	
 	  	<div class="col-lg-10 col-lg-offset-1" style="margin-top: 20px;">
+	  		<span style="font-size: 13px;color: #666666;">${requestScope.typeinfo.tpname }&nbsp;> </span>
 	  		<cc:forEach items="${sessionScope.items_checked }" var="item_checked">
-	  			<a class="btn btn-default item_checked" href="/meilishuo/mls/crol/mainAction/getInfoes?itemkey_checked=${fn:split(item_checked.key,':')[0] }&critera_propertyname_remove=${fn:split(item_checked.key,',')[1] }">${fn:split(item_checked.key,",")[0] }<i class="glyphicon glyphicon-remove"></i></a>
+	  			<a class="btn btn-default item_checked" href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=${requestScope.typeinfo.tpid }&itemkey_checked=${fn:split(item_checked.key,':')[0] }&critera_propertyname_remove=${fn:split(item_checked.key,',')[1] }">${fn:split(item_checked.key,",")[0] }<i class="glyphicon glyphicon-remove"></i></a>
 	  		</cc:forEach>
-	  		${fn:length(requestScope.infoes) }
+	  		<span style="font-size: 13px;color: #666666;">共${fn:length(requestScope.infoes) }件</span>
 	  	</div>
 	  	
 	  	
@@ -119,7 +120,7 @@
 	      		<div style="float: left;width: 86%;" role="item_infoes">
 	      			<cc:forEach items="${item.value }" var="info" varStatus="idx2">
 	      				<cc:set var="size" value="${idx2.count }"></cc:set>
-		      			<a href="/meilishuo/mls/crol/mainAction/getInfoes?itemkey=${item.key }&itemtext=${info.text }&critera_propertyname=${info.property_name }&critera_propertyvalue=${info.id }">${info.text }</a>
+		      			<a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=${requestScope.typeinfo.tpid }&itemkey=${item.key }&itemtext=${info.text }&critera_propertyname=${info.property_name }&critera_propertyvalue=${info.id }">${info.text }</a>
 		      		</cc:forEach>
 	      		</div>    
 	      		 		
@@ -148,7 +149,30 @@
 	    	</a>
 	    </div>
 	    
-	     
+	    
+	    <!-- 商品信息显示层 -->
+	    <div class="col-lg-10 col-lg-offset-1" style="margin-top: 40px;" id="show_area">
+		
+			<cc:forEach items="${requestScope.infoes }" var="gd">
+				 <div class="col-lg-2" style="width: 19%;margin-left: 1.25%;">
+				    <div class="thumbnail" style="border: 0px;">
+				      	<img src="/meilishuo/imgs/tp/${gd.goodsimages[1].gimgurl }" >
+				      <div class="caption">
+				        <h4 style="color: #ff6699;">
+				        	￥${gd.goodsprices[1].price }
+				        </h4>
+				        <h6 style="color: #666666;">${gd.gdname }</h6>
+				      </div>
+				    </div>
+				  </div>
+			</cc:forEach>
+
+
+
+		
+		
+		
+		</div>
 	   
 	    
 	    
@@ -337,7 +361,15 @@
   				$("#choose").css("left",$("#items").offset().left+($("#items").width())/2-($("#choose").width())/2);
   			}
   		
-  		
+  			
+  			//根据商品信息显示的需要  每行开头的左边距为0
+  			$("#show_area>div").each(function(i){
+  				if(i%5==0){
+  					$(this).css("margin-left","0px");
+  				}
+  			});
+  			
+  				
   		});
   	
   	

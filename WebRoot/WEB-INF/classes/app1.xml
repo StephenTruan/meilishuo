@@ -49,8 +49,18 @@
 		<entry key="腰线高度" value-ref="clothingLineheight_sps"></entry>
 		<entry key="材质" value-ref="material_sps"></entry>
 		<entry key="裙子厚度" value-ref="clothingSkirthoudu_sps"></entry>
-		<entry key="裙摆" value-ref="clothingSkirtbaixing_sps"></entry>
+		<entry key="摆型" value-ref="clothingSkirtbaixing_sps"></entry>
 		<entry key="开衩" value-ref="clothingSkirtkaicha_sps"></entry>
+		
+		<entry key="裤长" value-ref="clothingTrouserssize_sps"></entry>
+		<entry key="裤子厚度" value-ref="clothingTrousersHoudu_sps"></entry>
+		
+		<entry key="闭合方式" value-ref="clothingClosed_sps"></entry>
+		
+		<entry key="鞋底材质" value-ref="sole_sps"></entry>
+		
+		<entry key="箱包外形" value-ref="packagetype_sps"></entry>
+		<entry key="内部结构" value-ref="packageStructure_sps"></entry>
 	</util:map>
 	
 	<!-- 配置数据源 -->

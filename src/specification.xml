@@ -82,6 +82,47 @@
 	</bean>
 	
 	
+	<bean id="clothingTrousersHoudu_sps" parent="sps"  p:dao-ref="clothingTrousersHouduDAO">
+		<constructor-arg name="type" value="org.meilishuo.entity.ClothingTrousersHoudu"></constructor-arg>
+		<constructor-arg name="id" value="Cthid"></constructor-arg>
+		<constructor-arg name="text" value="Cthtext"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="clothingTrouserssize_sps" parent="sps"  p:dao-ref="clothingTrouserssizeDAO">
+		<constructor-arg name="type" value="org.meilishuo.entity.ClothingTrouserssize"></constructor-arg>
+		<constructor-arg name="id" value="Ctsid"></constructor-arg>
+		<constructor-arg name="text" value="Ctsname"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="clothingClosed_sps" parent="sps"  p:dao-ref="clothingClosedDAO">
+		<constructor-arg name="type" value="org.meilishuo.entity.ClothingClosed"></constructor-arg>
+		<constructor-arg name="id" value="Ccloseid"></constructor-arg>
+		<constructor-arg name="text" value="Cctext"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="sole_sps" parent="sps"  p:dao-ref="soleDAO">
+		<constructor-arg name="type" value="org.meilishuo.entity.Sole"></constructor-arg>
+		<constructor-arg name="id" value="Soleid"></constructor-arg>
+		<constructor-arg name="text" value="Soletext"></constructor-arg>
+	</bean>
+	
+	<bean id="packagetype_sps" parent="sps"  p:dao-ref="packagetypeDAO">
+		<constructor-arg name="type" value="org.meilishuo.entity.Packagetype"></constructor-arg>
+		<constructor-arg name="id" value="Ptid"></constructor-arg>
+		<constructor-arg name="text" value="Pttext"></constructor-arg>
+	</bean>
+	
+	<bean id="packageStructure_sps" parent="sps"  p:dao-ref="packageStructureDAO">
+		<constructor-arg name="type" value="org.meilishuo.entity.PackageStructure"></constructor-arg>
+		<constructor-arg name="id" value="Pgstid"></constructor-arg>
+		<constructor-arg name="text" value="Pgsttext"></constructor-arg>
+	</bean>
+	
+	
+	
 	
 	
 </beans>

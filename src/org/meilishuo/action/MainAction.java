@@ -115,20 +115,32 @@ public class MainAction extends BaseAction {
 
 
 	/**===================================动作=========================================
-	 * @throws UnsupportedEncodingException **/
+	 * @throws Exception **/
 	@Action(value="getInfoes")
-	public String showGoodsInfoes() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnsupportedEncodingException{
+	public String showGoodsInfoes() throws Exception{
 		
-		
+		//传递商品类型，根据商品类型的编号，获取整个商品类型信息，包括规格
 		if(typeinfo!=null){
 			typeinfo=(Typeinfo) getService().getInfoByID(getService().TYPEINFO, typeinfo.getTpid());
-			System.out.println(typeinfo.getTpname());
-			System.out.println(typeinfo.getSpecificationses());
 		}
 		
+		//在session作用域中存放类型编号，用于商品大类切换使得判断比较
+		if(!ActionContext.getContext().getSession().containsKey("tp_id")){
+			ActionContext.getContext().getSession().put("tp_id", typeinfo.getTpid());
+		}
 		
-		if(1>0)
-			return null;
+		//通过session作用域属性确认之前（本次检索之前）使用的商品类型
+		Integer tp_id = (Integer) ActionContext.getContext().getSession().get("tp_id");
+
+		//如果两次的商品类型编号不一致，则表明大类变化需要清空session中已有的规格，以便重新通过spring选择
+		if(tp_id.intValue() != typeinfo.getTpid().intValue()){
+			ActionContext.getContext().getSession().remove("items");
+			ActionContext.getContext().getSession().remove("items_checked");
+			
+			tp_id = typeinfo.getTpid();
+			
+			ActionContext.getContext().getSession().put("tp_id", tp_id);
+		}
 		
 		
 		
@@ -138,24 +150,33 @@ public class MainAction extends BaseAction {
 		
 		//如果不存在则从数据库提取相关规格数据
 		if(items==null){
-//			List list_typeinfo = new ItemList("Tpid", "Tpname", "typeinfo.tpid", getService().getInfoByProperties(ModelService.TYPEINFO, Restrictions.eq("tpparentid", 1)));
-//			List list_clothingSize = new ItemList("Csid", "Csname", "csid", getService().getInfoByProperties(ModelService.CLOTHINGSIZE, Restrictions.eq("tpid", 1)));
-//			List list_clothingCollat = new ItemList("Ccid", "Cctext", "ccid", getService().getInfoByProperties(ModelService.CLOTHINGCOLAR, Restrictions.eq("tpid", 1)));
-//			List list_clothingTypeversion = new ItemList("Ctid", "Cttext", "ctid", getService().getInfoByProperties(ModelService.CLOTHINGTYPEVERSION, Restrictions.eq("tpid", 1)));
-//			List list_clothingElement = new ItemList("Ceid", "Cetext", "ceid", getService().getInfoByProperties(ModelService.CLOTHINGELEMENT, Restrictions.eq("tpid", 1)));
-//			
-//			items = new LinkedHashMap<String, List>();
-//			
-//			items.put("类目", list_typeinfo);
-//			items.put("版型", list_clothingTypeversion);
-//			items.put("衣长", list_clothingSize);
-//			items.put("领型", list_clothingCollat);
-//			items.put("元素", list_clothingElement);
-//			
-//			ActionContext.getContext().getSession().put("items", items);
-//			
+			//获取商品类型中所有的规格
+ 			Map mp1 = typeinfo.getSpecificationses();
+			
+ 			//通过与spring规格map的比较，获取数据库中规格选项的信息
+			Set<String> keys = mp1.keySet();
+			for (String key : keys) {
+				
+				ItemList l = specificationMap.get(key);
+				
+				//获取规格信息的复制品，并添加
+				List data = (List) l.invoke(typeinfo.getTpid()).clone();
+				
+				mp1.put(key, data);
+				
+				//原有规格list复制完成后，需要清空，以便下次重新选择使用
+				l.clear();
+			}
+			
+			//将本商品大类的规格列表存入session属性
+			ActionContext.getContext().getSession().put("items", mp1);
+			
 		}
 		
+		
+		
+		
+
 		//收集 已选的规格显示选项 的容器，从session作用域获取------->已选容器
 		Map<String, List> items_checked = (Map<String, List>) ActionContext.getContext().getSession().get("items_checked");
 		
@@ -194,8 +215,6 @@ public class MainAction extends BaseAction {
 				}
 			}
 			
-			
-			
 		}
 		
 		
@@ -203,7 +222,7 @@ public class MainAction extends BaseAction {
 		Criterion criterion = null;
 		
 		//添加筛选项
-		if(this.critera_propertyname != null || critera_propertyname_remove != null){
+		if(this.critera_propertyname != null){
 			
 			Map criteriaMap = (Map) ActionContext.getContext().getSession().get("criteriaMap");
 			if(criteriaMap == null){
@@ -214,6 +233,7 @@ public class MainAction extends BaseAction {
 			criteriaMap.put(critera_propertyname, new Integer(critera_propertyvalue));
 			criterion = Restrictions.allEq(criteriaMap);
 		}
+		//移除选项
 		else if(critera_propertyname_remove != null){
 			Map criteriaMap = (Map) ActionContext.getContext().getSession().get("criteriaMap");
 			
@@ -221,20 +241,23 @@ public class MainAction extends BaseAction {
 			criterion = Restrictions.allEq(criteriaMap);
 			
 			if(criteriaMap.size() == 0){
-				List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", 1));
+				List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", tp_id));
 				
 				criterion = Restrictions.in("typeinfo", types);
 			}
-		}else{
-			List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", 1));
+		}
+		//默认无筛选项
+		else{
+			List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", tp_id));
 			
 			criterion = Restrictions.in("typeinfo", types);
 		}
 		
+		//根据选中的信息获取商品
 		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, criterion);
-		
 		Map<String, Object> map = (Map<String, Object>) ActionContext.getContext().get("request");
 		
+		//通过请求作用域传递数据
 		map.put("infoes", infoes);
 		
 		
@@ -245,7 +268,6 @@ public class MainAction extends BaseAction {
 	
 	
 	
-	/**============================================================================**/
 	/**============================================================================**/
 	@Override
 	public String getKey() {
