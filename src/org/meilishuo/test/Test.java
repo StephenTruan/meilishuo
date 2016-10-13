@@ -22,18 +22,9 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext app = new ClassPathXmlApplicationContext("app1.xml");
 		
-//		ModelService service = app.getBean("modelService",ModelService.class);
+		ModelService service = app.getBean("modelService",ModelService.class);
 		
-		Map<String, ItemList> mp = (Map<String, ItemList>) app.getBean("specificationMap");
-		
-		ItemList<Item> itm = mp.get("ÀàÄ¿");
-		
-		itm.invoke(1);
-		
-		for (Object o : itm) {
-			Item i = (Item) o;
-			System.out.println(i.getText());
-		}
-		
+		int rt = service.getRowCount(service.GOODSINFO, Restrictions.gt("gdid", 100));
+		System.out.println(rt);
 	}
 }

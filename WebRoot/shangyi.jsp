@@ -150,22 +150,10 @@
 	    </div>
 	    
 	    
-	    <!-- 商品信息显示层 -->
+	    <!-- ==================================商品信息显示层========================================= -->
 	    <div class="col-lg-10 col-lg-offset-1" style="margin-top: 40px;" id="show_area">
 		
-			<cc:forEach items="${requestScope.infoes }" var="gd">
-				 <div class="col-lg-2" style="width: 19%;margin-left: 1.25%;">
-				    <div class="thumbnail" style="border: 0px;">
-				      	<img src="/meilishuo/imgs/tp/${gd.goodsimages[1].gimgurl }" >
-				      <div class="caption">
-				        <h4 style="color: #ff6699;">
-				        	￥${gd.goodsprices[1].price }
-				        </h4>
-				        <h6 style="color: #666666;">${gd.gdname }</h6>
-				      </div>
-				    </div>
-				  </div>
-			</cc:forEach>
+			
 
 
 
@@ -312,7 +300,7 @@
   					$(this).parent().remove();
   					$(bt_choose_more).show();
   					$(bt_show_more).attr("close","1").click();
-  					
+  					                
 	  				choose_flow();
   				
   				}); 
@@ -361,11 +349,76 @@
   				$("#choose").css("left",$("#items").offset().left+($("#items").width())/2-($("#choose").width())/2);
   			}
   		
+  		
+  		
+  		
+  			//基于服务器端进行json字符串拼接
+  			var goods_infoes_text="[";
+  			
+  			<%-- 服务器端代码  开始： --%>
+  			<cc:forEach items="${requestScope.infoes }" var="gd">
+  				
+  				//属性jname（名称）jprice（价格）jimg（图片路径）
+  				goods_infoes_text+="{'gname':'${gd.gdname }','gprice':'${gd.goodsprices[1].price }','gimg':'/meilishuo/imgs/tp/${gd.goodsimages[1].gimgurl }'},";
+  			 
+			</cc:forEach>
+			<%-- 服务器端代码  结束 --%>
+  			
+  			
+  			//完整json字符串语法（数组中包含多个对象）
+  			goods_infoes_text+="]";
+  			
+  			//将json字符串转换为json对象（的数组）
+  			var goods_infoes=eval(goods_infoes_text);
+  				
+			//利用json数组在客户端拼接节点
+			var gtext="";
+  			
+  			$(goods_infoes).each(function(i){
+  				gtext+="<div class='col-lg-2' style='width: 19%;margin-left: 1.25%;'>";
+  				gtext+="<div class='thumbnail' style=;border: 0px;'>";
+  				gtext+="<img src='"+this.gimg+"' >";
+  				gtext+="<div class='caption'>";
+  				gtext+="<h4 style='color: #ff6699;'>￥"+this.gprice+"</h4>";
+  				gtext+="<h6 style='color: #666666;'>"+this.gname+"</h6>";
+  				gtext+="</div></div></div>";
+  			});
+  			//节点拼接完成之后添加到相应的区域当中（show_area）显示
+  			$("#show_area").append(gtext);
+  			
   			
   			//根据商品信息显示的需要  每行开头的左边距为0
   			$("#show_area>div").each(function(i){
   				if(i%5==0){
   					$(this).css("margin-left","0px");
+  				}
+  			});
+  			
+  			
+  			$(window).scroll(function(){
+  				var last = $("#show_area>div:last");
+  				if($(window).scrollTop()>=$(last).offset().top-300){
+  					$.post("/meilishuo/mls/crol/mainAction/showrest",function(txt){
+  						var data=eval(txt);
+  						var gtext="";
+  						$(data).each(function(idx,ob){
+  							gtext+="<div class='col-lg-2' style='width: 19%;margin-left: 1.25%;'>";
+			  				gtext+="<div class='thumbnail' style=;border: 0px;'>";
+			  				gtext+="<img src='/meilishuo/imgs/tp/"+ob.gdimg+"' >";
+			  				gtext+="<div class='caption'>";
+			  				gtext+="<h4 style='color: #ff6699;'>￥"+ob.gdprice+"</h4>";
+			  				gtext+="<h6 style='color: #666666;'>"+ob.gdname+"</h6>";
+			  				gtext+="</div></div></div>";
+  						});
+  						$("#show_area").append(gtext);
+  						
+  						//根据商品信息显示的需要  每行开头的左边距为0
+			  			$("#show_area>div").each(function(i){
+			  				if(i%5==0){
+			  					$(this).css("margin-left","0px");
+			  				}
+			  			});
+  					});
   				}
   			});
   			

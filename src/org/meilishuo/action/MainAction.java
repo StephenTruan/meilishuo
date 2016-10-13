@@ -1,15 +1,21 @@
 package org.meilishuo.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -17,6 +23,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.meilishuo.entity.Goodsinfo;
 import org.meilishuo.entity.Typeinfo;
 import org.meilishuo.mdservice.ModelService;
@@ -59,63 +68,69 @@ public class MainAction extends BaseAction {
 	private Map<String, ItemList> specificationMap;
 	
 	
+	private Integer pageNum;
+	
+	private Integer rowCount=60;
 	
 	
-	public Typeinfo getTypeinfo() {
-		return typeinfo;
-	}
-	public void setTypeinfo(Typeinfo typeinfo) {
-		this.typeinfo = typeinfo;
-	}
-	public Map<String, ItemList> getSpecificationMap() {
-		return specificationMap;
-	}
-	public void setSpecificationMap(Map<String, ItemList> specificationMap) {
-		this.specificationMap = specificationMap;
-	}
-	public String getCritera_propertyname_remove() {
-		return critera_propertyname_remove;
-	}
-	public void setCritera_propertyname_remove(String critera_propertyname_remove) {
-		this.critera_propertyname_remove = critera_propertyname_remove;
-	}
-	public String getCritera_propertyvalue() {
-		return critera_propertyvalue;
-	}
-	public void setCritera_propertyvalue(String critera_propertyvalue) {
-		this.critera_propertyvalue = critera_propertyvalue;
-	}
-	public String getCritera_propertyname() {
-		return critera_propertyname;
-	}
-	public void setCritera_propertyname(String critera_propertyname) {
-		this.critera_propertyname = critera_propertyname;
-	}
-	public String getItemtext() {
-		return itemtext;
-	}
-	public void setItemtext(String itemtext) {
-		this.itemtext = itemtext;
-	}
-	public String getItemkey() {
-		return itemkey;
-	}
-	public void setItemkey(String itemkey) {
-		this.itemkey = itemkey;
-	}
+	
 
-	public String getItemkey_checked() {
-		return itemkey_checked;
+
+
+	public int getPageNum() {
+		return pageNum;
 	}
-	public void setItemkey_checked(String itemkey_checked) {
-		this.itemkey_checked = itemkey_checked;
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+	public int getRowCount() {
+		return rowCount;
+	}
+	public void setRowCount(Integer rowCount) {
+		this.rowCount = rowCount;
 	}
 
 
 
 
 	/**===================================动作=========================================
+	 * @throws JSONException 
+	 * @throws IOException 
 	 * @throws Exception **/
+	@Action(value="showrest")
+	public void showRestInfoes() throws JSONException, IOException{
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		
+		LinkedList<Goodsinfo> dataList = (LinkedList<Goodsinfo>) ActionContext.getContext().getSession().get("infoes_onePage");
+		if(dataList==null||dataList.size()<0){
+			return;
+		}
+		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
+		int i = 0;
+		while(dataList.size()!=0&&i++<15){
+			part.add(dataList.removeFirst());
+		}
+		JSONArray data = new JSONArray();
+		for (Goodsinfo goodsinfo : part) {
+			JSONObject dt = new JSONObject();
+			dt.put("gdname", goodsinfo.getGdname());
+			dt.put("gdimg", goodsinfo.getGoodsimages().get((long)1).getGimgurl());
+			dt.put("gdprice", goodsinfo.getGoodsprices().get((long)1).getPrice());
+			
+			data.put(dt);
+		}
+		
+		PrintWriter out = response.getWriter();
+		out.print(data.toString());
+		out.flush();
+		out.close();
+		
+		
+		
+	}
+	
 	@Action(value="getInfoes")
 	public String showGoodsInfoes() throws Exception{
 		
@@ -254,11 +269,32 @@ public class MainAction extends BaseAction {
 		}
 		
 		//根据选中的信息获取商品
-		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, criterion);
+		
+		if(pageNum == null)
+			pageNum = 1;
+		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, pageNum, rowCount, criterion);
+		
+		
+		
+		LinkedList<Goodsinfo> data = new LinkedList<Goodsinfo>(infoes);
+		
+		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
+		
+		int i = 0;
+		while(data.size()!=0&&i++<15){
+			part.add(data.removeFirst());
+		}
+		
+		ActionContext.getContext().getSession().put("infoes_onePage", data);
+		
+		
+		
+		
+		
 		Map<String, Object> map = (Map<String, Object>) ActionContext.getContext().get("request");
 		
 		//通过请求作用域传递数据
-		map.put("infoes", infoes);
+		map.put("infoes", part);
 		
 		
 		
@@ -286,5 +322,56 @@ public class MainAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Typeinfo getTypeinfo() {
+		return typeinfo;
+	}
+	public void setTypeinfo(Typeinfo typeinfo) {
+		this.typeinfo = typeinfo;
+	}
+	public Map<String, ItemList> getSpecificationMap() {
+		return specificationMap;
+	}
+	public void setSpecificationMap(Map<String, ItemList> specificationMap) {
+		this.specificationMap = specificationMap;
+	}
+	public String getCritera_propertyname_remove() {
+		return critera_propertyname_remove;
+	}
+	public void setCritera_propertyname_remove(String critera_propertyname_remove) {
+		this.critera_propertyname_remove = critera_propertyname_remove;
+	}
+	public String getCritera_propertyvalue() {
+		return critera_propertyvalue;
+	}
+	public void setCritera_propertyvalue(String critera_propertyvalue) {
+		this.critera_propertyvalue = critera_propertyvalue;
+	}
+	public String getCritera_propertyname() {
+		return critera_propertyname;
+	}
+	public void setCritera_propertyname(String critera_propertyname) {
+		this.critera_propertyname = critera_propertyname;
+	}
+	public String getItemtext() {
+		return itemtext;
+	}
+	public void setItemtext(String itemtext) {
+		this.itemtext = itemtext;
+	}
+	public String getItemkey() {
+		return itemkey;
+	}
+	public void setItemkey(String itemkey) {
+		this.itemkey = itemkey;
+	}
+
+	public String getItemkey_checked() {
+		return itemkey_checked;
+	}
+	public void setItemkey_checked(String itemkey_checked) {
+		this.itemkey_checked = itemkey_checked;
+	}
+
 
 }

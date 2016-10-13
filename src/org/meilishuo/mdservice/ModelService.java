@@ -160,5 +160,15 @@ public class ModelService {
 	}
 
 	
+	/**
+	 * 根据筛选条件获得记录数
+	 * @param type 制定dao的key
+	 * @param criterions 筛选条件
+	 * @return 记录数量（行数）
+	 */
+	public int getRowCount(String type, Criterion...criterions){
+		return daoMap.get(type).getRowCount(criterions);
+	}
+	
 
 }

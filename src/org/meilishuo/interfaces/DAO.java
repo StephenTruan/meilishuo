@@ -85,4 +85,11 @@ public interface DAO<T> {
 	 * @return 页数
 	 */
 	int getPageCountByRowCount(int rowCount);
+	
+	/**
+	 * 获取根据筛选条件得到的信息的数量
+	 * @param criterions 筛选条件
+	 * @return 信息行数
+	 */
+	int getRowCount(Criterion...criterions);
 }

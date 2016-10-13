@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.meilishuo.interfaces.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -138,6 +140,18 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 		long count = (long) query.uniqueResult();
 		return (int) (count % rowCount == 0 ? count / rowCount
 				: (count / rowCount) + 1);
+	}
+
+	@Override
+	public int getRowCount(Criterion... criterions) {
+		// TODO Auto-generated method stub
+		DetachedCriteria criteria = DetachedCriteria.forClass(type);
+		for (Criterion criterion : criterions) {
+			criteria.add(criterion);
+		}
+		criteria.setProjection(Projections.rowCount());
+		
+		return (int) findByCriteria(criteria).get(0);
 	}
 
 }
