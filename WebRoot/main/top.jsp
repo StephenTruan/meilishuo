@@ -44,7 +44,7 @@
     				<button class="btn" style="background-color: #dddddd;color: #666666;border: 0px;border-radius: 0px;font-size: 12px;height: 26px;line-height: 12px;">店铺</button>
     			</div>
     			<div class="col-lg-10" style="background-color: #ff6699;padding: 2px;">
-    				<input style="width: 85%;float: left;height: 26px;border-radius: 0px;border: 0px;" type="text" class="form-control" />
+    				<input placeholder="搜索商品" style="width: 85%;float: left;height: 26px;border-radius: 0px;border: 0px;font-size: 12px;" type="text" class="form-control" />
     				<button class="btn " style="background-color: transparent;width: 15%;text-align: center;">
     					<i class="glyphicon glyphicon-search" style="color: #ffffff;float: left;margin-top: -2px;margin-left: 13px;"></i>
     				</button>

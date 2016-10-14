@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="/meilishuo/dist/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="/meilishuo/dist/syscss/toolbar_right.css">
 	<link rel="stylesheet" type="text/css" href="/meilishuo/dist/syscss/top.css">
+	<link rel="stylesheet" type="text/css" href="/meilishuo/dist/syscss/main.css">
 	
 	
 	<script type="text/javascript" src="/meilishuo/sysjs/jquery-2.1.1.min.js"></script>
@@ -104,7 +105,7 @@
 	  		<cc:forEach items="${sessionScope.items_checked }" var="item_checked">
 	  			<a class="btn btn-default item_checked" href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=${requestScope.typeinfo.tpid }&itemkey_checked=${fn:split(item_checked.key,':')[0] }&critera_propertyname_remove=${fn:split(item_checked.key,',')[1] }">${fn:split(item_checked.key,",")[0] }<i class="glyphicon glyphicon-remove"></i></a>
 	  		</cc:forEach>
-	  		<span style="font-size: 13px;color: #666666;">共${fn:length(requestScope.infoes) }件</span>
+	  		<span style="font-size: 13px;color: #666666;">共${sessionScope.count }件</span>
 	  	</div>
 	  	
 	  	
@@ -152,17 +153,24 @@
 	    
 	    <!-- ==================================商品信息显示层========================================= -->
 	    <div class="col-lg-10 col-lg-offset-1" style="margin-top: 40px;" id="show_area">
-		
-			
-
-
-
-		
-		
-		
 		</div>
 	   
 	    
+	    <div class="col-lg-10 col-lg-offset-1 text-right" style="margin-top: 20px;margin-bottom: 5px;">
+	    	
+	    	<cc:if test="${pageNum>1 }">
+	    		<a href="/meilishuo/mls/crol/mainAction/byPage?typeinfo.tpid=${requestScope.typeinfo.tpid }&pageNum=${requestScope.pageNum-1 }" class="btn btn-xs" style="font-weight: bold;border: 1px solid #FCC8D9;background-color: #FFE1EA;color: #ff6699;font-size: 13px;margin-right: 5px;border-radius: 0px;">上一页</a>
+	    	</cc:if>
+	    		
+	    	<cc:forEach begin="1" end="${sessionScope.pageCount }" var="pn">
+	    		<a href="/meilishuo/mls/crol/mainAction/byPage?typeinfo.tpid=${requestScope.typeinfo.tpid }&pageNum=${pn }" class="btn btn-xs" style="font-weight: bold;border: 1px solid #FCC8D9;background-color: #FFE1EA;color: #ff6699;font-size: 13px;margin-left: 2px;margin-right: 2px;border-radius: 0px;">${pn }</a>
+	    	</cc:forEach>
+	    	
+	    	<cc:if test="${sessionScope.pageCount!=pageNum }">
+	    		<a href="/meilishuo/mls/crol/mainAction/byPage?typeinfo.tpid=${requestScope.typeinfo.tpid }&pageNum=${requestScope.pageNum+1 }" class="btn btn-xs" style="font-weight: bold;border: 1px solid #FCC8D9;background-color: #FFE1EA;color: #ff6699;font-size: 13px;margin-left: 5px;border-radius: 0px;">下一页</a>
+	    	</cc:if>
+	    
+		</div>
 	    
 	   
 	    <!-- ==================================底部信息========================================= -->

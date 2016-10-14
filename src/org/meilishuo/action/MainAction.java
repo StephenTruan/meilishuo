@@ -39,7 +39,7 @@ import com.opensymphony.xwork2.ActionContext;
 @Namespace(value = "/mls/crol/mainAction")
 @ParentPackage("struts-default")
 @Results(value = {
-		@Result(name = "infoes", location = "/shangyi.jsp") 
+		@Result(name = "infoes", location = "/shangyi.jsp")
 		})
 @Lazy(true)
 public class MainAction extends BaseAction {
@@ -93,10 +93,51 @@ public class MainAction extends BaseAction {
 
 
 
-	/**===================================动作=========================================
-	 * @throws JSONException 
-	 * @throws IOException 
-	 * @throws Exception **/
+	/**===================================动作=========================================**/
+	
+	/**
+	 * 分页获取信息
+	 * @return
+	 */
+	@Action(value="byPage")
+	public String getInfoesByPage(){
+		
+		if(pageNum<1){
+			pageNum=1;
+		}
+		int pageCount = (int) ActionContext.getContext().getSession().get("pageCount");
+		if(pageNum>pageCount){
+			pageNum=pageCount;
+		}
+		
+		Criterion criterion = (Criterion) ActionContext.getContext().getSession().get("critersions");
+		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, pageNum, rowCount, criterion);
+		LinkedList<Goodsinfo> data = new LinkedList<Goodsinfo>(infoes);
+		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
+		int i = 0;
+		while(data.size()!=0&&i++<15){
+			part.add(data.removeFirst());
+		}
+		
+		ActionContext.getContext().getSession().put("infoes_onePage", data);
+		
+		
+		Map<String, Object> map = (Map<String, Object>) ActionContext.getContext().get("request");
+		
+		//通过请求作用域传递数据
+		map.put("infoes", part);
+		
+		
+		
+		return "infoes";
+	}
+	
+	
+	/**
+	 * 利用ajax异步加载 指定页面其余信息
+	 * @throws JSONException
+	 * @throws IOException
+	 */
 	@Action(value="showrest")
 	public void showRestInfoes() throws JSONException, IOException{
 		
@@ -131,6 +172,11 @@ public class MainAction extends BaseAction {
 		
 	}
 	
+	/**
+	 * 基本页面获取方法
+	 * @return
+	 * @throws Exception
+	 */
 	@Action(value="getInfoes")
 	public String showGoodsInfoes() throws Exception{
 		
@@ -274,8 +320,19 @@ public class MainAction extends BaseAction {
 			pageNum = 1;
 		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, pageNum, rowCount, criterion);
 		
+		//通过保存筛选条件
+		ActionContext.getContext().getSession().put("critersions", criterion);
+		//通过筛选条件获取记录数量
+		int count = getService().getRowCount(getService().GOODSINFO, criterion);
+		//通过记录数量获取可以分页的页数
+		int pageCount = count%rowCount==0?count/rowCount:(count/rowCount+1);
+		
+		//保存记录数和页数进入session作用域
+		ActionContext.getContext().getSession().put("count", count);
+		ActionContext.getContext().getSession().put("pageCount", pageCount);
 		
 		
+		//获取根据获取信息，分配第一批显示的数据和其余的数据
 		LinkedList<Goodsinfo> data = new LinkedList<Goodsinfo>(infoes);
 		
 		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
@@ -285,12 +342,11 @@ public class MainAction extends BaseAction {
 			part.add(data.removeFirst());
 		}
 		
+		//保存其余数据进入session
 		ActionContext.getContext().getSession().put("infoes_onePage", data);
 		
 		
-		
-		
-		
+		//发送第一批数据（15个）去页面
 		Map<String, Object> map = (Map<String, Object>) ActionContext.getContext().get("request");
 		
 		//通过请求作用域传递数据
