@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.hibernate.criterion.Restrictions;
 import org.meilishuo.dao.GoodsInfoDAO;
+import org.meilishuo.entity.Areainfo;
 import org.meilishuo.entity.ClothingSize;
 import org.meilishuo.entity.Goodsimage;
 import org.meilishuo.entity.Goodsinfo;
@@ -24,7 +25,7 @@ public class Test {
 		
 		ModelService service = app.getBean("modelService",ModelService.class);
 		
-		int rt = service.getRowCount(service.GOODSINFO, Restrictions.gt("gdid", 100));
-		System.out.println(rt);
+		System.out.println(service.getZhiZiaShi().size());
+		
 	}
 }

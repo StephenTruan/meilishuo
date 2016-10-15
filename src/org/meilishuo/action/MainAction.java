@@ -156,6 +156,7 @@ public class MainAction extends BaseAction {
 		JSONArray data = new JSONArray();
 		for (Goodsinfo goodsinfo : part) {
 			JSONObject dt = new JSONObject();
+			dt.put("gdid", goodsinfo.getGdid());
 			dt.put("gdname", goodsinfo.getGdname());
 			dt.put("gdimg", goodsinfo.getGoodsimages().get((long)1).getGimgurl());
 			dt.put("gdprice", goodsinfo.getGoodsprices().get((long)1).getPrice());

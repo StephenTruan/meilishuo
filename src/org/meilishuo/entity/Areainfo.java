@@ -1,5 +1,7 @@
 package org.meilishuo.entity;
 
+import java.util.Set;
+
 
 
 /**
@@ -16,6 +18,8 @@ public class Areainfo  implements java.io.Serializable {
      private Integer alevel;
      private Integer aparentid;
 
+     private Set<Areainfo> own_areas;
+     
 
     // Constructors
 
@@ -69,6 +73,14 @@ public class Areainfo  implements java.io.Serializable {
     public void setAparentid(Integer aparentid) {
         this.aparentid = aparentid;
     }
+
+	public Set<Areainfo> getOwn_areas() {
+		return own_areas;
+	}
+
+	public void setOwn_areas(Set<Areainfo> own_areas) {
+		this.own_areas = own_areas;
+	}
    
 
 

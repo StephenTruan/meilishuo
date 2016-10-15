@@ -19,5 +19,10 @@
         <property name="aparentid" type="java.lang.Integer">
             <column name="aparentid" />
         </property>
+        
+        <set name="own_areas" table="areainfo" order-by="aid" lazy="false">
+        	<key column="aparentid"></key>
+        	<one-to-many class="org.meilishuo.entity.Areainfo" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -367,7 +367,7 @@
   			<cc:forEach items="${requestScope.infoes }" var="gd">
   				
   				//属性jname（名称）jprice（价格）jimg（图片路径）
-  				goods_infoes_text+="{'gname':'${gd.gdname }','gprice':'${gd.goodsprices[1].price }','gimg':'/meilishuo/imgs/tp/${gd.goodsimages[1].gimgurl }'},";
+  				goods_infoes_text+="{'gid':'${gd.gdid }','gname':'${gd.gdname }','gprice':'${gd.goodsprices[1].price }','gimg':'/meilishuo/imgs/tp/${gd.goodsimages[1].gimgurl }'},";
   			 
 			</cc:forEach>
 			<%-- 服务器端代码  结束 --%>
@@ -385,7 +385,7 @@
   			$(goods_infoes).each(function(i){
   				gtext+="<div class='col-lg-2' style='width: 19%;margin-left: 1.25%;'>";
   				gtext+="<div class='thumbnail' style=;border: 0px;'>";
-  				gtext+="<img src='"+this.gimg+"' >";
+  				gtext+="<a href='/meilishuo/mls/crol/goodsinfoAction/showInfo?goodsinfo.Gdid="+this.gid+"'><img src='"+this.gimg+"' ></a>";
   				gtext+="<div class='caption'>";
   				gtext+="<h4 style='color: #ff6699;'>￥"+this.gprice+"</h4>";
   				gtext+="<h6 style='color: #666666;'>"+this.gname+"</h6>";
@@ -412,7 +412,7 @@
   						$(data).each(function(idx,ob){
   							gtext+="<div class='col-lg-2' style='width: 19%;margin-left: 1.25%;'>";
 			  				gtext+="<div class='thumbnail' style=;border: 0px;'>";
-			  				gtext+="<img src='/meilishuo/imgs/tp/"+ob.gdimg+"' >";
+			  				gtext+="<a href='/meilishuo/mls/crol/goodsinfoAction/showInfo?goodsinfo.Gdid="+ob.gdid+"'><img src='/meilishuo/imgs/tp/"+ob.gdimg+"' ></a>";
 			  				gtext+="<div class='caption'>";
 			  				gtext+="<h4 style='color: #ff6699;'>￥"+ob.gdprice+"</h4>";
 			  				gtext+="<h6 style='color: #666666;'>"+ob.gdname+"</h6>";

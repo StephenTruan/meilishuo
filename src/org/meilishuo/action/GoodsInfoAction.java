@@ -17,19 +17,22 @@ import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Namespace(value = "/mls/crol/goodsinfoAction")
 @Results(value = {
-		@Result(name = "infoes", location = "/goods.jsp") 
+		@Result(name = "infoes", location = "/goods.jsp"),
+		@Result(name = "introduction", location = "/introduction.jsp") 
 		})
 public class GoodsInfoAction extends BaseAction {
 	
-	@Action(value="getInfo")
+	private Goodsinfo goodsinfo;
+	
+	
+
+	@Action(value="showInfo")
 	public String getInfo(){
 		
-		List<Goodsinfo> infoes = getService().getInfoByPageNum(getKey(), 1, 10);
+		goodsinfo = (Goodsinfo) getService().getInfoByID(this.getKey(), goodsinfo.getGdid());
 		
-		Map<String, Object> mp = (Map<String, Object>) ActionContext.getContext().get("request");
-		mp.put("infoes", infoes);
-		
-		return "infoes";
+		return "introduction";
+	
 	}
 	
 	
@@ -55,5 +58,13 @@ public class GoodsInfoAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Goodsinfo getGoodsinfo() {
+		return goodsinfo;
+	}
+	public void setGoodsinfo(Goodsinfo goodsinfo) {
+		this.goodsinfo = goodsinfo;
+	}
+
 	
 }

@@ -61,10 +61,10 @@
     </div>
     
     <div id="dianpulogo">
-    	
+    	<img alt="" src="/meilishuo/imgs/dianpu.png">
     </div>
     
-    <div id="toolbar" style="background-color: black;padding: 8px;">
+    <div id="toolbar" style="background-color: #333333;padding: 8px;">
     	<a href="" style="color: white;margin-left: 100px;">店铺首页</a>
     	<a href="" style="color: white;margin-left: 40px;">新品到货</a>
     	<a href="" style="color: white;margin-left: 40px;">T恤</a>
@@ -78,6 +78,24 @@
   
     
     <script type="text/javascript">
-    	
+    
+    	//用于顶部导航滚动跟随的方法
+ 			function top3_beScroll(){
+ 				$(window).scroll(function(){
+ 					
+ 					if($(window).scrollTop()>=100){
+	  					$("#to_Top").show();
+	  				}else{
+	  					$("#to_Top").hide();				
+	  				}
+ 				
+	  				if($(window).scrollTop()>=$("#dianpulogo").offset().top+$("#dianpulogo").height()){
+	  					$("#toolbar").addClass("toolbar_scroll");
+	  				}else{
+	  					$("#toolbar").removeClass("toolbar_scroll");  					
+	  				}
+ 				});
+ 			}
+ 			top3_beScroll();
   	
     </script>

@@ -35,6 +35,7 @@
 		<entry key="clothingTypeversionDAO" value-ref="clothingTypeversionDAO"></entry>
 		<entry key="materialDAO" value-ref="materialDAO"></entry>
 		<entry key="typeinfoDAO" value-ref="typeinfoDAO"></entry>
+		<entry key="areaInfoDAO" value-ref="areaInfoDAO"></entry>
 	</util:map>
 	
 	<!-- 规格 -->

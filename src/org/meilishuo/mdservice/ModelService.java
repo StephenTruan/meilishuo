@@ -3,10 +3,13 @@ package org.meilishuo.mdservice;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.meilishuo.entity.Areainfo;
 import org.meilishuo.interfaces.DAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,7 @@ public class ModelService {
 	public static final String CLOTHINGTYPEVERSION = "clothingTypeversionDAO";
 	public static final String MATERIAL = "materialDAO";
 	public static final String TYPEINFO = "typeinfoDAO";
+	public static final String AREAINFO = "areaInfoDAO";
 	
 
 	@Resource(name = "daoMap")
@@ -170,5 +174,25 @@ public class ModelService {
 		return daoMap.get(type).getRowCount(criterions);
 	}
 	
-
+	
+	/**
+	 * 获取省
+	 * @return
+	 */
+	public List<Areainfo> getProvince(){
+		return daoMap.get(AREAINFO).getInfoesByProperties(Restrictions.eq("alevel", 2),Restrictions.eq("aparentid", 1));
+	}
+	
+	
+	/**
+	 * 获取直辖市
+	 * @return
+	 */
+	public List<Areainfo> getZhiZiaShi(){
+		return daoMap.get(AREAINFO).getInfoesByProperties(Restrictions.eq("alevel", 1),Restrictions.eq("aparentid", 1));
+	}
+	
+	
+	
+	
 }

@@ -12,7 +12,7 @@
 		#tp2{height: 120px;}
 		#tp3{height: 43px;border-bottom: 1px #ff6699 solid;z-index: 7;}
 		/**顶部导航**/
-		.tp3_scroll{position: fixed;top: 0px;z-index: 9;}
+		.tp3_scroll,.toolbar_scroll{position: fixed;top: 0px;z-index: 9;width: 100%;}
 		
 		/*****************************首页导航 1 ************************************/
 		/**首页导航 1 单项**/
