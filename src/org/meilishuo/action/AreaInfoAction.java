@@ -25,7 +25,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
-
+/**
+ * 用于地区数据获取的action
+ * @author Administrator
+ *
+ */
 @Controller
 @Namespace(value = "/mls/crol/area")
 @ParentPackage("struts-default")
@@ -38,7 +42,11 @@ public class AreaInfoAction extends BaseAction {
 	private Integer aid;
 	
 	
-	
+	/**
+	 * 获取二级城市信息
+	 * @throws IOException
+	 * @throws JSONException
+	 */
 	@Action(value="showCities")
 	public void getCities() throws IOException, JSONException{
 		HttpServletResponse respons = ServletActionContext.getResponse();
@@ -52,23 +60,24 @@ public class AreaInfoAction extends BaseAction {
 			Areainfo pr = (Areainfo) getService().getInfoByID(getKey(), aid);
 		 	cities = pr.getOwn_areas();
 		}
-		
 		for (Areainfo a : cities) {
 			JSONObject city = new JSONObject();
 			city.put("aid", a.getAid());
 			city.put("aname", a.getAname());
 			infoes.put(city);
 		}
-		
 		PrintWriter out = respons.getWriter();
-		
 		out.print(infoes.toString());
-		
 		out.flush();
 		out.close();
 	}
 	
 	
+	/**
+	 * 获取省级单位和直辖市信息
+	 * @throws JSONException
+	 * @throws IOException
+	 */
 	@Action(value="showAreas")
 	public void getAreas() throws JSONException, IOException{
 		
@@ -76,15 +85,10 @@ public class AreaInfoAction extends BaseAction {
 		respons.setCharacterEncoding("utf-8");
 		
 		JSONArray infoes = new JSONArray();
-		
-		
 		JSONObject zxs = new JSONObject();
 		zxs.put("aid", 1);
 		zxs.put("aname", "直辖市");
-		
 		infoes.put(zxs);
-		
-		
 		JSONArray provinces = new JSONArray();
 		List<Areainfo> ps = getService().getProvince();
 		for (Areainfo a : ps) {
@@ -93,15 +97,10 @@ public class AreaInfoAction extends BaseAction {
 			p.put("aname", a.getAname());
 			infoes.put(p);
 		}
-		
 		PrintWriter out = respons.getWriter();
-		
 		out.print(infoes.toString());
-		
 		out.flush();
 		out.close();
-		
-		
 	}
 	
 	
