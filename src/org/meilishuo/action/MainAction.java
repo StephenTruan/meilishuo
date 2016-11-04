@@ -181,6 +181,7 @@ public class MainAction extends BaseAction {
 	@Action(value="getInfoes")
 	public String showGoodsInfoes() throws Exception{
 		
+		
 		//传递商品类型，根据商品类型的编号，获取整个商品类型信息，包括规格
 		if(typeinfo!=null){
 			typeinfo=(Typeinfo) getService().getInfoByID(getService().TYPEINFO, typeinfo.getTpid());

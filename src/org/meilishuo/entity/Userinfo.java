@@ -26,9 +26,7 @@ public class Userinfo  implements java.io.Serializable {
      private String ufemail;
      private Timestamp uflogdate;
      private Integer uflocked;
-     private Set orderinfos = new HashSet(0);
-     private Set goodscomments = new HashSet(0);
-     private Set goodscollections = new HashSet(0);
+     
 
 
     // Constructors
@@ -46,22 +44,6 @@ public class Userinfo  implements java.io.Serializable {
         this.uflogdate = uflogdate;
     }
     
-    /** full constructor */
-    public Userinfo(Usertypeinfo usertypeinfo, String uflogname, String ufpassword, Integer ufsex, Date ufbirthday, String ufnum, String ufqq, String ufemail, Timestamp uflogdate, Integer uflocked, Set orderinfos, Set goodscomments, Set goodscollections) {
-        this.usertypeinfo = usertypeinfo;
-        this.uflogname = uflogname;
-        this.ufpassword = ufpassword;
-        this.ufsex = ufsex;
-        this.ufbirthday = ufbirthday;
-        this.ufnum = ufnum;
-        this.ufqq = ufqq;
-        this.ufemail = ufemail;
-        this.uflogdate = uflogdate;
-        this.uflocked = uflocked;
-        this.orderinfos = orderinfos;
-        this.goodscomments = goodscomments;
-        this.goodscollections = goodscollections;
-    }
 
    
     // Property accessors
@@ -153,35 +135,6 @@ public class Userinfo  implements java.io.Serializable {
     public void setUflocked(Integer uflocked) {
         this.uflocked = uflocked;
     }
-
-    public Set getOrderinfos() {
-        return this.orderinfos;
-    }
-    
-    public void setOrderinfos(Set orderinfos) {
-        this.orderinfos = orderinfos;
-    }
-
-    public Set getGoodscomments() {
-        return this.goodscomments;
-    }
-    
-    public void setGoodscomments(Set goodscomments) {
-        this.goodscomments = goodscomments;
-    }
-
-    public Set getGoodscollections() {
-        return this.goodscollections;
-    }
-    
-    public void setGoodscollections(Set goodscollections) {
-        this.goodscollections = goodscollections;
-    }
-   
-
-
-
-
 
 
 

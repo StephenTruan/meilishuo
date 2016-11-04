@@ -15,7 +15,6 @@ public class Usertypeinfo  implements java.io.Serializable {
 
      private Integer utid;
      private String utname;
-     private Set userinfos = new HashSet(0);
 
 
     // Constructors
@@ -29,11 +28,6 @@ public class Usertypeinfo  implements java.io.Serializable {
         this.utname = utname;
     }
     
-    /** full constructor */
-    public Usertypeinfo(String utname, Set userinfos) {
-        this.utname = utname;
-        this.userinfos = userinfos;
-    }
 
    
     // Property accessors
@@ -53,15 +47,6 @@ public class Usertypeinfo  implements java.io.Serializable {
     public void setUtname(String utname) {
         this.utname = utname;
     }
-
-    public Set getUserinfos() {
-        return this.userinfos;
-    }
-    
-    public void setUserinfos(Set userinfos) {
-        this.userinfos = userinfos;
-    }
-   
 
 
 

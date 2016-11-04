@@ -1,6 +1,7 @@
 package org.meilishuo.mdservice;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +11,8 @@ import javax.annotation.Resource;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.meilishuo.entity.Areainfo;
+import org.meilishuo.entity.Goodsimage;
+import org.meilishuo.entity.Userinfo;
 import org.meilishuo.interfaces.DAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,14 +22,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class ModelService {
 
 	
-	public static final String GOODSINFO = "goodsInfoDAO";
-	public static final String CLOTHINGCOLAR = "clothingColarDAO";
-	public static final String CLOTHINGELEMENT = "clothingElementDAO";
-	public static final String CLOTHINGSIZE = "clothingSizeDAO";
-	public static final String CLOTHINGTYPEVERSION = "clothingTypeversionDAO";
-	public static final String MATERIAL = "materialDAO";
-	public static final String TYPEINFO = "typeinfoDAO";
-	public static final String AREAINFO = "areaInfoDAO";
+	public static final String GOODSINFO = "goodsInfoDAO";//商品信息
+	public static final String CLOTHINGCOLAR = "clothingCollarDAO";//领型
+	public static final String CLOTHINGELEMENT = "clothingElementDAO";//元素
+	public static final String CLOTHINGSIZE = "clothingSizeDAO";//衣长
+	public static final String CLOTHINGTYPEVERSION = "clothingTypeversionDAO";//版型
+	public static final String MATERIAL = "materialDAO";//材质
+	public static final String TYPEINFO = "typeinfoDAO";//商品类目（类型）
+	public static final String AREAINFO = "areaInfoDAO";//地区
+	public static final String GOODSIMAGE = "goodsImageDAO";//商品图片
+	public static final String USERINFO = "userInfoDAO";//用户信息
+	public static final String USERTYPEINFO = "userTypeInfoDAO";//用户类型（等级）
 	
 
 	@Resource(name = "daoMap")
@@ -192,7 +198,63 @@ public class ModelService {
 		return daoMap.get(AREAINFO).getInfoesByProperties(Restrictions.eq("alevel", 1),Restrictions.eq("aparentid", 1));
 	}
 	
+	/**
+	 * 获取登录页面验证码的方法
+	 * @return map包含随机获取的验证码图片路径和其transform初始化角度值的map
+	 */
+	public Map<String, Integer> getIdentifyCode(){
+		DAO dao = daoMap.get(GOODSIMAGE);
+		int count = dao.getRowCount();
+		int[] transformInit = new int[]{90,180,270};
+		Map<String, Integer> mp = new HashMap<String, Integer>();
+		int i = 0;
+		while(true) {
+			int id = (int) (Math.random()*count)+1;
+			Goodsimage img = (Goodsimage) dao.getByID(id);
+			if(mp.containsKey(img.getGimgurl()))
+				continue;
+			int idx = (int) (Math.random()*transformInit.length);
+			mp.put(img.getGimgurl(), transformInit[idx]);
+			i++;
+			if(i == 4)
+				break;
+		}
+		return mp;
+	}
 	
+	/**
+	 * 验证制定用户名是否已经被使用
+	 * @param logname 指定用户名
+	 * @return 返回true表示已经被使用
+	 */
+	public boolean isExists_Logname(String logname){
+		DAO dao = daoMap.get(USERINFO);
+		int count = dao.getRowCount(Restrictions.eq("uflogname", logname));
+		return count == 1;
+	}
 	
+	/**
+	 * 验证制定手机号码是否已经被使用
+	 * @param number 指定手机号码
+	 * @return 返回true表示已经被使用
+	 */
+	public boolean isExists_Number(String number){
+		DAO dao = daoMap.get(USERINFO);
+		int count = dao.getRowCount(Restrictions.eq("ufnum", number));
+		return count == 1;
+	}
 	
+	/**
+	 * 用户登录方法
+	 * @param userinfo 封住有用户名和密码的userinfo对象
+	 * @return 返回userinfo（数据库信息对应的实体对象）或null（用户名或密码不正确）
+	 */
+	public Userinfo login(Userinfo userinfo){
+		
+		DAO dao = daoMap.get(USERINFO);
+		Criterion criterion1 = Restrictions.eq("uflogname", userinfo.getUflogname());
+		Criterion criterion2 = Restrictions.eq("ufpassword", userinfo.getUfpassword());
+		List<Userinfo> data = dao.getInfoesByProperties(criterion1,criterion2);
+		return data!=null&&data.size()==1 ? data.get(0) : null;
+	}
 }

@@ -1,0 +1,39 @@
+body{
+	background-image: url("/meilishuo/imgs/login_bg_m1.jpg");
+	background-size: 100% 100%;
+}
+
+.container{
+	width: 100%;padding: 40px;padding-top: 0px;
+}
+
+#logo1{background-image: url("/meilishuo/imgs/register_logo.png");margin-left: -20px;width: 157px;height: 56px;}
+#logo2{background-image: url("/meilishuo/imgs/register_wel_m.png");width: 336px;height: 50px;margin-left: 30px;margin-top: 6px;}
+
+.has-feedback .form-control {
+  padding-left: 42.5px;
+}
+.form-control-feedback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  pointer-events: none;
+}
+.has-feedback input{
+	font-size: 13px;border-radius: 0px;border: 1px solid #dddddd;
+}
+.has-feedback input:FOCUS {
+	border-color: #ff6699;
+	box-shadow: 0 0 0 0;
+}
+a{text-decoration: underline;color: #ff3366;}
+a:HOVER{color: #ff3366;}
+.tip{
+	height: 10px;font-size: 12px;color: #ff6699;line-height: 1px;
+}

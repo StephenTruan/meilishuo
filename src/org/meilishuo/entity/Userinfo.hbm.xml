@@ -11,13 +11,13 @@
             <generator class="increment" />
         </id>
         <many-to-one name="usertypeinfo" class="org.meilishuo.entity.Usertypeinfo" fetch="select">
-            <column name="utid" not-null="true" />
+            <column name="utid" />
         </many-to-one>
         <property name="uflogname" type="java.lang.String">
-            <column name="uflogname" length="20" not-null="true" unique="true" />
+            <column name="uflogname" length="20" unique="true" />
         </property>
         <property name="ufpassword" type="java.lang.String">
-            <column name="ufpassword" length="10" not-null="true" />
+            <column name="ufpassword" length="10" />
         </property>
         <property name="ufsex" type="java.lang.Integer">
             <column name="ufsex" />
@@ -26,7 +26,7 @@
             <column name="ufbirthday" length="10" />
         </property>
         <property name="ufnum" type="java.lang.String">
-            <column name="ufnum" length="30" not-null="true" />
+            <column name="ufnum" length="30" />
         </property>
         <property name="ufqq" type="java.lang.String">
             <column name="ufqq" length="30" />
@@ -35,28 +35,10 @@
             <column name="ufemail" length="100" />
         </property>
         <property name="uflogdate" type="java.sql.Timestamp">
-            <column name="uflogdate" length="19" not-null="true" />
+            <column name="uflogdate" length="19" />
         </property>
         <property name="uflocked" type="java.lang.Integer">
             <column name="uflocked" />
         </property>
-        <set name="orderinfos" inverse="true">
-            <key>
-                <column name="ofuser" />
-            </key>
-            <one-to-many class="org.meilishuo.entity.Orderinfo" />
-        </set>
-        <set name="goodscomments" inverse="true">
-            <key>
-                <column name="ufid" not-null="true" />
-            </key>
-            <one-to-many class="org.meilishuo.entity.Goodscomment" />
-        </set>
-        <set name="goodscollections" inverse="true">
-            <key>
-                <column name="ufid" not-null="true" />
-            </key>
-            <one-to-many class="org.meilishuo.entity.Goodscollection" />
-        </set>
     </class>
 </hibernate-mapping>

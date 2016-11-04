@@ -11,13 +11,7 @@
             <generator class="increment" />
         </id>
         <property name="utname" type="java.lang.String">
-            <column name="utname" length="20" not-null="true" unique="true" />
+            <column name="utname" length="20" unique="true" />
         </property>
-        <set name="userinfos" inverse="true">
-            <key>
-                <column name="utid" not-null="true" />
-            </key>
-            <one-to-many class="org.meilishuo.entity.Userinfo" />
-        </set>
     </class>
 </hibernate-mapping>

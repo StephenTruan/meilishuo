@@ -36,6 +36,9 @@
 		<entry key="materialDAO" value-ref="materialDAO"></entry>
 		<entry key="typeinfoDAO" value-ref="typeinfoDAO"></entry>
 		<entry key="areaInfoDAO" value-ref="areaInfoDAO"></entry>
+		<entry key="goodsImageDAO" value-ref="goodsImageDAO"></entry>
+		<entry key="userInfoDAO" value-ref="userInfoDAO"></entry>
+		<entry key="userTypeInfoDAO" value-ref="userTypeInfoDAO"></entry>
 	</util:map>
 	
 	<!-- 规格 -->

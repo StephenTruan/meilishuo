@@ -12,6 +12,8 @@ import org.meilishuo.entity.Goodsimage;
 import org.meilishuo.entity.Goodsinfo;
 import org.meilishuo.entity.Specifications;
 import org.meilishuo.entity.Typeinfo;
+import org.meilishuo.entity.Userinfo;
+import org.meilishuo.entity.Usertypeinfo;
 import org.meilishuo.interfaces.DAO;
 import org.meilishuo.mdservice.ModelService;
 import org.meilishuo.webtool.Item;
@@ -25,7 +27,9 @@ public class Test {
 		
 		ModelService service = app.getBean("modelService",ModelService.class);
 		
-		System.out.println(service.getZhiZiaShi().size());
-		
+		Userinfo userinfo = new Userinfo();
+		userinfo.setUflogname("Œ‚Ω®¥®");
+		userinfo.setUfpassword("123456");
+		System.out.println(service.login(userinfo));
 	}
 }
