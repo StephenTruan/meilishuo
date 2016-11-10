@@ -36,17 +36,19 @@ public class Goodsinfo  implements java.io.Serializable {
      private Integer packagehardness;
      private Integer packageinner;
      private Integer pgstid;
-     private Integer stid;
+     
      private Integer tagid;
      private String gtkeywords;
      private Integer gsid;
      private Timestamp gtdate;
      private Set goodspricehistories;
-     private Map<Long, Goodsprice> goodsprices;
      private Set goodscollections;
      private Set goodscomments;
+     
+     private Map<Long, Goodsprice> goodsprices;
      private Map<Long, Goodsimage> goodsimages;
 
+     private Storeinfo storeinfo;
 
     // Constructors
 
@@ -233,15 +235,17 @@ public class Goodsinfo  implements java.io.Serializable {
         this.pgstid = pgstid;
     }
 
-    public Integer getStid() {
-        return this.stid;
-    }
     
-    public void setStid(Integer stid) {
-        this.stid = stid;
-    }
 
-    public Integer getTagid() {
+    public Storeinfo getStoreinfo() {
+		return storeinfo;
+	}
+
+	public void setStoreinfo(Storeinfo storeinfo) {
+		this.storeinfo = storeinfo;
+	}
+
+	public Integer getTagid() {
         return this.tagid;
     }
     

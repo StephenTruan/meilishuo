@@ -13,14 +13,12 @@
         <many-to-one name="orderinfo" class="org.meilishuo.entity.Orderinfo" fetch="select">
             <column name="ofid" length="50" />
         </many-to-one>
-        <property name="gdid" type="java.lang.Integer">
-            <column name="gdid" />
-        </property>
         <property name="gdcount" type="java.lang.Integer">
             <column name="gdcount" />
         </property>
         <property name="price" type="java.lang.Double">
             <column name="price" precision="22" scale="0" />
         </property>
+        <many-to-one name="goodsinfo" class="org.meilishuo.entity.Goodsinfo" column="gdid" lazy="false"></many-to-one>
     </class>
 </hibernate-mapping>

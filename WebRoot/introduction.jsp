@@ -19,6 +19,7 @@
 	
 	
 	<script type="text/javascript" src="/meilishuo/sysjs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/meilishuo/sysjs/jquery.fly.js"></script>
 	<script type="text/javascript" src="/meilishuo/dist/js/bootstrap.min.js"></script>
 	
 	
@@ -43,6 +44,14 @@
   
   <body>
     <div class="container">
+    
+    	<cc:set var="cartsize" value="0"></cc:set>
+    	
+    	<cc:set var="cartsize" value="${fn:length(sessionScope.cart) }"></cc:set>
+    	
+    	<div id="cart_count">${cartsize }</div>
+    	
+    
     	<cc:set var="goods" value="${goodsinfo }"></cc:set>
     	
 	    <!-- =====================上层div（登录注册以及个人中心，logo 搜索，导航）========================= -->
@@ -167,7 +176,7 @@
 	    		</div>
 	    		
 	    		<div style="margin-top: 26px;">
-	    			<button 
+	    			<button id="putintocart" value="${goodsinfo.gdid }" 
 	    				style="border: 0px;background-color: #ff9933;color: #ffffff;
 	    				width: 160px;height: 40px;font-size: 16px;">
 	    				<i class="glyphicon glyphicon-shopping-cart"></i>
@@ -217,7 +226,52 @@
   	(function(){
   		
   		$("").ready(function(){
-  		
+  			
+  			
+  			$("#putintocart").click(function(){
+  			
+  				var bt = this;
+  				
+  				$.post("/meilishuo/mls/crol/cart/intocart",{"orderlist.goodsinfo.gdid":$(this).val(),"orderlist.gdcount":$("#count").val()},function(txt){
+  					
+  					if(txt!=0){
+  					
+  						var cl = $("#pic1").clone();
+  						
+  						var cl_css = {'position':'absolute','left':$(bt).offset().left,'top':$(bt).offset().top,'width':'50px','height':'50px'};
+  						
+  						cl.css(cl_css);
+  						
+  						$("body").append(cl);
+  						
+  						var offset = $('#toolbar_right').offset(),flyer = cl;
+  						
+  						flyer.fly({
+  							start:{
+  								left:$(bt).offset().left,
+  								top:$(bt).offset().top-500
+  							},
+  							end:{
+  								left:offset.left,
+  								top:100,
+  								width:20,
+  								height:20
+  							}
+  						});
+  						
+  						$("#cart_count").html(txt);
+  					
+  					}
+  					
+  				});
+  			});
+  			
+  			$("#cart_count").css('left',$("#toolbar_right").offset().left+16);
+  			$("#cart_count").css('top',$("#toolbar_right").offset().top+24);
+  			
+  			
+  			
+  			
   		
   			//商品图片切换
   			$("#imgcollection img").mouseover(function(){

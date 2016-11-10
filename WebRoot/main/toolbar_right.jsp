@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!-- ============================================右侧购物车，客服信息=============================================== -->
     <div id="toolbar_right">
-    	<button>
+    	<button id="bt_showcart">
     		<i class="glyphicon glyphicon-shopping-cart"></i>
     		<br>购<br>物<br>车
     	</button>
@@ -35,6 +35,15 @@
     
     
     <script type="text/javascript">
+    
+    	
+    	$("#bt_showcart").click(function(){
+    		window.location.href="/meilishuo/mls/crol/cart/tocart"
+    	});
+    	
+    	
+    	
+    	
     	/**右侧工具栏按钮hover效果**/
   			$("#toolbar_right button").mouseover(function(){
 	  				$(this).children("i").css("color","#ffffff");

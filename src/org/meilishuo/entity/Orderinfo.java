@@ -22,7 +22,8 @@ public class Orderinfo  implements java.io.Serializable {
      private String address;
      private String recipient;
      private String contactnumber;
-     private Set orderlists = new HashSet(0);
+     
+     private Set<Orderlist> orderlists;
 
 
     // Constructors
@@ -45,7 +46,6 @@ public class Orderinfo  implements java.io.Serializable {
         this.address = address;
         this.recipient = recipient;
         this.contactnumber = contactnumber;
-        this.orderlists = orderlists;
     }
 
    
@@ -115,14 +115,13 @@ public class Orderinfo  implements java.io.Serializable {
         this.contactnumber = contactnumber;
     }
 
-    public Set getOrderlists() {
-        return this.orderlists;
-    }
-    
-    public void setOrderlists(Set orderlists) {
-        this.orderlists = orderlists;
-    }
-   
+	public Set<Orderlist> getOrderlists() {
+		return orderlists;
+	}
+
+	public void setOrderlists(Set<Orderlist> orderlists) {
+		this.orderlists = orderlists;
+	}
 
 
 

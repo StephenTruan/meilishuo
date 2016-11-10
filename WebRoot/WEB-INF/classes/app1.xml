@@ -39,6 +39,7 @@
 		<entry key="goodsImageDAO" value-ref="goodsImageDAO"></entry>
 		<entry key="userInfoDAO" value-ref="userInfoDAO"></entry>
 		<entry key="userTypeInfoDAO" value-ref="userTypeInfoDAO"></entry>
+		<entry key="storeInfoDAO" value-ref="storeInfoDAO"></entry>
 	</util:map>
 	
 	<!-- 规格 -->

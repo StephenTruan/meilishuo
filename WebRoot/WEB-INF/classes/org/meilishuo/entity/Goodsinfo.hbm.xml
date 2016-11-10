@@ -69,9 +69,7 @@
         <property name="pgstid" type="java.lang.Integer">
             <column name="pgstid" />
         </property>
-        <property name="stid" type="java.lang.Integer">
-            <column name="stid" />
-        </property>
+
         <property name="tagid" type="java.lang.Integer">
             <column name="tagid" />
         </property>
@@ -96,6 +94,8 @@
        		<map-key column="utid" type="long"></map-key>
        		<one-to-many class="org.meilishuo.entity.Goodsprice" />
        </map>
+       
+       <many-to-one name="storeinfo" column="stid" class="org.meilishuo.entity.Storeinfo" lazy="false"></many-to-one>
        
     </class>
 </hibernate-mapping>

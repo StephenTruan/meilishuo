@@ -35,6 +35,7 @@ public class ModelService {
 	public static final String GOODSIMAGE = "goodsImageDAO";//商品图片
 	public static final String USERINFO = "userInfoDAO";//用户信息
 	public static final String USERTYPEINFO = "userTypeInfoDAO";//用户类型（等级）
+	public static final String STOREINFO = "storeInfoDAO";//店铺信息
 	
 
 	@Resource(name = "daoMap")
