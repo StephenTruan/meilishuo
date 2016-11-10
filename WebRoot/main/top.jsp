@@ -9,13 +9,13 @@
     		<a href=""><i class="glyphicon glyphicon-phone" style="color: "></i>&nbsp;&nbsp;&nbsp;下载App</a>
     	</div>
     	<div class="pull-right">
-    		<a href=""><i class="glyphicon glyphicon-user" style="color: "></i>&nbsp;&nbsp;&nbsp;美丽说会员</a>
+    		<a href=""><i class="glyphicon glyphicon-user" style="color: "></i>&nbsp;&nbsp;&nbsp;AiYi会员</a>
     	</div>
     	<div class="pull-right">
     		<a href=""><i class="glyphicon glyphicon-file" style="color: "></i>&nbsp;&nbsp;&nbsp;我的订单</a>
     	</div>
     	<div class="pull-right">
-    		<a href=""><i class="glyphicon glyphicon-shopping-cart" style="color: #ff6699;"></i>&nbsp;&nbsp;&nbsp;帮我的购物车</a>
+    		<a href=""><i class="glyphicon glyphicon-shopping-cart" style="color: #ff6699;"></i>&nbsp;&nbsp;&nbsp;我的购物车</a>
     	</div>
     	
     	<cc:if test="${sessionScope.activeUser==null }">
@@ -56,12 +56,16 @@
     				<button class="btn" style="background-color: #ff6699;color: #ffffff;border: 0px;border-radius: 0px;font-size: 12px;height: 26px;line-height: 12px;">宝贝</button>
     				<button class="btn" style="background-color: #dddddd;color: #666666;border: 0px;border-radius: 0px;font-size: 12px;height: 26px;line-height: 12px;">店铺</button>
     			</div>
-    			<div class="col-lg-10" style="background-color: #ff6699;padding: 2px;">
-    				<input placeholder="搜索商品" style="width: 85%;float: left;height: 26px;border-radius: 0px;border: 0px;font-size: 12px;" type="text" class="form-control" />
-    				<button class="btn " style="background-color: transparent;width: 15%;text-align: center;">
-    					<i class="glyphicon glyphicon-search" style="color: #ffffff;float: left;margin-top: -2px;margin-left: 13px;"></i>
-    				</button>
-    			</div>
+    			<form action="/meilishuo/mls/crol/mainAction/tosearch" method="post">
+	    			<div class="col-lg-10" style="background-color: #ff6699;padding: 2px;">
+	   					<input placeholder="搜索商品" id="search" name="kwds" autocomplete="off" 
+	    					style="width: 85%;float: left;height: 26px;border-radius: 0px;border: 0px;font-size: 12px;" 
+	    					type="text" class="form-control" />
+	    				<button class="btn " style="background-color: transparent;width: 15%;text-align: center;">
+	    					<i class="glyphicon glyphicon-search" style="color: #ffffff;float: left;margin-top: -2px;margin-left: 13px;"></i>
+	    				</button>
+	    			</div>
+    			</form>
     			<br><br>
     			<div style="font-size: 12px;color: #ff6699;">
     				套装 外套 连衣裙  运动鞋 双肩包 牛仔裤 卫衣 衬衫 小白鞋 睡衣
@@ -94,6 +98,94 @@
     
     
     <script type="text/javascript">
+    
+    
+    
+    
+    	(function(){
+    		
+    		$("").ready(function(){
+    			
+    			//商品搜索关键字检索操作
+    			$("#search").keyup(function(event){
+    				
+    				//如果按键为 上或者下 则进行单项操作
+    				if(event.which==40||event.which==38){
+    					
+    					var step = 1;
+    					if(event.which==38){
+    						step=-1;
+    					}
+    					
+    					if($("#kwddv")[0]!=undefined){
+    						//根据组件的自定义属性idx 确定索引
+    						var idx = $("#kwddv").attr("idx");
+    						idx = parseInt(idx)+step;
+    						//索引超出10 自动返回为第一个（归0）
+    						if(idx==10){
+    							idx = 0;
+    						}
+    						//除去索引指定的单项，其他单项去掉样式，模拟失去焦点的状态
+    						$("#kwddv>div").removeClass("kwddvitem");
+    						//制定索引的单项，加载样式，模拟获得焦点的状态
+    						$("#kwddv>div:eq("+idx+")").addClass("kwddvitem");
+    						//输入框内容配合被选中的单项，内容一致
+    						$("#search").val($("#kwddv>div:eq("+idx+")").html());
+    						//索引再次赋值给自定义属性，为下次操作做准备
+    						$("#kwddv").attr("idx",idx);
+    					}
+    					
+    					return;
+    				}
+    				
+    				//输入框内容不为空，则进行ajax请求
+    				if($(this).val()!=""){
+    				
+    					var ipt = this;
+    					
+    					//根据输入框内容发送请求，并接收返回的数据
+    					$.post("/meilishuo/mls/crol/mainAction/getkwds",{'kwds':$(this).val()},function(txt){
+    						//如果没有相应内容则不进行操作
+    						if(txt.length<1){
+    							return;
+    						}
+    						//对返回内容进行操作前将现有的信息去掉
+    						$("#kwddv").remove();
+    						//根据返回内容生成json对象
+    						var data = eval(txt);
+    						//生成div显示单项
+    						var dv1 = "<div id='kwddv' idx='-1'></div>";
+    						
+    						$("body").append(dv1);
+    						//设置div的位置以及样式（样式本身参看top.css）
+    						$("#kwddv").width($(ipt).width()+24);
+    						$("#kwddv").css("left",$(ipt).offset().left-1);
+    						$("#kwddv").css("top",$(ipt).offset().top+28);
+    						//为div加载搜索关键字单项
+    						$(data).each(function(){
+    						
+    							$("#kwddv").append("<div>"+this.value+"</div>");
+    							
+    						});
+    						
+    					});
+    				}
+    				
+    				
+    				
+    			});
+    			
+    			
+    		});
+    		
+    		
+    		
+    	})();
+    	
+    	
+    
+    
+    
     	//用于顶部导航滚动跟随的方法
   			function top3_beScroll(){
   				$(window).scroll(function(){

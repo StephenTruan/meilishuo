@@ -124,7 +124,7 @@
   			$.post("/meilishuo/mls/crol/log/identify",function(txt){
   				var data = eval(txt);
   				var imgs = $("#identifycode img");
-  				////调整页面验证码图片的路径和transform中rotate的角度（初始化）
+  				//调整页面验证码图片的路径和transform中rotate的角度（初始化）
   				$(imgs).each(function(i){
   					this.src="/meilishuo/imgs/tp/"+data[i].key;
   					$(this).attr("key",data[i].key);

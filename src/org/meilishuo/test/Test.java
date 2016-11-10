@@ -27,9 +27,9 @@ public class Test {
 		
 		ModelService service = app.getBean("modelService",ModelService.class);
 		
-		Userinfo userinfo = new Userinfo();
-		userinfo.setUflogname("Îâ½¨´¨");
-		userinfo.setUfpassword("123456");
-		System.out.println(service.login(userinfo));
+		List<Goodsinfo> data = service.getGoodsByKeywords("º«°æ Å£×Ð ÏÔÊÝ");
+		for (Goodsinfo g : data) {
+			System.out.println(g.getGdname());
+		}
 	}
 }

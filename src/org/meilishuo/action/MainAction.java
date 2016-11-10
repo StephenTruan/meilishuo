@@ -62,6 +62,8 @@ public class MainAction extends BaseAction {
 	
 	private Typeinfo typeinfo;
 	
+	//商品搜索关键字
+	private String kwds;
 	
 	
 	@Resource(name="specificationMap")
@@ -94,6 +96,72 @@ public class MainAction extends BaseAction {
 
 
 	/**===================================动作=========================================**/
+	
+	
+	
+	/**
+	 * 根据关键字获取对应的商品信息的方法
+	 * @return
+	 */
+	@Action(value="tosearch")
+	public String searchGoods(){
+		
+		List<Goodsinfo> data = getService().getGoodsByKeywords(kwds);
+		Map<String, Object> mp = (Map<String, Object>) ActionContext.getContext().get("request");
+		mp.put("infoes", data);
+		//重新设定需要显示的商品数量
+		ActionContext.getContext().getSession().put("count",data.size());
+		//将在特定类型检索时需要的规格信息、分页信息、单页累计续加显示的信息属性（session作用域中）移除
+		ActionContext.getContext().getSession().remove("items");
+		ActionContext.getContext().getSession().remove("pageCount");
+		ActionContext.getContext().getSession().remove("items_checked");
+		ActionContext.getContext().getSession().remove("infoes_onePage");
+		return "infoes";
+	}
+	
+	
+	
+	/**
+	 * 根据输入获取搜索关键字的方法
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	@Action(value="getkwds")
+	public void getKeyWords() throws JSONException, IOException{
+		
+		if(this.kwds == null || kwds.length() == 0){
+			
+			return;
+			
+		}
+		Set<String> keys = getService().getKeyWordsForSearch(kwds);
+		if(keys != null && keys.size() > 0){
+			
+			HttpServletResponse response = ServletActionContext.getResponse();
+			//设置相应字符集，以显示汉字
+			response.setCharacterEncoding("utf-8");
+			
+			JSONArray data = new JSONArray();
+			for (String k : keys) {
+				
+				JSONObject ob = new JSONObject();
+				ob.put("value", k);
+				data.put(ob);
+				
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(data);
+			
+			out.flush();
+			out.close();
+			
+		}
+		
+	}
+	
+	
 	
 	/**
 	 * 分页获取信息
@@ -411,12 +479,14 @@ public class MainAction extends BaseAction {
 	public void setCritera_propertyname(String critera_propertyname) {
 		this.critera_propertyname = critera_propertyname;
 	}
+	
 	public String getItemtext() {
 		return itemtext;
 	}
 	public void setItemtext(String itemtext) {
 		this.itemtext = itemtext;
 	}
+	
 	public String getItemkey() {
 		return itemkey;
 	}
@@ -431,5 +501,11 @@ public class MainAction extends BaseAction {
 		this.itemkey_checked = itemkey_checked;
 	}
 
+	public String getKwds() {
+		return kwds;
+	}
+	public void setKwds(String kwds) {
+		this.kwds = kwds;
+	}
 
 }

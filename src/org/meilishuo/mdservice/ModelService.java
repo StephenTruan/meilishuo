@@ -2,6 +2,7 @@ package org.meilishuo.mdservice;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,6 +13,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.meilishuo.entity.Areainfo;
 import org.meilishuo.entity.Goodsimage;
+import org.meilishuo.entity.Goodsinfo;
 import org.meilishuo.entity.Userinfo;
 import org.meilishuo.interfaces.DAO;
 import org.springframework.stereotype.Service;
@@ -257,4 +259,63 @@ public class ModelService {
 		List<Userinfo> data = dao.getInfoesByProperties(criterion1,criterion2);
 		return data!=null&&data.size()==1 ? data.get(0) : null;
 	}
+	
+	/**
+	 * 根据关键字获取搜索关键字条的方法
+	 * @param keywords 输入的关键字（多个之间用空格分着）
+	 * @return 关键字条的set
+	 */
+	public Set<String> getKeyWordsForSearch(String keywords){
+		DAO dao = daoMap.get(GOODSINFO);
+		//多个关键字用空格分组
+		String[] keys = keywords.split(" ");
+		Criterion[] cts = new Criterion[keys.length];
+		//每个关键字用like匹配一个criterion
+		for (int i = 0; i < keys.length; i++) {
+			cts[i] = Restrictions.like("gtkeywords", "%"+keys[i]+"%");
+		}
+		//将多个criterion放入查询条件获取相应信息
+		List<Goodsinfo> data = dao.getInfoesByProperties(cts);
+		Set<String> keywodsSet = new HashSet<String>();
+		//通过set容器，去除重复项
+		for (Goodsinfo g : data) {
+			keywodsSet.add(g.getGtkeywords());
+		}
+		//根据剩余信息状态返回10个以内的选项
+		if(keywodsSet.size()<=10){
+			return keywodsSet;
+		}else{
+			Set<String> dt = new HashSet<String>();
+			int i = 0;
+			for (String k : keywodsSet) {
+				if(i++ == 10){
+					break;
+				}
+				dt.add(k);
+			}
+			return dt;
+		}
+	}
+	
+	/**
+	 * 根据关键字获取匹配的商品信息
+	 * @param keywords 输入的关键字（多个之间用空格分着）
+	 * @return 匹配的商品信息
+	 */
+	public List<Goodsinfo> getGoodsByKeywords(String keywords){
+		DAO dao = daoMap.get(GOODSINFO);
+		//多个关键字用空格分组
+		String[] keys = keywords.split(" ");
+		Criterion[] cts = new Criterion[keys.length];
+		//每个关键字用like匹配一个criterion
+		for (int i = 0; i < keys.length; i++) {
+			cts[i] = Restrictions.like("gtkeywords", "%"+keys[i]+"%");
+		}
+		//将多个criterion放入查询条件获取相应信息
+		List<Goodsinfo> data = dao.getInfoesByProperties(cts);
+		return data;
+	}
+	
+	
+	
 }

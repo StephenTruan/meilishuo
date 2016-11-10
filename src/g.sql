@@ -2512,7 +2512,7 @@ insert into goodsprice(gdid,utid,price) values
 (811,1,258),(811,2,154),(811,3,129),(811,4,103),(811,5,77),(811,6,51);
 
 -- ÉÌÆ·²éÑ¯¹Ø¼ü×Ö
-/**
+
 UPDATE goodsinfo SET gtkeywords='';
 call dokeyword();
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'Ñ©·Ä ') WHERE INSTR(gdname,'Ñ©·Ä')>0 ;
@@ -2631,4 +2631,3 @@ UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'Ïµ´ø ') WHERE INSTR(gdname,'Ï
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'ºñµ× ') WHERE INSTR(gdname,'ºñµ×')>0 ;
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'¿É°® ') WHERE INSTR(gdname,'¿É°®')>0 ;
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'ÈÞÃæ ') WHERE INSTR(gdname,'ÈÞÃæ')>0 ;
-**/

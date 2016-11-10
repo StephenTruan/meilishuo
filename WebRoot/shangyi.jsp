@@ -101,7 +101,7 @@
 	  	
 	  	
 	  	<div class="col-lg-10 col-lg-offset-1" style="margin-top: 20px;">
-	  		<span style="font-size: 13px;color: #666666;">${requestScope.typeinfo.tpname }&nbsp;> </span>
+	  		<span style="font-size: 13px;color: #666666;">${requestScope.typeinfo!=null?requestScope.typeinfo.tpname:"搜索结果" }&nbsp;> </span>
 	  		<cc:forEach items="${sessionScope.items_checked }" var="item_checked">
 	  			<a class="btn btn-default item_checked" href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=${requestScope.typeinfo.tpid }&itemkey_checked=${fn:split(item_checked.key,':')[0] }&critera_propertyname_remove=${fn:split(item_checked.key,',')[1] }">${fn:split(item_checked.key,",")[0] }<i class="glyphicon glyphicon-remove"></i></a>
 	  		</cc:forEach>
@@ -110,7 +110,7 @@
 	  	
 	  	
 	  	<%--规格显示  开始 --%>
-	   	<div id="items" class="col-lg-10 col-lg-offset-1" >
+	   	<div id="items" class='col-lg-10 col-lg-offset-1 ${sessionScope.items==null?"hide":"" }' >
 	   		<cc:forEach items="${sessionScope.items }" var="item" varStatus="idx1">
 	      
 	      	<div class="col-lg-12" role="item">
@@ -144,7 +144,7 @@
 	      </cc:forEach>
 	   	</div><%--规格显示  结束 --%>
 	    <br><br><br>
-	    <div id="choose">
+	    <div id="choose" class='${sessionScope.items==null?"hide":"" }'>
 	    	<a id="more_items" style="font-size: 13px;" close="0" href="javascript:void">
 	    		更多筛选<i class="glyphicon glyphicon-chevron-down"></i>
 	    	</a>
@@ -383,12 +383,12 @@
 			var gtext="";
   			
   			$(goods_infoes).each(function(i){
-  				gtext+="<div class='col-lg-2' style='width: 19%;margin-left: 1.25%;'>";
+  				gtext+="<div class='col-lg-2' style='width: 19%;margin-left: 1.25%;margin-top:3px;'>";
   				gtext+="<div class='thumbnail' style=;border: 0px;'>";
   				gtext+="<a href='/meilishuo/mls/crol/goodsinfoAction/showInfo?goodsinfo.Gdid="+this.gid+"'><img src='"+this.gimg+"' ></a>";
   				gtext+="<div class='caption'>";
   				gtext+="<h4 style='color: #ff6699;'>￥"+this.gprice+"</h4>";
-  				gtext+="<h6 style='color: #666666;'>"+this.gname+"</h6>";
+  				gtext+="<h6 style='color: #666666;height:12px;'>"+this.gname+"</h6>";
   				gtext+="</div></div></div>";
   			});
   			//节点拼接完成之后添加到相应的区域当中（show_area）显示
