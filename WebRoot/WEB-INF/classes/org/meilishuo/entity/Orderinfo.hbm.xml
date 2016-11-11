@@ -31,7 +31,7 @@
         <property name="contactnumber" type="java.lang.String">
             <column name="contactnumber" length="100" />
         </property>
-        <set name="orderlists" table="orderlist" lazy="false">
+        <set name="orderlists" table="orderlist" lazy="false" inverse="true">
         	<key column="ofid"></key>
         	<one-to-many class="org.meilishuo.entity.Orderlist"/>
         </set>

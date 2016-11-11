@@ -15,7 +15,14 @@
 						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 						">
-
+	
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory"
+	></bean>
+	
 
 	<import resource="specification.xml"/>
 
@@ -40,6 +47,8 @@
 		<entry key="userInfoDAO" value-ref="userInfoDAO"></entry>
 		<entry key="userTypeInfoDAO" value-ref="userTypeInfoDAO"></entry>
 		<entry key="storeInfoDAO" value-ref="storeInfoDAO"></entry>
+		<entry key="orderInfoDAO" value-ref="orderInfoDAO"></entry>
+		<entry key="orderListDAO" value-ref="orderListDAO"></entry>
 	</util:map>
 	
 	<!-- 规格 -->

@@ -1,6 +1,7 @@
 package org.meilishuo.mdservice;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,8 @@ import org.hibernate.criterion.Restrictions;
 import org.meilishuo.entity.Areainfo;
 import org.meilishuo.entity.Goodsimage;
 import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Orderinfo;
+import org.meilishuo.entity.Orderlist;
 import org.meilishuo.entity.Userinfo;
 import org.meilishuo.interfaces.DAO;
 import org.springframework.stereotype.Service;
@@ -36,6 +39,8 @@ public class ModelService {
 	public static final String USERINFO = "userInfoDAO";//用户信息
 	public static final String USERTYPEINFO = "userTypeInfoDAO";//用户类型（等级）
 	public static final String STOREINFO = "storeInfoDAO";//店铺信息
+	public static final String ORDERINFO = "orderInfoDAO";//订单信息
+	public static final String ORDERLIST = "orderListDAO";//订单明细
 	
 
 	@Resource(name = "daoMap")
@@ -316,6 +321,70 @@ public class ModelService {
 		List<Goodsinfo> data = dao.getInfoesByProperties(cts);
 		return data;
 	}
+	
+	/**
+	 * 生成订单（多张订单批量处理，同一事务）
+	 * @param orderinfoes
+	 * @return
+	 * @throws Exception
+	 */
+	@Transactional
+	public boolean mkOrderInfores(Collection<Orderinfo> orderinfoes) throws Exception {
+		
+		Set<Orderlist> orderlists = new HashSet<Orderlist>();
+		
+		OrderInfoIdMaker mker = new OrderInfoIdMaker();
+		
+		for (Orderinfo orderinfo : orderinfoes) {
+			
+			String id = mker.getOrderInfoId(orderinfo.getUserinfo());
+			
+			orderinfo.setOfid(id);
+			
+			Set<Orderlist> ols = orderinfo.getOrderlists();
+			
+			int i = 1;
+			
+			for (Orderlist ol : ols) {
+				
+				ol.setOfid(id);
+				
+				ol.setOlid(new StringBuffer(id.toString()).append("_").append(i++).toString());
+				
+			}
+			
+			orderlists.addAll(ols);
+			
+			
+			
+		}
+		
+		
+		daoMap.get(ORDERINFO).execute_insert(orderinfoes.toArray());
+		daoMap.get(ORDERLIST).execute_insert(orderlists.toArray());
+		
+		return true;
+	}
+	
+	//利用内部类生成订单编号
+	class OrderInfoIdMaker{
+		
+		private int id_index = 1;
+		
+		public int getIndex(){
+			
+			return id_index++;
+			
+		}
+		
+		public String getOrderInfoId(Userinfo user){
+			
+			return new StringBuffer("of_").append(user.getUfid()).append("_").append(System.currentTimeMillis()).append("_").append(getIndex()).toString();
+			
+		}
+		
+	}
+	
 	
 	
 	

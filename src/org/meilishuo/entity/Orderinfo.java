@@ -123,6 +123,15 @@ public class Orderinfo  implements java.io.Serializable {
 		this.orderlists = orderlists;
 	}
 
+	@Override
+	public String toString() {
+		return "Orderinfo [ofid=" + ofid + ", storeinfo=" + storeinfo
+				+ ", userinfo=" + userinfo + ", ofdate=" + ofdate
+				+ ", ofstate=" + ofstate + ", address=" + address
+				+ ", recipient=" + recipient + ", contactnumber="
+				+ contactnumber + "]";
+	}
+
 
 
 

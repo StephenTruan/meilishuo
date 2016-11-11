@@ -12,7 +12,7 @@ public class Orderlist  implements java.io.Serializable {
     // Fields    
 
      private String olid;
-     private Orderinfo orderinfo;
+     private String ofid;
      private Integer gdcount;
      private Double price;
      private Goodsinfo goodsinfo;
@@ -34,16 +34,20 @@ public class Orderlist  implements java.io.Serializable {
     public void setOlid(String olid) {
         this.olid = olid;
     }
-
-    public Orderinfo getOrderinfo() {
-        return this.orderinfo;
-    }
     
-    public void setOrderinfo(Orderinfo orderinfo) {
-        this.orderinfo = orderinfo;
-    }
+	public String getOfid() {
+		return ofid;
+	}
 
-    public Integer getGdcount() {
+
+
+	public void setOfid(String ofid) {
+		this.ofid = ofid;
+	}
+
+
+
+	public Integer getGdcount() {
         return this.gdcount;
     }
     
@@ -69,6 +73,15 @@ public class Orderlist  implements java.io.Serializable {
 
 	public void setGoodsinfo(Goodsinfo goodsinfo) {
 		this.goodsinfo = goodsinfo;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Orderlist [olid=" + olid + ", ofid=" + ofid + ", gdcount="
+				+ gdcount + ", price=" + price + ", goodsinfo=" + goodsinfo
+				+ "]";
 	}
    
     

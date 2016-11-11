@@ -78,14 +78,14 @@
      <!-- 首页导航 3 -->
     <div id="tp3" class="col-lg-12">
     	<div class="col-lg-10 col-lg-offset-1" style="line-height: 40px;">
-    		<div class="tp3_link_1">首页</div>
+    		<div class="tp3_link_1"><a href="/meilishuo/index.jsp" style="color: #535353;">首页</a></div>
     		<div class="tp3_link_1">最热</div>
-    		<div class="tp3_link_1">上衣</div>
-    		<div class="tp3_link_1">裙子</div>
-    		<div class="tp3_link_1">裤子</div>
-    		<div class="tp3_link_1">鞋子</div>
-    		<div class="tp3_link_1">宝宝</div>
-    		<div class="tp3_link_1">配饰</div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=1" style="color: #535353;">上衣</a></div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=2" style="color: #535353;">裙子</a></div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=3" style="color: #535353;">裤子</a></div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=4" style="color: #535353;">鞋子</a></div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=5" style="color: #535353;">包包</a></div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=6" style="color: #535353;">配饰</a></div>
     		<div class="tp3_link_1" id="find_more" style="width: 100px;">更多</div>
     		<div style="border-left: 1px dotted #cccccc;float: left;width: 30px;height: 16px;margin-top: 13px;">&nbsp;</div>
     		<div class="tp3_link_2">Hi范儿</div>
@@ -222,13 +222,13 @@
   		
   			var more="<div id='the_more'>";
   			
-  			more+="<div><a>内衣</a></div>";
-  			more+="<div><a>美装</a></div>";
-  			more+="<div><a>男装</a></div>";
-  			more+="<div><a>童装</a></div>";
-  			more+="<div><a>家具</a></div>";
-  			more+="<div><a>小家电</a></div>";
-  			more+="<div><a>食品</a></div>";
+  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=7'>内衣</a></div>";
+  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=8'>美妆</a></div>";
+  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=9'>男装</a></div>";
+  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=10'>童装</a></div>";
+  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=11'>家具</a></div>";
+  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=12'>小家电</a></div>";
+  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=13'>食品</a></div>";
   			more+="</div>";
   			
   			$("body").append(more);

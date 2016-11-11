@@ -8,11 +8,11 @@
     <class name="org.meilishuo.entity.Orderlist" table="orderlist" catalog="mls">
         <id name="olid" type="java.lang.String">
             <column name="olid" length="50" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
-        <many-to-one name="orderinfo" class="org.meilishuo.entity.Orderinfo" fetch="select">
-            <column name="ofid" length="50" />
-        </many-to-one>
+        <property name="ofid" type="java.lang.String">
+        	<column name="ofid"></column>
+        </property>
         <property name="gdcount" type="java.lang.Integer">
             <column name="gdcount" />
         </property>

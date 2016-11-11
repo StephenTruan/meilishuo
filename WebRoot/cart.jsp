@@ -37,6 +37,8 @@
     
 	<div class="container">
 	
+	<form action="/meilishuo/mls/crol/orderinfo/mkorderinfoes" method="post">
+	
 		<jsp:include page="/main/top3.jsp"></jsp:include>
 		
 		<div class="col-lg-10 col-lg-offset-1" style="margin-top: 26px;font-size: 12px;color: #666666;line-height: 40px;">
@@ -88,7 +90,7 @@
 					<div class="col-lg-12 text-center" role='ol_item' style="font-size: 12px;background-color: #fcfcfc;border: 1px solid #e6e6e6;height: 120px;padding-top:20px;">
 					
 						<div style="float: left;margin: 20px;">
-							<input type="checkbox" role='ol-cx'>
+							<input type="checkbox" role='ol-cx' name="orderlist" value="${ol.goodsinfo.gdid}">
 						</div>
 						
 						<div class="col-lg-1">
@@ -107,7 +109,7 @@
 						<div class="col-lg-2 text-center" gdid="${ol.goodsinfo.gdid }" style="float: left;margin-top: 10px;padding-left: 60px;">
 							
 							
-								<button id="bt_down" role="changecount" value="-1" 
+								<button id="bt_down" type="button" role="changecount" value="-1" 
 			    					style="border:1px solid #e6e6e6;background-color: #ffffff;
 			    					width: 20px;height: 25px;text-align: center;float: left;line-height: 20px;">
 			    					<i class="glyphicon glyphicon-minus" style="margin-left: -3px;"></i>
@@ -119,7 +121,7 @@
 			    					border: 1px solid #e6e6e6;float: left;border-right: 0px;
 			    					border-left: 0px;line-height: 20px;">
 			    					
-			    				<button id="bt_up" role="changecount" value="1" 
+			    				<button id="bt_up" type="button" role="changecount" value="1" 
 				    				style="border:1px solid #e6e6e6;background-color: #ffffff;
 				    				width: 20px;height: 25px;float: left;text-align: center;line-height: 20px;">
 			    					<i class="glyphicon glyphicon-plus" style="margin-left: -3px;"></i>
@@ -158,7 +160,7 @@
 				</div>
 			</div>
 			<div id="btjs" class="col-lg-2 text-center" data-toggle="modal" data-target="${sessionScope.activeUser!=null?'#myModal':'#login' }" style="background-color: #F36;color: #ffffff;font-size: 16px;">
-				去结算
+				<a href="javascript:return void(0)" style="color: #ffffff;">去结算</a>
 			</div>	
 		</div>
 		
@@ -202,23 +204,23 @@
 			      
 			      <div class="col-lg-6 " style="height: 200px;padding: 20px;">
 			      	<div style="height: 30px;margin-top: 12px;line-height: 30px;">
-			      		<i class="glyphicon glyphicon-home" style="float: left;width: 20%;height: 100%;background-color: #ff6699;text-align: center;font-size: 18px;padding-top: 5px;border: 1px solid #ff6699;color: #ffffff;margin-top: -1px;"></i>
-						<input type="text" placeholder="联系地址" style="height: 100%;width: 80%;float: right;">
+			      		<i class="glyphicon glyphicon-home" style="float: left;width: 20%;height: 100%;background-color: #ff6699;text-align: center;font-size: 16px;padding-top: 5px;border: 1px solid #ff6699;color: #ffffff;margin-top: -1px;"></i>
+						<input type="text" name="address" placeholder="联系地址" style="height: 100%;width: 80%;float: right;color: black;padding-left: 10px;">
 					</div>
 			      	<div style="height: 30px;margin-top: 12px;line-height: 30px;">
-			      		<i class="glyphicon glyphicon-user" style="float: left;width: 20%;height: 100%;background-color: #ff6699;text-align: center;font-size: 18px;padding-top: 5px;border: 1px solid #ff6699;color: #ffffff;margin-top: -1px;"></i>
-						<input type="text" placeholder="收件人" style="height: 100%;width: 80%;float: right;">
+			      		<i class="glyphicon glyphicon-user" style="float: left;width: 20%;height: 100%;background-color: #ff6699;text-align: center;font-size: 16px;padding-top: 5px;border: 1px solid #ff6699;color: #ffffff;margin-top: -1px;"></i>
+						<input type="text" name="recipient" placeholder="收件人" style="height: 100%;width: 80%;float: right;color: black;padding-left: 10px;">
 					</div>
 			      	<div style="height: 30px;margin-top: 12px;line-height: 30px;">
-			      		<i class="glyphicon glyphicon-earphone" style="float: left;width: 20%;height: 100%;background-color: #ff6699;text-align: center;font-size: 18px;padding-top: 5px;border: 1px solid #ff6699;color: #ffffff;margin-top: -1px;"></i>
-						<input type="text" placeholder="联系电话" style="height: 100%;width: 80%;float: right;">
+			      		<i class="glyphicon glyphicon-earphone" style="float: left;width: 20%;height: 100%;background-color: #ff6699;text-align: center;font-size: 16px;padding-top: 5px;border: 1px solid #ff6699;color: #ffffff;margin-top: -1px;"></i>
+						<input type="text" name="contactnumber" placeholder="联系电话" style="height: 100%;width: 80%;float: right;color: black;padding-left: 10px;">
 					</div>
 			      </div>
 			      
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 13px;margin-right: 10px;">关&nbsp;闭</button>
-		        <button type="button" class="btn btn-primary" style="font-size: 13px; margin-right: 60px;background-color: #F36;border: 0px;">提&nbsp;交</button>
+		        <button type="submit" class="btn btn-primary" style="font-size: 13px; margin-right: 60px;background-color: #F36;border: 0px;">提&nbsp;交</button>
 		      </div>
 		
 		
@@ -226,7 +228,7 @@
 	  </div>
 	</div>
 	
-	
+	</form>
 	
 		
 	
