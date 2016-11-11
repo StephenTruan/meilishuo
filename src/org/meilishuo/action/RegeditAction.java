@@ -24,7 +24,8 @@ import com.opensymphony.xwork2.ActionContext;
 @Controller
 @Namespace(value = "/mls/crol/regedit")
 @Results(value = {
-			@Result(name="login",location="/login.html",type="redirect")
+			@Result(name="login",location="/login.html",type="redirect"),
+			@Result(name="login2",location="/login2.html",type="redirect")
 		})
 @Lazy(true)
 public class RegeditAction extends BaseAction {
@@ -47,6 +48,22 @@ public class RegeditAction extends BaseAction {
 		getService().insert_batch(getService().USERINFO, this.userinfo);
 		
 		return "login";
+	}
+	
+	@Action(value="doregedit2")
+	public String doRegedit2(){
+		
+		
+		userinfo.setUflocked(1);
+		userinfo.setUflogdate(new Timestamp(System.currentTimeMillis()));
+		
+		Usertypeinfo usertypeinfo = new Usertypeinfo();
+		usertypeinfo.setUtid(2);
+		userinfo.setUsertypeinfo(usertypeinfo);
+		
+		getService().insert_batch(getService().USERINFO, this.userinfo);
+		
+		return "login2";
 	}
 	
 	

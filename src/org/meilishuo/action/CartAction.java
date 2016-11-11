@@ -48,6 +48,45 @@ public class CartAction extends BaseAction {
 	
 	private Orderlist orderlist;
 	
+	
+	
+/*================================================ACTION============================================================*/
+	
+	@Action(value="changect")
+	public void changeCount() throws IOException{
+		
+		int gdid = orderlist.getGoodsinfo().getGdid();
+		
+		int count = orderlist.getGdcount();
+		
+		Map<Integer, Orderlist> cart = (Map<Integer, Orderlist>) ActionContext.getContext().getSession().get("cart");
+		
+		if(cart.containsKey(gdid)){
+			
+			Orderlist ol = cart.get(gdid);
+			
+			if(count == 0){
+				
+				cart.remove(gdid);
+				
+			}else{
+				
+				ol.setGdcount(count);
+				
+			}
+			
+			HttpServletResponse response = ServletActionContext.getResponse();
+			PrintWriter out = response.getWriter();
+			out.print(count);
+			out.flush();
+			out.close();
+			
+		}
+		
+	}
+	
+	
+	
 	@Action(value="tocart")
 	public String showCart(){
 		
@@ -127,7 +166,7 @@ public class CartAction extends BaseAction {
 		
 	}
 	
-	/**============================================================================**/
+/*===================================================================================================================*/
 	
 	@Override
 	public String getKey() {

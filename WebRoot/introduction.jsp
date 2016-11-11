@@ -159,7 +159,7 @@
 	    					<i class="glyphicon glyphicon-chevron-up" ></i>
 	    				</button>
 	    				<br>
-	    				<button id="bt_up" value="-1" 
+	    				<button id="bt_down" value="-1" 
 	    					style="border:1px solid #e6e6e6;background-color: transparent;
 	    					width: 25px;height: 20px;text-align: center;">
 	    					<i class="glyphicon glyphicon-chevron-down" style="margin-top: 2px;"></i>
