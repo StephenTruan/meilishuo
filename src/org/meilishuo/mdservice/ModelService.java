@@ -17,6 +17,7 @@ import org.meilishuo.entity.Goodsimage;
 import org.meilishuo.entity.Goodsinfo;
 import org.meilishuo.entity.Orderinfo;
 import org.meilishuo.entity.Orderlist;
+import org.meilishuo.entity.Typeinfo;
 import org.meilishuo.entity.Userinfo;
 import org.meilishuo.interfaces.DAO;
 import org.springframework.stereotype.Service;
@@ -385,6 +386,18 @@ public class ModelService {
 		
 	}
 	
+	
+	/**
+	 * 得到第一级商品类型，可以间接获取到对应的从属商品类型（二级三级）
+	 * @return
+	 */
+	public List<Typeinfo> getTypeInfoesOfTopLevel(){
+		
+		Criterion criterion1 = Restrictions.eq("tplevel", 1);
+		Criterion criterion2 = Restrictions.eq("tpid", 5);
+		
+		return daoMap.get(TYPEINFO).getInfoesByProperties(criterion1, criterion2);
+	}
 	
 	
 	

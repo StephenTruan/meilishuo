@@ -40,7 +40,7 @@
 	<form action="/meilishuo/mls/crol/orderinfo/mkorderinfoes" method="post">
 	
 		<jsp:include page="/main/top3.jsp"></jsp:include>
-		
+		<p style="font-size: 13px;color: red;">${requestScope.msg }</p>
 		<div class="col-lg-10 col-lg-offset-1" style="margin-top: 26px;font-size: 12px;color: #666666;line-height: 40px;">
 				
 					<div class="col-lg-12 text-center" style="font-size: 12px;background-color: #fcfcfc;border: 1px solid #e6e6e6;height: 40px;">

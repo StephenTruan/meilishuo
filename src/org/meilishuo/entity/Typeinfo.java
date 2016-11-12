@@ -20,6 +20,11 @@ public class Typeinfo  implements java.io.Serializable {
      private Integer tplevel;
      private Integer tpparentid;
      
+     
+     private Set<Typeinfo> belong;
+     
+     
+     
      private Map<String, Specifications> specificationses;
 
 
@@ -84,6 +89,14 @@ public class Typeinfo  implements java.io.Serializable {
 
 	public void setSpecificationses(Map<String, Specifications> specificationses) {
 		this.specificationses = specificationses;
+	}
+
+	public Set<Typeinfo> getBelong() {
+		return belong;
+	}
+
+	public void setBelong(Set<Typeinfo> belong) {
+		this.belong = belong;
 	}
     
    

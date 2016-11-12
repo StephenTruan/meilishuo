@@ -9,13 +9,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.meilishuo.interfaces.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
-
+/**
+ * 用于具体表格dao继承实现了基类
+ * @author Jianchuan
+ *
+ * @param <T> 注入具体操作需要的实体类类型
+ */
 @Transactional
 public class BaseDAO<T> extends HibernateTemplate implements DAO {
 
@@ -137,6 +143,33 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 		return findByCriteria(criteria);
 	}
 
+	
+
+	@Override
+	public List getInfoesByProperties(Integer pageNum, Integer rowCount,
+			Order[] orders, Criterion... criterions) {
+
+		DetachedCriteria criteria = DetachedCriteria.forClass(type);
+		
+		for (Criterion criterion : criterions) {
+			criteria.add(criterion);
+		}
+		
+		if(orders!=null&&orders.length>0){
+			for (Order order : orders) {
+				criteria.addOrder(order);
+			}
+		}
+		
+		if (pageNum != null && rowCount != null && pageNum >= 1
+				&& rowCount >= 1) {
+			return findByCriteria(criteria, (pageNum - 1) * rowCount, rowCount);
+		}
+		
+		return findByCriteria(criteria);
+	}
+	
+	
 	@Override
 	public int getPageCountByRowCount(int rowCount) {
 		// TODO Auto-generated method stub
@@ -159,5 +192,6 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 		
 		return (int) findByCriteria(criteria).get(0);
 	}
+
 
 }

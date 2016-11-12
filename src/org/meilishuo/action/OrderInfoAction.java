@@ -42,7 +42,8 @@ import com.opensymphony.xwork2.ActionContext;
 @Namespace(value = "/mls/crol/orderinfo")
 @ParentPackage("struts-default")
 @Results(value = {
-		@Result(location="/index.jsp",name="index")
+		@Result(location="/index.jsp",name="index"),
+		@Result(location="/cart.jsp",name="toshowcart")
 		})
 @Lazy(true)
 public class OrderInfoAction extends BaseAction {
@@ -62,6 +63,13 @@ public class OrderInfoAction extends BaseAction {
 		Set<Orderlist> ols = new HashSet<Orderlist>();
 		
 		Map<Integer, Orderlist> cart = (Map<Integer, Orderlist>) ActionContext.getContext().getSession().get("cart");
+		
+		if(orderlist == null){
+			String msg = "Ω·À„ ß∞‹£°";
+			Map<String, String> mp = (Map<String, String>) ActionContext.getContext().get("request");
+			mp.put("msg", msg);
+			return "toshowcart";
+		}
 		
 		Map<Integer, Orderinfo> orderinfoMp = new HashMap<Integer, Orderinfo>();
 		
@@ -109,7 +117,7 @@ public class OrderInfoAction extends BaseAction {
 		
 		System.out.println(ok);
 		
-		return "index";
+		return "toshowcart";
 	}
 	
 	

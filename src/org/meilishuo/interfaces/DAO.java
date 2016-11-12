@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 
 /**
  * 基于规范进行设计的DAO接口
@@ -52,6 +53,21 @@ public interface DAO<T> {
 	 */
 	List<T> getInfoesByPage(Integer pageNum, Integer rowCount,
 			Criterion... criterions);
+	
+	/**
+	 * 根据业务需要，进行多条件查询并实现分页
+	 * 
+	 * @param pageNum
+	 *            要查询的页码
+	 * @param rowCount
+	 *            指定每页显示的行数
+	 * @param orders
+	 * 			  需要排序的操作（可以多个）
+	 * @param criterion
+	 *            查询条件
+	 * @return 封装有相关信息的实体类对象的List
+	 */
+	List getInfoesByProperties(Integer pageNum, Integer rowCount,Order[] orders, Criterion... criterions);
 
 	/**
 	 * 批量进行相关数据添加的方法

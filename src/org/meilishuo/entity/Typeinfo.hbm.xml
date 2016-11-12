@@ -20,6 +20,11 @@
             <column name="tpparentid" />
         </property>
         
+        <set name="belong" table="typeinfo" lazy="false" order-by="tpid">
+        	<key column="tpparentid"></key>
+        	<one-to-many class="org.meilishuo.entity.Typeinfo"/>
+        </set>
+        
         <map name="specificationses" table="typeinfoandspecifications" order-by="tpid" lazy="false">
         	<key column="tpid"></key>
         	<map-key type="string" column="sptext"></map-key>
