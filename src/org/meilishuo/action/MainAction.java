@@ -180,6 +180,8 @@ public class MainAction extends BaseAction {
 		
 		Criterion criterion = (Criterion) ActionContext.getContext().getSession().get("critersions");
 		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, pageNum, rowCount, criterion);
+		
+		
 		LinkedList<Goodsinfo> data = new LinkedList<Goodsinfo>(infoes);
 		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
 		int i = 0;
@@ -253,15 +255,21 @@ public class MainAction extends BaseAction {
 		//传递商品类型，根据商品类型的编号，获取整个商品类型信息，包括规格
 		if(typeinfo!=null){
 			typeinfo=(Typeinfo) getService().getInfoByID(getService().TYPEINFO, typeinfo.getTpid());
+			
+			
 		}
 		
 		//在session作用域中存放类型编号，用于商品大类切换使得判断比较
 		if(!ActionContext.getContext().getSession().containsKey("tp_id")){
 			ActionContext.getContext().getSession().put("tp_id", typeinfo.getTpid());
+			
+			
 		}
 		
 		//通过session作用域属性确认之前（本次检索之前）使用的商品类型
 		Integer tp_id = (Integer) ActionContext.getContext().getSession().get("tp_id");
+		
+		
 
 		//如果两次的商品类型编号不一致，则表明大类变化需要清空session中已有的规格，以便重新通过spring选择
 		if(tp_id.intValue() != typeinfo.getTpid().intValue()){
@@ -278,11 +286,22 @@ public class MainAction extends BaseAction {
 		//负责收集规格选项的容器  从session作用域获取------>规格容器
 		Map<String, List> items = (Map<String, List>) ActionContext.getContext().getSession().get("items");
 		
+		System.out.println("*********************************");
+		System.out.println("获取的规格容器为："+items);
 		
 		//如果不存在则从数据库提取相关规格数据
 		if(items==null){
+			
+			System.out.println("*********************************");
+			System.out.println("向规格容器中添加规格");
+			
 			//获取商品类型中所有的规格
  			Map mp1 = typeinfo.getSpecificationses();
+ 			
+ 			System.out.println("*********************************");
+ 			System.out.println("商品所有规格的大小为："+mp1.size());
+ 			
+ 			System.out.println("#######################################################");
 			
  			//通过与spring规格map的比较，获取数据库中规格选项的信息
 			Set<String> keys = mp1.keySet();
@@ -290,8 +309,14 @@ public class MainAction extends BaseAction {
 				
 				ItemList l = specificationMap.get(key);
 				
+				System.out.println("------------------1--------------------------");
+	 			System.out.println("商品规格DAO为："+l.getDao());
+				
 				//获取规格信息的复制品，并添加
 				List data = (List) l.invoke(typeinfo.getTpid()).clone();
+				
+				System.out.println("-----4-------------");
+				System.out.println("获取规格的复制品并添加");
 				
 				mp1.put(key, data);
 				
@@ -302,21 +327,33 @@ public class MainAction extends BaseAction {
 			//将本商品大类的规格列表存入session属性
 			ActionContext.getContext().getSession().put("items", mp1);
 			
+			System.out.println("*********************************");
+			System.out.println("将商品大类："+items+"放入session中");
+			
 		}
 		
 		
 		
 		
 
-		//收集 已选的规格显示选项 的容器，从session作用域获取------->已选容器
+		//收集 已选的规格显示选项 的容器，从session作用域获取------->已选规格容器
 		Map<String, List> items_checked = (Map<String, List>) ActionContext.getContext().getSession().get("items_checked");
 		
-		//如果  已选容器   不存在则创建
+		System.out.println("*********************************");
+		System.out.println("已选规格容器："+items_checked);
+		
+		//如果  已选规格容器   不存在则创建
 		if(items_checked==null){
+			
+			System.out.println("*********************************");
+			System.out.println("已选规格 容器不存在");
 			
 			items_checked = new LinkedHashMap<String, List>();
 			
 			ActionContext.getContext().getSession().put("items_checked", items_checked);
+			
+			System.out.println("*********************************");
+			System.out.println("将已选规格容器放入session作用域："+items_checked);
 			
 		}
 		
@@ -374,12 +411,21 @@ public class MainAction extends BaseAction {
 			if(criteriaMap.size() == 0){
 				List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", tp_id));
 				
+				System.out.println("*********************************");
+				System.out.println("移除选项");
+				
 				criterion = Restrictions.in("typeinfo", types);
 			}
 		}
 		//默认无筛选项
 		else{
 			List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", tp_id));
+			
+			System.out.println("*********************************");
+			System.out.println("商品类型:");
+			for (Typeinfo t : types) {
+				System.out.print(t.getTpname()+" , ");
+			}
 			
 			criterion = Restrictions.in("typeinfo", types);
 		}
@@ -390,10 +436,17 @@ public class MainAction extends BaseAction {
 			pageNum = 1;
 		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, pageNum, rowCount, criterion);
 		
+		System.out.println("*********************************");
+		System.out.println("商品数量"+infoes.size());
+		
 		//通过保存筛选条件
 		ActionContext.getContext().getSession().put("critersions", criterion);
 		//通过筛选条件获取记录数量
 		int count = getService().getRowCount(getService().GOODSINFO, criterion);
+		
+		System.out.println("*********************************");
+		System.out.println("筛选后的商品数量"+count);
+		
 		//通过记录数量获取可以分页的页数
 		int pageCount = count%rowCount==0?count/rowCount:(count/rowCount+1);
 		

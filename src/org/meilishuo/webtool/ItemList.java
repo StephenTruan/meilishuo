@@ -67,6 +67,9 @@ public class ItemList<T> extends ArrayList {
 	}
 
 	public ItemList invoke(int tpid) throws Exception{
+
+		System.out.println("---------2------------------");
+		System.out.println("Ö´ÐÐgetInfoesByProperties·½·¨");
 		
 		List infoes = dao.getInfoesByProperties(Restrictions.eq(this.eq != null?this.eq:"tpid", tpid));
 		

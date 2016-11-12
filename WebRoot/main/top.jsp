@@ -79,7 +79,7 @@
     <div id="tp3" class="col-lg-12">
     	<div class="col-lg-10 col-lg-offset-1" style="line-height: 40px;">
     		<div class="tp3_link_1"><a href="/meilishuo/index.jsp" style="color: #535353;">首页</a></div>
-    		<div class="tp3_link_1">最热</div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/tosearch?kwds=短" style="color: #535353;">最热</a></div>
     		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=1" style="color: #535353;">上衣</a></div>
     		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=2" style="color: #535353;">裙子</a></div>
     		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=3" style="color: #535353;">裤子</a></div>
@@ -223,11 +223,11 @@
   			var more="<div id='the_more'>";
   			
   			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=7'>内衣</a></div>";
-  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=8'>美妆</a></div>";
+  			//more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=8'>美妆</a></div>";   这里有报错
   			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=9'>男装</a></div>";
   			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=10'>童装</a></div>";
-  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=11'>家具</a></div>";
-  			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=12'>小家电</a></div>";
+  			//more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=11'>家具</a></div>";
+  			//more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=12'>小家电</a></div>";
   			more+="<div><a href='/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=13'>食品</a></div>";
   			more+="</div>";
   			

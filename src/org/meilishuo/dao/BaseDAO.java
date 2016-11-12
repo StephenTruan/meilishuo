@@ -50,6 +50,7 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 	@Override
 	public List getInfoesByProperties(Criterion... criterions) {
 		// TODO Auto-generated method stub
+		
 		return getInfoesByPage(null, null, criterions);
 	}
 
@@ -128,6 +129,11 @@ public class BaseDAO<T> extends HibernateTemplate implements DAO {
 				&& rowCount >= 1) {
 			return findByCriteria(criteria, (pageNum - 1) * rowCount, rowCount);
 		}
+		
+
+		System.out.println("---------3-------------");
+		System.out.println("Ö´ÐÐgetInfoesByPage·½·¨");
+		
 		return findByCriteria(criteria);
 	}
 

@@ -92,6 +92,8 @@ public class CartAction extends BaseAction {
 		
 		Map<Integer, Orderlist> cart = (Map<Integer, Orderlist>) ActionContext.getContext().getSession().get("cart");
 		
+		if(cart==null){return "toshowcart";}
+		
 		Set<Integer> storeinfo = new LinkedHashSet<Integer>();
 		
 		Collection<Orderlist> values = cart.values();

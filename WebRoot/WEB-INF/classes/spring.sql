@@ -189,12 +189,13 @@ DROP TABLE IF EXISTS `clothing_trousers_houdu`;
 CREATE TABLE `clothing_trousers_houdu` (
   `cthid` int(11) NOT NULL AUTO_INCREMENT,
   `cthtext` varchar(20) NOT NULL,
+  `tpid` int(11) DEFAULT NULL,
   PRIMARY KEY (`cthid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `clothing_trousers_houdu` */
 
-insert  into `clothing_trousers_houdu`(`cthid`,`cthtext`) values (1,'适中'),(2,'加绒'),(3,'偏厚'),(4,'偏薄');
+insert  into `clothing_trousers_houdu`(`cthid`,`cthtext`,`tpid`) values (1,'适中',3),(2,'加绒',3),(3,'偏厚',3),(4,'偏薄',3);
 
 /*Table structure for table `clothing_trouserssize` */
 
@@ -203,12 +204,13 @@ DROP TABLE IF EXISTS `clothing_trouserssize`;
 CREATE TABLE `clothing_trouserssize` (
   `ctsid` int(11) NOT NULL AUTO_INCREMENT,
   `ctsname` varchar(20) NOT NULL,
+  `tpid` int(11) DEFAULT NULL,
   PRIMARY KEY (`ctsid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `clothing_trouserssize` */
 
-insert  into `clothing_trouserssize`(`ctsid`,`ctsname`) values (1,'长裤'),(2,'九分裤'),(3,'短裤'),(4,'七分裤'),(5,'中裤'),(6,'五分裤'),(7,'超短裤');
+insert  into `clothing_trouserssize`(`ctsid`,`ctsname`，`tpid`) values (1,'长裤',3),(2,'九分裤',3),(3,'短裤',3),(4,'七分裤',3),(5,'中裤',3),(6,'五分裤',3),(7,'超短裤',3);
 
 /*Table structure for table `clothing_typeversion` */
 
@@ -466,13 +468,14 @@ DROP TABLE IF EXISTS `package_structure`;
 CREATE TABLE `package_structure` (
   `pgstid` int(11) NOT NULL AUTO_INCREMENT,
   `pgsttext` varchar(20) NOT NULL,
+  `tpid` int(11) DEFAULT NULL,
   PRIMARY KEY (`pgstid`),
   UNIQUE KEY `pgsttext` (`pgsttext`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `package_structure` */
 
-insert  into `package_structure`(`pgstid`,`pgsttext`) values (3,'卡位'),(6,'大钞夹'),(4,'夹层拉链袋'),(2,'手机袋'),(1,'拉链暗袋'),(8,'拉链格'),(5,'暗格'),(9,'电脑插袋'),(13,'相机插袋'),(11,'相片位'),(7,'证件位'),(12,'钥匙位'),(10,'零钱位');
+insert  into `package_structure`(`pgstid`,`pgsttext`,tpid) values (3,'卡位',5),(6,'大钞夹',5),(4,'夹层拉链袋',5),(2,'手机袋',5),(1,'拉链暗袋',5),(8,'拉链格',5),(5,'暗格',5),(9,'电脑插袋',5),(13,'相机插袋',5),(11,'相片位',5),(7,'证件位',5),(12,'钥匙位',5),(10,'零钱位',5);
 
 /*Table structure for table `packagetype` */
 
@@ -481,13 +484,14 @@ DROP TABLE IF EXISTS `packagetype`;
 CREATE TABLE `packagetype` (
   `ptid` int(11) NOT NULL AUTO_INCREMENT,
   `pttext` varchar(20) NOT NULL,
+  `tpid` int(11) DEFAULT NULL,
   PRIMARY KEY (`ptid`),
   UNIQUE KEY `pttext` (`pttext`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 /*Data for the table `packagetype` */
 
-insert  into `packagetype`(`ptid`,`pttext`) values (16,'三角形'),(12,'信封形'),(11,'动物形'),(14,'圆桶形'),(10,'圆盒形'),(13,'异形'),(19,'新月形'),(8,'方盒形'),(9,'枕头形'),(7,'梯形'),(1,'横款方形'),(3,'水桶形'),(2,'竖款方形'),(6,'箱形'),(4,'翅膀形'),(18,'菜篮形'),(5,'贝壳形'),(15,'购物袋形'),(20,'饺子形'),(17,'马鞍形');
+insert  into `packagetype`(`ptid`,`pttext`,tpid) values (16,'三角形',5),(12,'信封形',5),(11,'动物形',5),(14,'圆桶形',5),(10,'圆盒形',5),(13,'异形',5),(19,'新月形',5),(8,'方盒形',5),(9,'枕头形',5),(7,'梯形',5),(1,'横款方形',5),(3,'水桶形',5),(2,'竖款方形',5),(6,'箱形',5),(4,'翅膀形',5),(18,'菜篮形',5),(5,'贝壳形',5),(15,'购物袋形',5),(20,'饺子形',5),(17,'马鞍形',5);
 
 /*Table structure for table `sole` */
 
@@ -496,13 +500,14 @@ DROP TABLE IF EXISTS `sole`;
 CREATE TABLE `sole` (
   `soleid` int(11) NOT NULL AUTO_INCREMENT,
   `soletext` varchar(20) NOT NULL,
+  `tpid` int(11) DEFAULT NULL,
   PRIMARY KEY (`soleid`),
   UNIQUE KEY `soletext` (`soletext`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sole` */
 
-insert  into `sole`(`soleid`,`soletext`) values (20,'CLINGER'),(13,'CONTAGRIP'),(7,'EVA'),(18,'HYPERGRIP'),(17,'PHYLON'),(19,'SKY'),(10,'千层底'),(4,'复合底'),(6,'天然橡胶'),(11,'木质'),(1,'橡胶'),(14,'水晶底'),(8,'泡沫'),(5,'牛筋'),(15,'真皮底'),(12,'硬质橡胶'),(9,'碳素橡胶'),(3,'耐磨橡胶'),(16,'软木'),(2,'防滑橡胶');
+insert  into `sole`(`soleid`,`soletext`,tpid) values (20,'CLINGER',4),(13,'CONTAGRIP',4),(7,'EVA',4),(18,'HYPERGRIP',4),(17,'PHYLON',4),(19,'SKY',4),(10,'千层底',4),(4,'复合底',4),(6,'天然橡胶',4),(11,'木质',4),(1,'橡胶',4),(14,'水晶底',4),(8,'泡沫',4),(5,'牛筋',4),(15,'真皮底',4),(12,'硬质橡胶',4),(9,'碳素橡胶',4),(3,'耐磨橡胶',4),(16,'软木',4),(2,'防滑橡胶',4);
 
 /*Table structure for table `specifications` */
 

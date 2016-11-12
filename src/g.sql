@@ -1692,10 +1692,6 @@ insert into goodsimage(gimgurl,gdid,gimgtype) values
 ('d4d70066083a5810074df068e85a_640_832.c1.jpg',810,1),
 ('cf44b064cf9ed6b374441236ee96_2643_3859.ch.jpg',811,1);
 
--- È¥µôÉÌÆ·ÐÅÏ¢±íÖÐµÄÍ¼Æ¬×Ö¶Î
-alter table goodsinfo drop column gimg;
-
-
 
 -- ÉÌÆ· ¼Û¸ñÐÅÏ¢ 
 insert into goodsprice(gdid,utid,price) values
@@ -2512,7 +2508,7 @@ insert into goodsprice(gdid,utid,price) values
 (811,1,258),(811,2,154),(811,3,129),(811,4,103),(811,5,77),(811,6,51);
 
 -- ÉÌÆ·²éÑ¯¹Ø¼ü×Ö
-
+/*
 UPDATE goodsinfo SET gtkeywords='';
 call dokeyword();
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'Ñ©·Ä ') WHERE INSTR(gdname,'Ñ©·Ä')>0 ;
@@ -2631,3 +2627,4 @@ UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'Ïµ´ø ') WHERE INSTR(gdname,'Ï
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'ºñµ× ') WHERE INSTR(gdname,'ºñµ×')>0 ;
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'¿É°® ') WHERE INSTR(gdname,'¿É°®')>0 ;
 UPDATE goodsinfo SET gtkeywords=CONCAT(gtkeywords,'ÈÞÃæ ') WHERE INSTR(gdname,'ÈÞÃæ')>0 ;
+*/
