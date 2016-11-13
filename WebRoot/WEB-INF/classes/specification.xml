@@ -12,109 +12,114 @@
 	<bean id="sps" class="org.meilishuo.webtool.ItemList" abstract="true" p:sessionFactory-ref="sessionFactory">
 		
 	</bean>
-
+	<!-- 类目 -->
 	<bean id="typeinfo_sps" parent="sps"  p:dao-ref="typeinfoDAO" p:eq="tpparentid">
 		<constructor-arg name="type" value="org.meilishuo.entity.Typeinfo"></constructor-arg>
 		<constructor-arg name="id" value="Tpid"></constructor-arg>
 		<constructor-arg name="text" value="Tpname"></constructor-arg>
 		<constructor-arg name="property" value="typeinfo.tpid"></constructor-arg>
 	</bean>
-
+	<!-- 衣长 -->
 	<bean id="clothingsize_sps" parent="sps"  p:dao-ref="clothingSizeDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingSize"></constructor-arg>
 		<constructor-arg name="id" value="Csid"></constructor-arg>
 		<constructor-arg name="text" value="Csname"></constructor-arg>
 	</bean>
-
+	<!-- 版型 -->
 	<bean id="clothingTypeversion_sps" parent="sps"  p:dao-ref="clothingTypeversionDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingTypeversion"></constructor-arg>
 		<constructor-arg name="id" value="Ctid"></constructor-arg>
 		<constructor-arg name="text" value="Cttext"></constructor-arg>
 	</bean>
 	
-
+	<!-- 领型 -->
 	<bean id="clothingCollar_sps" parent="sps"  p:dao-ref="clothingCollarDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingCollar"></constructor-arg>
 		<constructor-arg name="id" value="Ccid"></constructor-arg>
 		<constructor-arg name="text" value="Cctext"></constructor-arg>
 	</bean>
-	
+	<!-- 元素 -->
 	<bean id="clothingElement_sps" parent="sps"  p:dao-ref="clothingElementDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingElement"></constructor-arg>
 		<constructor-arg name="id" value="Ceid"></constructor-arg>
 		<constructor-arg name="text" value="Cetext"></constructor-arg>
 	</bean>
 	
+	
+	<!-- ================一下为商品信息添加时设置需要补充的bean数据======================= -->
+	
+	
+	<!-- 裙长 -->
 	<bean id="clothingSkirtsize_sps" parent="sps"  p:dao-ref="clothingSkirtsizeDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingSkirtsize"></constructor-arg>
 		<constructor-arg name="id" value="Cssid"></constructor-arg>
 		<constructor-arg name="text" value="Csstext"></constructor-arg>
 	</bean>
-	
+	<!-- 腰线高度 -->
 	<bean id="clothingLineheight_sps" parent="sps"  p:dao-ref="clothingLineheightDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingLineheight"></constructor-arg>
 		<constructor-arg name="id" value="Clhid"></constructor-arg>
 		<constructor-arg name="text" value="Clhtext"></constructor-arg>
 	</bean>
-	
+	<!-- 材质 -->
 	<bean id="material_sps" parent="sps"  p:dao-ref="materialDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.Material"></constructor-arg>
 		<constructor-arg name="id" value="Mtid"></constructor-arg>
 		<constructor-arg name="text" value="Mttext"></constructor-arg>
 	</bean>
-	
+	<!-- 裙子厚度 -->
 	<bean id="clothingSkirthoudu_sps" parent="sps"  p:dao-ref="clothingSkirthouduDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingSkirthoudu"></constructor-arg>
 		<constructor-arg name="id" value="Cshid"></constructor-arg>
 		<constructor-arg name="text" value="Cshtext"></constructor-arg>
 	</bean>
-	
+	<!-- 裙子摆型 -->
 	<bean id="clothingSkirtbaixing_sps" parent="sps"  p:dao-ref="clothingSkirtbaixingDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingSkirtbaixing"></constructor-arg>
 		<constructor-arg name="id" value="Csbid"></constructor-arg>
 		<constructor-arg name="text" value="Csbtext"></constructor-arg>
 	</bean>
-	
+	<!-- 裙子开叉 -->
 	<bean id="clothingSkirtkaicha_sps" parent="sps"  p:dao-ref="clothingSkirtkaichaDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingSkirtkaicha"></constructor-arg>
 		<constructor-arg name="id" value="Cskid"></constructor-arg>
 		<constructor-arg name="text" value="Csktext"></constructor-arg>
 	</bean>
 	
-	
+	<!-- 裤子厚度 -->
 	<bean id="clothingTrousersHoudu_sps" parent="sps"  p:dao-ref="clothingTrousersHouduDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingTrousersHoudu"></constructor-arg>
 		<constructor-arg name="id" value="Cthid"></constructor-arg>
 		<constructor-arg name="text" value="Cthtext"></constructor-arg>
 	</bean>
 	
-	
+	<!-- 裤长 -->
 	<bean id="clothingTrouserssize_sps" parent="sps"  p:dao-ref="clothingTrouserssizeDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingTrouserssize"></constructor-arg>
 		<constructor-arg name="id" value="Ctsid"></constructor-arg>
 		<constructor-arg name="text" value="Ctsname"></constructor-arg>
 	</bean>
 	
-	
+	<!-- 闭合方式 -->
 	<bean id="clothingClosed_sps" parent="sps"  p:dao-ref="clothingClosedDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.ClothingClosed"></constructor-arg>
 		<constructor-arg name="id" value="Ccloseid"></constructor-arg>
 		<constructor-arg name="text" value="Cctext"></constructor-arg>
 	</bean>
 	
-	
+	<!-- 鞋底材质 -->
 	<bean id="sole_sps" parent="sps"  p:dao-ref="soleDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.Sole"></constructor-arg>
 		<constructor-arg name="id" value="Soleid"></constructor-arg>
 		<constructor-arg name="text" value="Soletext"></constructor-arg>
 	</bean>
-	
+	<!-- 箱包外形 -->
 	<bean id="packagetype_sps" parent="sps"  p:dao-ref="packagetypeDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.Packagetype"></constructor-arg>
 		<constructor-arg name="id" value="Ptid"></constructor-arg>
 		<constructor-arg name="text" value="Pttext"></constructor-arg>
 	</bean>
-	
+	<!-- 箱包内部结构 -->
 	<bean id="packageStructure_sps" parent="sps"  p:dao-ref="packageStructureDAO">
 		<constructor-arg name="type" value="org.meilishuo.entity.PackageStructure"></constructor-arg>
 		<constructor-arg name="id" value="Pgstid"></constructor-arg>

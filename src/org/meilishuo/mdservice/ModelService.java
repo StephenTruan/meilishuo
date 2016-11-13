@@ -394,9 +394,8 @@ public class ModelService {
 	public List<Typeinfo> getTypeInfoesOfTopLevel(){
 		
 		Criterion criterion1 = Restrictions.eq("tplevel", 1);
-		Criterion criterion2 = Restrictions.eq("tpid", 5);
 		
-		return daoMap.get(TYPEINFO).getInfoesByProperties(criterion1, criterion2);
+		return daoMap.get(TYPEINFO).getInfoesByProperties(criterion1);
 	}
 	
 	

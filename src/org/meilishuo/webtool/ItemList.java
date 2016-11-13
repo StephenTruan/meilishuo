@@ -66,6 +66,12 @@ public class ItemList<T> extends ArrayList {
 		this.property = property;
 	}
 
+	/**
+	 * 通过反射方法获取对应数据填充list中的item
+	 * @param tpid
+	 * @return
+	 * @throws Exception
+	 */
 	public ItemList invoke(int tpid) throws Exception{
 
 		System.out.println("---------2------------------");
