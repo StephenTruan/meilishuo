@@ -62,7 +62,7 @@
 					  <div role="tabpanel" class="tab-pane active" id="goods_info">
 							
 							<div class="dv3" style="float: left;margin-right: 20px;"><h5><label class="label label-default">商品名称</label></h5>
-								<input type="text" class="form-control" name="goodsinfo.gdid">
+								<input type="text" class="form-control" name="goodsinfo.gdname">
 							</div>
 
 							<div class="dv3" style="float: left;"><h5><label class="label label-default">供应商</label></h5>
@@ -125,7 +125,7 @@
       				  		
       				  		<div class="input-group">
       				  			<div class="input-group-addon" style="font-size: 14px;">普通会员价</div>
-      				  			<input type="text" class="form-control" placeholder="请填写价格" value="100" name="goodsinfo.goodsprice[1]" id="price1">
+      				  			<input type="text" class="form-control" placeholder="请填写价格" value="100" name="goodsinfo.goodsprices[1].price" id="price1">
       				  			<div class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></div>
       				  		</div>
       				  		
@@ -133,14 +133,14 @@
       				  		
       				  		<div class="input-group">
       				  			<div class="input-group-addon input-group-addon_care">VIP &nbsp;会员</div>
-      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price2" name="goodsinfo.goodsprice[2]" value="90">
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price2" name="goodsinfo.goodsprices[2].price" value="90">
       				  			<div class="input-group-addon input-group-addon_care">
       				  			<input type="range" max="1" min="0" step="0.01" value="0.9" target="#price2" style="width: 30px;"></div>
       				  		</div>
       				  		
       				  		<div class="input-group">
       				  			<div class="input-group-addon" style="background-color: orange;color: #ffffff;font-size: 14px;border: orange;">黄金会员</div>
-      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price3" value="80" name="goodsinfo.goodsprice[3]">
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price3" value="80" name="goodsinfo.goodsprices[3].price">
       				  			<div class="input-group-addon" style="background-color: orange;border: orange;">
       				  				<input type="range" max="1" min="0" step="0.01" value="0.8" target="#price3" style="width: 30px;">
       				  			</div>
@@ -148,7 +148,7 @@
       				  		
       				  		<div class="input-group">
       				  			<div class="input-group-addon" style="background-color: silver;color: #ffffff;border: silver;font-size: 14px;">白金会员</div>
-      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price4" value="70" name="goodsinfo.goodsprice[4]">
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price4" value="70" name="goodsinfo.goodsprices[4].price">
       				  			<div class="input-group-addon" style="background-color: silver;border: silver;">
       				  				<input type="range" max="1" min="0" step="0.01" value="0.7" target="#price4" style="width: 30px;">
       				  			</div>
@@ -156,7 +156,7 @@
       				  		
       				  		<div class="input-group">
       				  			<div class="input-group-addon" style="background-color: #31B0D5;color: #ffffff;border: #31B0D5;font-size: 14px;">钻石会员</div>
-      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price5" value="60" name="goodsinfo.goodsprice[5]">
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price5" value="60" name="goodsinfo.goodsprices[5].price">
       				  			<div class="input-group-addon" style="background-color: #31B0D5;border: #31B0D5;">
       				  				<input type="range" max="1" min="0" step="0.01" value="0.6" target="#price5" style="width: 30px;">
       				  			</div>
@@ -186,7 +186,7 @@
     				  			<br>
     				  			<div style="clear: both;text-align: center;">
     				  				<button class="btn btn-danger" type="submit" style="margin-right: 30px;">保存</button>
-    				  				<button class="btn btn-default" style="">重置</button>
+    				  				<button class="btn btn-default" type="reset" style="">重置</button>
     				  			</div>
     				  	</div>
       				  	
@@ -490,7 +490,7 @@
 	  	//表单提交事件
 	  	$("#fm1").submit(function(){
 	  	
-	  		var img_main=$("img_main");
+	  		var img_main=$("#img_main");
 	  		
 	  		var pimg_1="<input type='hidden' name='goodsinfo.goodsimages[1].gimgurl' value='"+$(img_main).attr("value")+"'>";
 	  		

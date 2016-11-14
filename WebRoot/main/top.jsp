@@ -47,8 +47,10 @@
     <div id="tp2">
     	<div class="col-lg-10 col-lg-offset-1">
     		<div class="col-lg-5">
+    			<a href="/meilishuo/mls/index/welcome">
     			<img src="/meilishuo/imgs/logo_1.png" style="margin-top: 30px;">
     			<img src="/meilishuo/imgs/logo_2.png" style="margin-top: 30px;margin-left: 20px;">
+    			</a>
     		</div>
     		
     		<div class="col-lg-6" style="margin-top: 16px;margin-left: -100;">
@@ -78,7 +80,7 @@
      <!-- 首页导航 3 -->
     <div id="tp3" class="col-lg-12">
     	<div class="col-lg-10 col-lg-offset-1" style="line-height: 40px;">
-    		<div class="tp3_link_1"><a href="/meilishuo/index.jsp" style="color: #535353;">首页</a></div>
+    		<div class="tp3_link_1"><a href="/meilishuo/mls/index/welcome" style="color: #535353;">首页</a></div>
     		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/tosearch?kwds=短" style="color: #535353;">最热</a></div>
     		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=1" style="color: #535353;">上衣</a></div>
     		<div class="tp3_link_1"><a href="/meilishuo/mls/crol/mainAction/getInfoes?typeinfo.tpid=2" style="color: #535353;">裙子</a></div>

@@ -33,9 +33,12 @@
     <!-- 首页导航 2 -->
     <div id="tp2">
     	<div class="col-lg-10 col-lg-offset-1">
+    		
     		<div class="col-lg-5">
+    			<a href="/meilishuo/mls/index/welcome" style="color: #535353;">
     			<img src="/meilishuo/imgs/logo_1.png" style="margin-top: 30px;">
     			<img src="/meilishuo/imgs/logo_2.png" style="margin-top: 30px;margin-left: 20px;">
+    			</a>
     		</div>
     		
     		<div class="col-lg-6" style="margin-top: 56px;margin-left: 20;">

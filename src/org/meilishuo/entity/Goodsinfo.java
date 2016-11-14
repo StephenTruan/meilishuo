@@ -65,19 +65,21 @@ public class Goodsinfo  implements java.io.Serializable {
    
     // Property accessors
 
-    public Integer getGdid() {
-        return this.gdid;
-    }
-    
-    public void setGdid(Integer gdid) {
-        this.gdid = gdid;
-    }
+   
 
     public String getGdname() {
         return this.gdname;
     }
     
-    public void setGdname(String gdname) {
+    public Integer getGdid() {
+		return gdid;
+	}
+
+	public void setGdid(Integer gdid) {
+		this.gdid = gdid;
+	}
+
+	public void setGdname(String gdname) {
         this.gdname = gdname;
     }
 

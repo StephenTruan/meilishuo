@@ -10,7 +10,7 @@
             <column name="gpid" />
             <generator class="increment" />
         </id>
-        <many-to-one name="goodsinfo" class="org.meilishuo.entity.Goodsinfo" fetch="select">
+        <many-to-one name="goodsinfo" cascade="all" class="org.meilishuo.entity.Goodsinfo" fetch="select" lazy="false">
             <column name="gdid" />
         </many-to-one>
         <property name="utid" type="java.lang.Integer">

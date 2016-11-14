@@ -16,6 +16,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -26,7 +27,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.meilishuo.entity.Areainfo;
+import org.meilishuo.entity.Goodsimage;
 import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Goodsprice;
 import org.meilishuo.entity.Specifications;
 import org.meilishuo.entity.Storeinfo;
 import org.meilishuo.entity.Typeinfo;
@@ -36,6 +39,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.sun.org.apache.bcel.internal.generic.ATHROW;
 /**
  * 用于商品信息维护的后台
  * @author JianchuanWu
@@ -59,6 +63,64 @@ public class BE_GoodsInfoAction extends BaseAction {
 	
 	
 	/*===========================================ACTION===================================================*/
+	
+	/**
+	 * 添加商品信息
+	 * @return
+	 * @throws IOException 
+	 */
+	@Action(value="doinsert")
+	public String insertGoodsInfo() throws IOException{
+		
+		//获取表单中商品对应的价格信息map
+		Map<Long, Goodsprice> priceMp = goodsinfo.getGoodsprices();
+		
+		Set<Long> keys = priceMp.keySet();
+		
+		for (Long key : keys) {
+			Goodsprice price = priceMp.get(key);
+			//设置价格的用户类型，以及商品信息
+			price.setGoodsinfo(goodsinfo);
+			price.setUtid(key.intValue());
+		}
+		
+		
+		//获取表单中商品对应的图片信息map
+		Map<Long, Goodsimage> imgsMp = goodsinfo.getGoodsimages();
+		
+		Set<Long> imgkeys = imgsMp.keySet();
+		
+		for (Long key : imgkeys) {
+			Goodsimage gimg = imgsMp.get(key);
+			
+			/**
+			 * 复制upload文件夹下的对应图片到imgs/tp当中
+			 */
+			
+			//获取upload文件夹路径
+			String path_src = ServletActionContext.getServletContext().getRealPath("/upload");
+			//获取图片真正保存地点的文件夹路径
+			String path_target = ServletActionContext.getServletContext().getRealPath("/imgs/tp");
+			
+			path_src+=File.separator+gimg.getGimgurl();
+			path_target+=File.separator+gimg.getGimgurl();
+			
+			//将目标文件复制到图片真正保存地点路径下
+			FileUtils.copyFile(new File(path_src), new File(path_target));
+			
+			//设置图片信息的功能类型以及商品信息
+			gimg.setGoodsinfo(goodsinfo);
+			gimg.setGimgtype(key.intValue());
+			
+		}
+		
+		getService().insert_batch(getService().GOODSINFO, goodsinfo);
+		System.out.println(">>>>>>>>>>>>>>>>商品信息添加成功>>>>>>>>>>>>>>>>>>>>>>");
+		
+		return null;
+	}
+	
+	
 	
 	/**
 	 * 获取商品备选图片的信息页面

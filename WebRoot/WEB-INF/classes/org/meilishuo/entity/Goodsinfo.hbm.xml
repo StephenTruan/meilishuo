@@ -83,13 +83,13 @@
             <column name="gtdate" length="19" />
         </property>
        
-       <map name="goodsimages" table="goodsimage" lazy="false">
+       <map name="goodsimages" cascade="save-update,delete-orphan" inverse="true" table="goodsimage" lazy="false">
        		<key column="gdid"></key>
        		<map-key column="gimgtype" type="long"></map-key>
        		<one-to-many class="org.meilishuo.entity.Goodsimage" />
        </map>
        
-       <map name="goodsprices" table="goodsprice" lazy="false">
+       <map name="goodsprices" cascade="save-update,delete-orphan" inverse="true" table="goodsprice" lazy="false">
        		<key column="gdid"></key>
        		<map-key column="utid" type="long"></map-key>
        		<one-to-many class="org.meilishuo.entity.Goodsprice" />

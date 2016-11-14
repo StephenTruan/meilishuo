@@ -11,12 +11,15 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.meilishuo.entity.Advertisement;
 import org.meilishuo.entity.Areainfo;
 import org.meilishuo.entity.Goodsimage;
 import org.meilishuo.entity.Goodsinfo;
 import org.meilishuo.entity.Orderinfo;
 import org.meilishuo.entity.Orderlist;
+import org.meilishuo.entity.Rollingadvertisement;
 import org.meilishuo.entity.Typeinfo;
 import org.meilishuo.entity.Userinfo;
 import org.meilishuo.interfaces.DAO;
@@ -42,6 +45,7 @@ public class ModelService {
 	public static final String STOREINFO = "storeInfoDAO";//店铺信息
 	public static final String ORDERINFO = "orderInfoDAO";//订单信息
 	public static final String ORDERLIST = "orderListDAO";//订单明细
+	public static final String ROLLINGADVERTISEMENT = "rollingAdvertisementDAO";//滚动广告信息
 	
 
 	@Resource(name = "daoMap")
@@ -398,6 +402,17 @@ public class ModelService {
 		return daoMap.get(TYPEINFO).getInfoesByProperties(criterion1);
 	}
 	
-	
+	/**
+	 * 选择滚动广告按时间倒序最新的五条记录作为主页显示的数据
+	 * @return
+	 */
+	public List<Rollingadvertisement> getTop3RollingAdvertisement(){
+		
+		Order[] orders = new Order[1];
+		orders[0]=Order.desc("radate");
+		
+		return daoMap.get(ROLLINGADVERTISEMENT).getInfoesByProperties(1, 3, orders);
+		
+	}
 	
 }
