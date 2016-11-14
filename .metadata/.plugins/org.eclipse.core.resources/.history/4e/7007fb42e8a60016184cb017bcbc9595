@@ -1,0 +1,122 @@
+/**************顶部三个贯穿区域， 以及底部相关操作*******************/
+#tp2, #tp3, #footer {
+	width: 100%;
+	background-color: white;
+	margin-bottom: 1px;
+}
+
+#tp1 {
+	background-color: #f8f8f8;
+	height: 26px;
+	padding-top: 5px;
+}
+
+#tp1 {
+	height: 26px;
+	border-bottom: 1px solid #eeeeee;
+	border-width: thin;
+}
+
+#tp2 {
+	height: 120px;
+}
+
+#tp3 {
+	height: 43px;
+	border-bottom: 1px #ff6699 solid;
+	z-index: 7;
+}
+/**顶部导航**/
+.tp3_scroll, .toolbar_scroll {
+	position: fixed;
+	top: 0px;
+	z-index: 9;
+	width: 100%;
+}
+
+/*****************************首页导航 1 ************************************/
+/**首页导航 1 单项**/
+#tp1 div {
+	border-left: 1px dotted #cccccc;
+	padding-left: 18px;
+	padding-right: 13px;
+}
+/**首页导航 1 超链接**/
+#tp1 a {
+	color: gray;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+#tp1 a:HOVER {
+	color: #ff6699;
+	font-size: 13px;
+}
+
+/*****************************首页导航 3 ************************************/
+/**首页导航 3 单项**/
+.tp3_link_1, .tp3_link_2 {
+	float: left;
+	width: 60px;
+	margin-right: 12px;
+	text-align: center;
+	font-size: 15px;
+}
+
+.tp3_link_1 {
+	color: #535353;
+}
+
+.tp3_link_2 {
+	color: #ff6699;
+}
+
+.tp3_link_1:HOVER, .tp3_link_2:HOVER {
+	border-bottom: 3px solid #ff6699;
+	color: #ff6699;
+}
+/**首页导航 3 更多下拉菜单**/
+#the_more {
+	position: absolute;
+	z-index: 9;
+	background-color: #ffffff;
+	top: 0px;
+	width: 100px;
+	font-family: 黑体;
+}
+
+#the_more div {
+	text-align: center;
+	line-height: 30px;
+}
+
+#the_more div:HOVER {
+	background-color: #eeeeee;
+}
+
+#the_more div:HOVER a {
+	color: #ff6699;
+}
+
+#the_more a {
+	width: 100%;
+	font-size: 13px;
+	color: #535353;
+	text-decoration: none;
+}
+
+/*商品搜索*/
+#kwddv{
+	position: absolute;
+	z-index: 999;
+	top: 10px;
+	left: 10px;
+	background: #ffffff;
+	border: 1px solid #bbbbbb;
+	
+}
+#kwddv>div{
+	font-size: 12px;
+	padding-left: 10px;
+	line-height: 26px;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>b_d_welcome.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="/meilishuo/dist/css/bootstrap.css">
+    
+    <script type="text/javascript" src="/meilishuo/sysjs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/meilishuo/dist/js/bootstrap.min.js"></script>
+
+  </head>
+  
+  <body>
+    <div class="text-primary" style="text-shadow: 0px 0px 6px #337AB7;margin-top: 126px;margin-left: 28%;font-size: 66px;letter-spacing: 6px;font-family: inherit;font-weight: bolder;">
+    	<div style="float: left;margin-left: -16px;color: #ffffff;">Welcome</div>
+    	<i class="glyphicon glyphicon-leaf" style="font-size: 26px;float: left;margin-top: 6px;color: #ffffff;"></i>
+    </div>
+  </body>
+</html>

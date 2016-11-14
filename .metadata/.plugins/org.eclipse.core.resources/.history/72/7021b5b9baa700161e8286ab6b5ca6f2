@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <title>login.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="/meilishuo/dist/css/bootstrap.css">
+     <link rel="stylesheet" type="text/css" href="/meilishuo/dist/syscss/regedit_and_login.css">
+    
+    <script type="text/javascript" src="/meilishuo/sysjs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/meilishuo/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/meilishuo/sysjs/regedit_and_login.js"></script>
+	
+	
+	<style type="text/css">
+	body{
+			background-image: url("/meilishuo/imgs/login_bg_m1.jpg");
+			background-size: 100% 100%;
+		}
+		
+		.container{
+			width: 400ps;
+		}
+		
+		#logo1{background-image: url("/meilishuo/imgs/register_logo.png");margin-left: -20px;width: 157px;height: 56px;}
+		#logo2{background-image: url("/meilishuo/imgs/welcome_txt.png");width: 336px;height: 50px;margin-left: 30px;margin-top: 6px;}
+		
+	</style>
+  
+  
+  
+  
+  </head>
+  
+  <body style="background-image: none;">
+    <div class="container">
+    	
+    		<div class="col-lg-5" id="regedit_div"
+    			style="height: 396px;
+    			padding-left: 36px;
+    			border: 1px solid #dcdcdc;
+    			padding-right: 36px;
+    			padding-top: 6px;
+    			width: 390px;margin-top: 10px;">
+    			<h6 style="color: #666666;">
+    				<b>登录AiYi</b>
+    				<a href="/meilishuo/regedit.html" class="pull-right">立即注册</a>
+    			</h6>
+    			<hr>
+    			<form method="post" id="fm1" >
+    			
+    				
+    				<div class="tip" role="nc"></div>
+    				
+    				<div class="form-group has-feedback">
+					  <span class="glyphicon glyphicon-user form-control-feedback" style="color: #ff6699;"></span>
+					  <input type="text" class="form-control" placeholder="Nickname" id="nc" name="userinfo.uflogname">
+					</div>
+    			
+    				<div class="tip" role="pwd"></div>
+    				
+    				<div class="form-group has-feedback">
+					  <span class="glyphicon glyphicon-lock form-control-feedback" style="color: #ff6699;"></span>
+					  <input type="password" class="form-control" placeholder="Password" id="pwd" name="userinfo.ufpassword">
+					</div>
+    			
+    				<div class="tip" role="identifycode" style="clear: both;float: left;"></div>
+    				
+    				<div id="identifycode" style="margin-top: 30px;">
+    					<h6 style="color: #666666;">请点击下方图片转至正确位置，进行验证！</h6>
+    					<img src="" style="width: 56px;height: 56px;float: left;margin-right: 3px;">
+    					<img src="" style="width: 56px;height: 56px;float: left;margin-right: 3px;">
+    					<img src="" style="width: 56px;height: 56px;float: left;margin-right: 3px;">
+    					<img src="" style="width: 56px;height: 56px;float: left;margin-right: 3px;">
+    					<a href="javascript:return(0);" id="changeIdentifycode" style="float: left;font-size: 12px;margin-top: 39px;">换一组</a>
+    				</div>
+    				
+    				
+    				
+					<button type="button" id="bt_submit" class="btn btn-default form-control" 
+						style="border: 0px;border-radius:0px;background-color: #ff3366;
+						color: #ffffff;height: 50px;margin-top: 12px;">
+						<h5><b>立即登录</b></h5>
+					</button>
+					
+					<div style="font-size: 12px;margin-top: 10px;float: left;">
+						<input type="checkbox" style="float: left;" checked="checked">&nbsp;记住我&nbsp;&nbsp;<a href="" >忘记密码</a>
+					</div>
+					
+    			</form>
+    		</div>
+    		
+    </div>
+    	
+  </body>
+  
+  <script type="text/javascript">
+  
+  	(function(){
+  	
+  		$("#nc").blur(function(){
+  			isNull(this, $("[role='nc']"),"请输入您的用户名或注册邮箱");
+  		});
+  		$("#pwd").blur(function(){
+  			isNull(this, $("[role='pwd']"),"请输入密码");
+  		});
+  		//请求验证码
+  		getIdentigyCode();
+  		//更换一组验证码
+  		$("#changeIdentifycode").click(function(){
+  			getIdentigyCode();  			
+  		});
+  		
+  		//获取验证码
+  		function getIdentigyCode(){
+  			//发送ajax请求
+  			$.post("/meilishuo/mls/crol/log/identify",function(txt){
+  				var data = eval(txt);
+  				var imgs = $("#identifycode img");
+  				//调整页面验证码图片的路径和transform中rotate的角度（初始化）
+  				$(imgs).each(function(i){
+  					this.src="/meilishuo/imgs/tp/"+data[i].key;
+  					$(this).attr("key",data[i].key);
+  					$(this).css({'transform':'rotate('+data[i].value+'deg)'});
+  				});
+  			});
+  		}
+  		//设置验证码图片的点击事件，实现验证操作
+  		$("#identifycode img").click(function(){
+			var img_ct = this;
+			//发送请求，调整session作用域中map的具体key（图片名称）对应的value值（rotate角度值）
+  			$.post("/meilishuo/mls/crol/log/doIdentify",{"identifyKey":$(this).attr("key")},function(txt1){
+  				//得到相应，根据返回数据调整被点击图片的rotate角度值
+  				var d = jQuery.parseJSON(txt1);
+  				$(img_ct).css({'transform':'rotate('+d.value+'deg)'});
+  			});
+  		});
+  		
+  		
+  		
+  		
+  		
+  		//表单验证
+  		$("#bt_submit").click(function(){
+  		
+  			var fm1 = this;
+  			//用户名以及密码的非空验证
+  			if(isNull($("#nc"), $("[role='nc']"),"您还没有填写昵称"))
+  				return false;
+  			if(isNull($("#pwd"), $("[role='pwd']"),"您还没有填写密码"))
+  				return false;
+  			//通过ajax请求，实现验证码验证操作
+  			$.post("/meilishuo/mls/crol/log/isnormal",function(ok){
+  				//验证通过，提交表单
+  				if(ok==1){
+  					
+					$.post("/meilishuo/mls/crol/log/dologin",$("#fm1").serialize(),function(txt){
+						//用户名密码不正确
+						if(txt==0){
+							$("[role='identifycode']").html("用户名或密码错误，请重新输入");
+  							getIdentigyCode();
+						}
+						//用户已经被锁定
+						else if(txt==-1){
+							$("[role='identifycode']").html("您的账号已被锁定，如有问题请与客服联系");
+  							getIdentigyCode();
+						}
+						//登录成功跳转到主页
+						else if(txt==1){
+							window.location.href="/meilishuo/index.jsp";
+						}
+					});
+  				}
+  				//验证失败，页面提示，并重新获取验证图片
+  				else{
+  					$("[role='identifycode']").html("图片验证错误");
+  					getIdentigyCode();
+  				}
+  			});
+  			
+  			
+  			//设置表单提交为false
+  			return false;
+  		});
+  		
+  		
+  		
+  	
+  	})();
+  
+  </script>
+  
+  
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

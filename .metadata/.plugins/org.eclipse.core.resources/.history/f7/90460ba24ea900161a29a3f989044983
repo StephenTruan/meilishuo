@@ -1,0 +1,284 @@
+package org.meilishuo.action;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.meilishuo.entity.Areainfo;
+import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Specifications;
+import org.meilishuo.entity.Storeinfo;
+import org.meilishuo.entity.Typeinfo;
+import org.meilishuo.webtool.Item;
+import org.meilishuo.webtool.ItemList;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Controller;
+
+import com.opensymphony.xwork2.ActionContext;
+/**
+ * 用于商品信息维护的后台
+ * @author JianchuanWu
+ *
+ */
+@Controller
+@Namespace(value = "/mls/becrol/goodsinfo")
+@ParentPackage("struts-default")
+@Results(value = {
+			
+		})
+@Lazy(true)
+public class BE_GoodsInfoAction extends BaseAction {
+	
+	private Goodsinfo goodsinfo;
+	
+	@Resource(name="specificationMap")
+	private Map<String, ItemList> specificationMap;
+	
+	
+	
+	
+	/**
+	 * 根据页面提供的商品类型编号（一级商品类型） 获取相对应的规格信息
+	 * @throws Exception
+	 */
+	@Action(value="spfortype")
+	public void getSpecificationForType() throws Exception{
+		
+		Typeinfo tp = (Typeinfo) getService().getInfoByID(getService().TYPEINFO, goodsinfo.getTypeinfo().getTpid());
+		
+		//获取商品信息中的所有规格
+		Map mp1 = tp.getSpecificationses();
+		
+		//通过与spring规格map的比较，获取数据库中规格选项的信息
+		Set<String> keys = mp1.keySet();
+		
+		for (String key : keys) {
+			
+			ItemList l = specificationMap.get(key);
+			
+			if(l!=null){
+				//获取规格信息的复制品并添加
+				List data = (List) l.invoke(tp.getTpid()).clone();
+				mp1.put(key, data);
+				
+				//原有规格list复制完成后，需要清空，以便下次重新选择使用
+				l.clear();
+				
+			}
+			
+			
+		}
+		
+		//根据规格类型的信息拼接json数据
+		JSONArray data = new JSONArray();
+		
+		//获取规格名称（如：衣长、裙长、闭合方式……）
+		Set<String> kk = mp1.keySet();
+
+		//根据规格名称，获取具体信息
+		for (String k : kk) {
+			
+			JSONObject dt = new JSONObject();
+			
+			//制定具体规格信息的文本
+			dt.put("text", k);
+			//制定具体规格信息的属性名（html的select标记的name属性值）
+			dt.put("name", "0");
+			
+			JSONArray itms = new JSONArray();
+			
+			List<Item> al = (List<Item>) mp1.get(k);
+			for (Item i : al) {
+				
+				JSONObject itm = new JSONObject();
+				//具体规格信息包含的选项文本
+				itm.put("text", i.getText());
+				//具体规格信息包含选项的编号（主键值）
+				itm.put("value", i.getId());
+				//填充具体规格信息的属性名（html的select标记的name属性值）
+				if(dt.get("name").equals("0")){
+					dt.put("name", i.getProperty_name());
+				}
+				itms.put(itm);
+				
+			}
+			
+			dt.put("items", itms);
+			data.put(dt);
+			
+		}
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		
+		PrintWriter out = response.getWriter();
+		out.print(data.toString());
+		out.flush();
+		out.close();
+		
+	}
+	
+	
+	
+	/**
+	 * 获取一级商品类型的方法
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	@Action(value="firstLeveltype")
+	public void getGoodsType() throws JSONException, IOException{
+		
+		//通过service获取一级商品类型
+		List<Typeinfo> types = getService().getTypeInfoesOfTopLevel();
+		
+		//拼接json数据
+		JSONArray data = new JSONArray();
+		
+		for (Typeinfo tp : types) {
+			
+			JSONObject jb = new JSONObject();
+			
+			//拼接json中的主键信息属性  以及  拼接类型名称属性
+			jb.put("tpid", tp.getTpid()).put("tpname", tp.getTpname());
+			
+			//根据数据库信息状态，可以获取其从属类型（二级或三级商品类型）
+			if(tp.getBelong()!=null&&tp.getBelong().size()>0){
+				
+				JSONArray bl = new JSONArray();
+				
+				//拼接从属二级或三级类型信息的json数组
+				for (Typeinfo t : types) {
+					
+					JSONObject jt = new JSONObject();
+					
+					//拼接json中的主键信息属性  以及  拼接类型名称属性
+					jt.put("tpid", t.getTpid()).put("tpname", t.getTpname());
+					bl.put(jt);
+					
+				}
+				
+				
+				//将信息变成一级类型的belong属性值保存
+				jb.put("belong", bl);
+				
+			}
+			
+		}
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		
+		PrintWriter out = response.getWriter();
+		out.print(data.toString());
+		out.flush();
+		out.close();
+		
+	}
+	
+	
+	
+	/**
+	 * 通过ajax 返回供应商信息json数据的方法
+	 * @throws JSONException
+	 * @throws IOException 
+	 */
+	@Action(value="store")
+	public void getStore() throws JSONException, IOException{
+		
+		JSONArray data = new JSONArray();
+		//获取所有供应商信息
+		List<Storeinfo> al = getService().getAll(getService().STOREINFO);
+		
+		//拼接json数据
+		for (Storeinfo storeinfo : al) {
+			
+			JSONObject dt = new JSONObject();
+			//供应商主键
+			dt.put("value", storeinfo.getStid());
+			//供应商名称
+			dt.put("text", storeinfo.getStname());
+			
+			data.put(dt);
+		}
+		
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		
+		PrintWriter out = response.getWriter();
+		out.print(data.toString());
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>"+data.toString());
+		
+		out.flush();
+		out.close();
+		
+	}
+	
+	
+	
+	
+	/**============================================================================**/
+	
+	@Override
+	public String getKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getBatch_list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Serializable getEntity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public Goodsinfo getGoodsinfo() {
+		return goodsinfo;
+	}
+
+
+
+	public void setGoodsinfo(Goodsinfo goodsinfo) {
+		this.goodsinfo = goodsinfo;
+	}
+
+
+
+	public Map<String, ItemList> getSpecificationMap() {
+		return specificationMap;
+	}
+
+
+
+	public void setSpecificationMap(Map<String, ItemList> specificationMap) {
+		this.specificationMap = specificationMap;
+	}
+
+
+
+	
+}

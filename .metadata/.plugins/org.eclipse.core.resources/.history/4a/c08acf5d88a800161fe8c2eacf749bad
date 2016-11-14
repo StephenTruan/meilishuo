@@ -1,0 +1,575 @@
+package org.meilishuo.action;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Typeinfo;
+import org.meilishuo.mdservice.ModelService;
+import org.meilishuo.webtool.ItemList;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Controller;
+
+import com.opensymphony.xwork2.ActionContext;
+
+@Controller
+@Namespace(value = "/mls/crol/mainAction")
+@ParentPackage("struts-default")
+@Results(value = {
+		@Result(name = "infoes", location = "/shangyi.jsp")
+		})
+@Lazy(true)
+public class MainAction extends BaseAction {
+	//显示规格  key
+	private String itemkey;
+	//已被选中规格 key
+	private String itemkey_checked;
+	
+	//规格文本
+	private String itemtext;
+	
+	
+	//筛选条件（属性名称）
+	private String critera_propertyname;
+	//筛选条件（属性值）
+	private String critera_propertyvalue;
+	
+	//被取消的筛选条件（属性名称）
+	private String critera_propertyname_remove;
+	
+	private Typeinfo typeinfo;
+	
+	//商品搜索关键字
+	private String kwds;
+	
+	
+	@Resource(name="specificationMap")
+	private Map<String, ItemList> specificationMap;
+	
+	
+	private Integer pageNum;
+	
+	private Integer rowCount=60;
+	
+	
+	
+
+
+
+	public int getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+	public int getRowCount() {
+		return rowCount;
+	}
+	public void setRowCount(Integer rowCount) {
+		this.rowCount = rowCount;
+	}
+
+
+
+
+	/**===================================动作=========================================**/
+	
+	
+	
+	/**
+	 * 根据关键字获取对应的商品信息的方法
+	 * @return
+	 */
+	@Action(value="tosearch")
+	public String searchGoods(){
+		
+		List<Goodsinfo> data = getService().getGoodsByKeywords(kwds);
+		Map<String, Object> mp = (Map<String, Object>) ActionContext.getContext().get("request");
+		mp.put("infoes", data);
+		//重新设定需要显示的商品数量
+		ActionContext.getContext().getSession().put("count",data.size());
+		//将在特定类型检索时需要的规格信息、分页信息、单页累计续加显示的信息属性（session作用域中）移除
+		ActionContext.getContext().getSession().remove("items");
+		ActionContext.getContext().getSession().remove("pageCount");
+		ActionContext.getContext().getSession().remove("items_checked");
+		ActionContext.getContext().getSession().remove("infoes_onePage");
+		return "infoes";
+	}
+	
+	
+	
+	/**
+	 * 根据输入获取搜索关键字的方法
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	@Action(value="getkwds")
+	public void getKeyWords() throws JSONException, IOException{
+		
+		if(this.kwds == null || kwds.length() == 0){
+			
+			return;
+			
+		}
+		Set<String> keys = getService().getKeyWordsForSearch(kwds);
+		if(keys != null && keys.size() > 0){
+			
+			HttpServletResponse response = ServletActionContext.getResponse();
+			//设置相应字符集，以显示汉字
+			response.setCharacterEncoding("utf-8");
+			
+			JSONArray data = new JSONArray();
+			for (String k : keys) {
+				
+				JSONObject ob = new JSONObject();
+				ob.put("value", k);
+				data.put(ob);
+				
+			}
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(data);
+			
+			out.flush();
+			out.close();
+			
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * 分页获取信息
+	 * @return
+	 */
+	@Action(value="byPage")
+	public String getInfoesByPage(){
+		
+		if(pageNum<1){
+			pageNum=1;
+		}
+		int pageCount = (int) ActionContext.getContext().getSession().get("pageCount");
+		if(pageNum>pageCount){
+			pageNum=pageCount;
+		}
+		
+		Criterion criterion = (Criterion) ActionContext.getContext().getSession().get("critersions");
+		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, pageNum, rowCount, criterion);
+		
+		System.out.println("*********************************");
+		System.out.println("分页获取信息,商品数量："+infoes.size());
+		
+		LinkedList<Goodsinfo> data = new LinkedList<Goodsinfo>(infoes);
+		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
+		int i = 0;
+		while(data.size()!=0&&i++<15){
+			part.add(data.removeFirst());
+		}
+		
+		ActionContext.getContext().getSession().put("infoes_onePage", data);
+		
+		
+		Map<String, Object> map = (Map<String, Object>) ActionContext.getContext().get("request");
+		
+		//通过请求作用域传递数据
+		map.put("infoes", part);
+		
+		
+		
+		return "infoes";
+	}
+	
+	
+	/**
+	 * 利用ajax异步加载 指定页面其余信息
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	@Action(value="showrest")
+	public void showRestInfoes() throws JSONException, IOException{
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		
+		LinkedList<Goodsinfo> dataList = (LinkedList<Goodsinfo>) ActionContext.getContext().getSession().get("infoes_onePage");
+		if(dataList==null||dataList.size()<0){
+			return;
+		}
+		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
+		int i = 0;
+		while(dataList.size()!=0&&i++<15){
+			part.add(dataList.removeFirst());
+		}
+		JSONArray data = new JSONArray();
+		for (Goodsinfo goodsinfo : part) {
+			JSONObject dt = new JSONObject();
+			dt.put("gdid", goodsinfo.getGdid());
+			dt.put("gdname", goodsinfo.getGdname());
+			dt.put("gdimg", goodsinfo.getGoodsimages().get((long)1).getGimgurl());
+			dt.put("gdprice", goodsinfo.getGoodsprices().get((long)1).getPrice());
+			
+			data.put(dt);
+		}
+		
+		PrintWriter out = response.getWriter();
+		out.print(data.toString());
+		out.flush();
+		out.close();
+		
+		
+		
+	}
+	
+	/**
+	 * 基本页面获取方法
+	 * @return
+	 * @throws Exception
+	 */
+	@Action(value="getInfoes")
+	public String showGoodsInfoes() throws Exception{
+		
+		
+		//传递商品类型，根据商品类型的编号，获取整个商品类型信息，包括规格
+		if(typeinfo!=null){
+			typeinfo=(Typeinfo) getService().getInfoByID(getService().TYPEINFO, typeinfo.getTpid());
+			
+			System.out.println("*********************************");
+			System.out.println("传递过来的商品类型"+typeinfo.getTpname());
+			
+		}
+		
+		//在session作用域中存放类型编号，用于商品大类切换使得判断比较
+		if(!ActionContext.getContext().getSession().containsKey("tp_id")){
+			ActionContext.getContext().getSession().put("tp_id", typeinfo.getTpid());
+			
+			System.out.println("*********************************");
+			System.out.println("放进session中的tp_id:"+typeinfo.getTpid());
+			
+		}
+		
+		//通过session作用域属性确认之前（本次检索之前）使用的商品类型
+		Integer tp_id = (Integer) ActionContext.getContext().getSession().get("tp_id");
+		
+		System.out.println("*********************************");
+		System.out.println("之前的商品类型："+tp_id);
+		
+
+		//如果两次的商品类型编号不一致，则表明大类变化需要清空session中已有的规格，以便重新通过spring选择
+		if(tp_id.intValue() != typeinfo.getTpid().intValue()){
+			ActionContext.getContext().getSession().remove("items");
+			ActionContext.getContext().getSession().remove("items_checked");
+			
+			tp_id = typeinfo.getTpid();
+			
+			System.out.println("*********************************");
+			System.out.println("现在的商品类型："+tp_id);
+			
+			ActionContext.getContext().getSession().put("tp_id", tp_id);
+		}
+		
+		
+		
+		//负责收集规格选项的容器  从session作用域获取------>规格容器
+		Map<String, List> items = (Map<String, List>) ActionContext.getContext().getSession().get("items");
+		
+		System.out.println("*********************************");
+		System.out.println("获取的规格容器为："+items);
+		
+		//如果不存在则从数据库提取相关规格数据
+		if(items==null){
+			
+			System.out.println("*********************************");
+			System.out.println("向规格容器中添加规格");
+			
+			//获取商品类型中所有的规格
+ 			Map mp1 = typeinfo.getSpecificationses();
+ 			
+ 			System.out.println("*********************************");
+ 			System.out.println("商品所有规格的大小为："+mp1.size());
+ 			
+ 			System.out.println("#######################################################");
+			
+ 			//通过与spring规格map的比较，获取数据库中规格选项的信息
+			Set<String> keys = mp1.keySet();
+			for (String key : keys) {
+				
+				ItemList l = specificationMap.get(key);
+				
+				System.out.println("----------------------------------------");
+	 			System.out.println("商品规格DAO为："+l.getDao());
+				
+				//获取规格信息的复制品，并添加
+				List data = (List) l.invoke(typeinfo.getTpid()).clone();
+				
+				System.out.println("-------------");
+				System.out.println("获取规格的复制品并添加");
+				
+				mp1.put(key, data);
+				
+				//原有规格list复制完成后，需要清空，以便下次重新选择使用
+				l.clear();
+			}
+			
+			//将本商品大类的规格列表存入session属性
+			ActionContext.getContext().getSession().put("items", mp1);
+			
+			System.out.println("*********************************");
+			System.out.println("将商品大类："+items+"放入session中");
+			
+		}
+		
+		
+		
+		
+
+		//收集 已选的规格显示选项 的容器，从session作用域获取------->已选规格容器
+		Map<String, List> items_checked = (Map<String, List>) ActionContext.getContext().getSession().get("items_checked");
+		
+		System.out.println("*********************************");
+		System.out.println("已选规格容器："+items_checked);
+		
+		//如果  已选规格容器   不存在则创建
+		if(items_checked==null){
+			
+			System.out.println("*********************************");
+			System.out.println("已选规格 容器不存在");
+			
+			items_checked = new LinkedHashMap<String, List>();
+			
+			ActionContext.getContext().getSession().put("items_checked", items_checked);
+			
+			System.out.println("*********************************");
+			System.out.println("将已选规格容器放入session作用域："+items_checked);
+			
+		}
+		
+		//点击单项（如类目中的单项、版型中的单项）可将itemkey传过来   
+		if(itemkey!=null){
+			
+			//将itemkey的value放入到  已选容器    同时从  规格容器  中删除
+			items_checked.put(itemkey+":"+itemtext+","+critera_propertyname, items.remove(itemkey));
+			
+		}
+		
+		//点击  已选出的规格（按钮）  
+		if(itemkey_checked!=null){
+			
+			Set<String> keys = items_checked.keySet();
+			
+			for (String k : keys) {
+				if(k.indexOf(itemkey_checked)!=-1){
+					//将其放入到  规格容器    同时从  已选容器  中删除
+					items.put(itemkey_checked, items_checked.remove(k));
+					
+					String ck = k.split(",")[1];
+					Map mp = (Map) ActionContext.getContext().getSession().get("criteriaMap");
+					mp.remove(ck);
+					
+					break;
+				}
+			}
+			
+		}
+		
+		
+		//用于条件筛选的Criterion
+		Criterion criterion = null;
+		
+		//添加筛选项
+		if(this.critera_propertyname != null){
+			
+			Map criteriaMap = (Map) ActionContext.getContext().getSession().get("criteriaMap");
+			if(criteriaMap == null){
+				criteriaMap = new LinkedHashMap();
+				ActionContext.getContext().getSession().put("criteriaMap",criteriaMap);
+				
+			}
+			criteriaMap.put(critera_propertyname, new Integer(critera_propertyvalue));
+			criterion = Restrictions.allEq(criteriaMap);
+		}
+		//移除选项
+		else if(critera_propertyname_remove != null){
+			Map criteriaMap = (Map) ActionContext.getContext().getSession().get("criteriaMap");
+			
+			criteriaMap.remove(critera_propertyname_remove);
+			criterion = Restrictions.allEq(criteriaMap);
+			
+			if(criteriaMap.size() == 0){
+				List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", tp_id));
+				
+				System.out.println("*********************************");
+				System.out.println("移除选项");
+				
+				criterion = Restrictions.in("typeinfo", types);
+			}
+		}
+		//默认无筛选项
+		else{
+			List<Typeinfo> types = getService().getInfoByProperties(getService().TYPEINFO, Restrictions.eq("tpparentid", tp_id));
+			
+			System.out.println("*********************************");
+			System.out.println("商品类型:");
+			for (Typeinfo t : types) {
+				System.out.print(t.getTpname()+" , ");
+			}
+			
+			criterion = Restrictions.in("typeinfo", types);
+		}
+		
+		//根据选中的信息获取商品
+		
+		if(pageNum == null)
+			pageNum = 1;
+		List<Goodsinfo> infoes = getService().getInfoByProperties(getService().GOODSINFO, pageNum, rowCount, criterion);
+		
+		System.out.println("*********************************");
+		System.out.println("商品数量"+infoes.size());
+		
+		//通过保存筛选条件
+		ActionContext.getContext().getSession().put("critersions", criterion);
+		//通过筛选条件获取记录数量
+		int count = getService().getRowCount(getService().GOODSINFO, criterion);
+		
+		System.out.println("*********************************");
+		System.out.println("筛选后的商品数量"+count);
+		
+		//通过记录数量获取可以分页的页数
+		int pageCount = count%rowCount==0?count/rowCount:(count/rowCount+1);
+		
+		//保存记录数和页数进入session作用域
+		ActionContext.getContext().getSession().put("count", count);
+		ActionContext.getContext().getSession().put("pageCount", pageCount);
+		
+		
+		//获取根据获取信息，分配第一批显示的数据和其余的数据
+		LinkedList<Goodsinfo> data = new LinkedList<Goodsinfo>(infoes);
+		
+		List<Goodsinfo> part = new ArrayList<Goodsinfo>();
+		
+		int i = 0;
+		while(data.size()!=0&&i++<15){
+			part.add(data.removeFirst());
+		}
+		
+		//保存其余数据进入session
+		ActionContext.getContext().getSession().put("infoes_onePage", data);
+		
+		
+		//发送第一批数据（15个）去页面
+		Map<String, Object> map = (Map<String, Object>) ActionContext.getContext().get("request");
+		
+		//通过请求作用域传递数据
+		map.put("infoes", part);
+		
+		
+		
+		return "infoes";
+	}
+	
+	
+	
+	
+	/**============================================================================**/
+	@Override
+	public String getKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getBatch_list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Serializable getEntity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Typeinfo getTypeinfo() {
+		return typeinfo;
+	}
+	public void setTypeinfo(Typeinfo typeinfo) {
+		this.typeinfo = typeinfo;
+	}
+	public Map<String, ItemList> getSpecificationMap() {
+		return specificationMap;
+	}
+	public void setSpecificationMap(Map<String, ItemList> specificationMap) {
+		this.specificationMap = specificationMap;
+	}
+	public String getCritera_propertyname_remove() {
+		return critera_propertyname_remove;
+	}
+	public void setCritera_propertyname_remove(String critera_propertyname_remove) {
+		this.critera_propertyname_remove = critera_propertyname_remove;
+	}
+	public String getCritera_propertyvalue() {
+		return critera_propertyvalue;
+	}
+	public void setCritera_propertyvalue(String critera_propertyvalue) {
+		this.critera_propertyvalue = critera_propertyvalue;
+	}
+	public String getCritera_propertyname() {
+		return critera_propertyname;
+	}
+	public void setCritera_propertyname(String critera_propertyname) {
+		this.critera_propertyname = critera_propertyname;
+	}
+	
+	public String getItemtext() {
+		return itemtext;
+	}
+	public void setItemtext(String itemtext) {
+		this.itemtext = itemtext;
+	}
+	
+	public String getItemkey() {
+		return itemkey;
+	}
+	public void setItemkey(String itemkey) {
+		this.itemkey = itemkey;
+	}
+
+	public String getItemkey_checked() {
+		return itemkey_checked;
+	}
+	public void setItemkey_checked(String itemkey_checked) {
+		this.itemkey_checked = itemkey_checked;
+	}
+
+	public String getKwds() {
+		return kwds;
+	}
+	public void setKwds(String kwds) {
+		this.kwds = kwds;
+	}
+
+}

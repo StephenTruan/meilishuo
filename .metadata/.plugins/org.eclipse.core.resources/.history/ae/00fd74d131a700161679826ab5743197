@@ -1,0 +1,77 @@
+/*********************右侧工具栏************************/
+#toolbar_right {
+	width: 40px;
+	background-color: #F6F6F6;
+	height: 260px;
+	position: fixed;
+	top: 50px;
+	right: 0px;
+	z-index: 9;
+}
+/**右侧工具栏	按钮**/
+#toolbar_right button {
+	width: 100%;
+	height: 50%;
+	background-color: transparent;
+	border: 1px solid #dddddd;
+}
+
+#toolbar_right button:HOVER {
+	background-color: #ff6699;
+	color: #ffffff;
+}
+/**右侧工具栏	按钮字体图标**/
+#toolbar_right button i {
+	color: #ff6699;
+}
+
+#toolbar_right button i:HOVER {
+	color: #ffffff;
+}
+/**右侧工具栏	返回顶部按钮**/
+#to_Top {
+	border: 1px solid #dddddd;
+	width: 40px;
+	height: 40px;
+	background-color: #F6F6F6;
+	position: fixed;
+	top: 500px;
+	right: 0px;
+	text-align: center;
+	display: none;
+	z-index: 9;
+}
+/**右侧隐藏工具栏	效果**/
+#toolbar_right_hover {
+	width: 40px;
+	background-color: #F6F6F6;
+	height: 100%;
+	position: fixed;
+	top: -1px;
+	right: -40px;
+	z-index: 8;
+	border: 1px solid #dddddd;
+}
+/**右侧工具栏	按钮效果**/
+#toolbar_right_hover button {
+	width: 100%;
+	background-color: transparent;
+	height: 40px;
+	border: 0px;
+	border-bottom: 1px solid #dddddd;
+	color: #ff6699;
+}
+/**右侧工具栏	按钮光标覆盖效果**/
+#toolbar_right_hover button:HOVER {
+	background-color: #ff6699;
+	color: #ffffff;
+}
+
+#cart_count{
+	position: fixed;
+	width: 26px;
+	color: red;
+	font-size: 10px;
+	z-index: 999;
+	border: 0px;
+}

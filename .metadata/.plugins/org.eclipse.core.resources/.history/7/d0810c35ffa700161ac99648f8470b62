@@ -1,0 +1,376 @@
+package org.meilishuo.mdservice;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.meilishuo.entity.Areainfo;
+import org.meilishuo.entity.Goodsimage;
+import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Orderinfo;
+import org.meilishuo.entity.Orderlist;
+import org.meilishuo.entity.Userinfo;
+import org.meilishuo.interfaces.DAO;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional
+public class ModelService {
+
+	
+	public static final String GOODSINFO = "goodsInfoDAO";//商品信息
+	public static final String CLOTHINGCOLAR = "clothingCollarDAO";//领型
+	public static final String CLOTHINGELEMENT = "clothingElementDAO";//元素
+	public static final String CLOTHINGSIZE = "clothingSizeDAO";//衣长
+	public static final String CLOTHINGTYPEVERSION = "clothingTypeversionDAO";//版型
+	public static final String MATERIAL = "materialDAO";//材质
+	public static final String TYPEINFO = "typeinfoDAO";//商品类目（类型）
+	public static final String AREAINFO = "areaInfoDAO";//地区
+	public static final String GOODSIMAGE = "goodsImageDAO";//商品图片
+	public static final String USERINFO = "userInfoDAO";//用户信息
+	public static final String USERTYPEINFO = "userTypeInfoDAO";//用户类型（等级）
+	public static final String STOREINFO = "storeInfoDAO";//店铺信息
+	public static final String ORDERINFO = "orderInfoDAO";//订单信息
+	public static final String ORDERLIST = "orderListDAO";//订单明细
+	
+
+	@Resource(name = "daoMap")
+	private Map<String, DAO> daoMap;
+
+	public Map<String, DAO> getDaoMap() {
+		return daoMap;
+	}
+
+	public void setDaoMap(Map<String, DAO> daoMap) {
+		this.daoMap = daoMap;
+	}
+
+	// ----------------以下是根据DAO 相关实现 进行的基础操作方法封装--------------------
+	/**
+	 * 获取指定表格所有信息
+	 * 
+	 * @param key
+	 *            指定表格key（常量）
+	 * @return 封装有相关信息实体类对象的List
+	 */
+	public List getAll(String key) {
+		return this.daoMap.get(key).getAll();
+	}
+
+	/**
+	 * 返回指定信息
+	 * 
+	 * @param key
+	 *            指定表格key（常量）
+	 * @param id
+	 *            主键编号
+	 * @return 封装有相关数据的实体类对象
+	 */
+	public Object getInfoByID(String key, Serializable id) {
+		return this.daoMap.get(key).getByID(id);
+	}
+
+	/**
+	 * 根据提供的条件做相应的查询获取信息的方法，并可以指定分页操作
+	 * 
+	 * @param key
+	 *            指定表格key（常量）
+	 * @param pagetNum
+	 *            指定页面编号
+	 * @param rowCount
+	 *            单页显示信息行数
+	 * @param criterions
+	 *            查询条件
+	 * @return 封装有相关信息实体类对象的List
+	 */
+	public List getInfoByProperties(String key, Integer pagetNum,
+			Integer rowCount, Criterion... criterions) {
+		return this.daoMap.get(key).getInfoesByPage(pagetNum, rowCount,
+				criterions);
+	}
+
+	/**
+	 * 根据提供的条件做相应的查询获取信息的方法
+	 * 
+	 * @param key
+	 *            指定表格key（常量）
+	 * @param criterions
+	 *            查询条件
+	 * @return 封装有相关信息实体类对象的List
+	 */
+	public List getInfoByProperties(String key, Criterion... criterions) {
+		return this.daoMap.get(key).getInfoesByProperties(criterions);
+	}
+
+	/**
+	 * 对指定表格进行批量数据添加的方法
+	 * 
+	 * @param key
+	 *            指定表格key（常量）
+	 * @param entities
+	 *            根据hibernate规范和业务需要封装有相关数据的实体类对象
+	 */
+	public void insert_batch(String key, Object... entities) {
+		this.daoMap.get(key).execute_insert(entities);
+	}
+
+	/**
+	 * 对指定表格进行批量数据删除的方法
+	 * 
+	 * @param key
+	 *            指定表格key（常量）
+	 * @param entities
+	 *            根据hibernate规范和业务需要封装有相关数据的实体类对象
+	 */
+	public void delete_batch(String key, Object... entities) {
+		this.daoMap.get(key).execute_delete(entities);
+	}
+
+	/**
+	 * 对指定表格进行批量数据更新的方法
+	 * 
+	 * @param key
+	 *            指定表格key（常量）
+	 * @param entities
+	 *            根据hibernate规范和业务需要封装有相关数据的实体类对象
+	 */
+	public void update_batch(String key, Object... entities) {
+		this.daoMap.get(key).execute_update(entities);
+	}
+
+	/**
+	 * 根据每页行数得到指定表格信息可以分成的页数
+	 * 
+	 * @param type
+	 *            指定表格
+	 * @param rowCount
+	 *            指定每页行数
+	 * @return 可以分页数的数量
+	 */
+	public int getPageCount(String type, int rowCount) {
+		return this.daoMap.get(type).getPageCountByRowCount(rowCount);
+	}
+
+	// ----------------以下是根据DAO 相关实现 进行的业务需要方法--------------------
+
+	/**
+	 * 根据分页操作获取指定信息
+	 * 
+	 * @param type
+	 *            指定表格
+	 * @param pageNum
+	 *            指定页码
+	 * @param rowCount
+	 *            指定每页显示行数
+	 * @return 查询结果
+	 */
+	public List getInfoByPageNum(String type, int pageNum, int rowCount) {
+		return this.getInfoByProperties(type, pageNum, rowCount);
+	}
+
+	
+	/**
+	 * 根据筛选条件获得记录数
+	 * @param type 制定dao的key
+	 * @param criterions 筛选条件
+	 * @return 记录数量（行数）
+	 */
+	public int getRowCount(String type, Criterion...criterions){
+		return daoMap.get(type).getRowCount(criterions);
+	}
+	
+	
+	/**
+	 * 获取省
+	 * @return
+	 */
+	public List<Areainfo> getProvince(){
+		return daoMap.get(AREAINFO).getInfoesByProperties(Restrictions.eq("alevel", 2),Restrictions.eq("aparentid", 1));
+	}
+	
+	
+	/**
+	 * 获取直辖市
+	 * @return
+	 */
+	public List<Areainfo> getZhiZiaShi(){
+		return daoMap.get(AREAINFO).getInfoesByProperties(Restrictions.eq("alevel", 1),Restrictions.eq("aparentid", 1));
+	}
+	
+	/**
+	 * 获取登录页面验证码的方法
+	 * @return map包含随机获取的验证码图片路径和其transform初始化角度值的map
+	 */
+	public Map<String, Integer> getIdentifyCode(){
+		DAO dao = daoMap.get(GOODSIMAGE);
+		int count = dao.getRowCount();
+		int[] transformInit = new int[]{90,180,270};
+		Map<String, Integer> mp = new HashMap<String, Integer>();
+		int i = 0;
+		while(true) {
+			int id = (int) (Math.random()*count)+1;
+			Goodsimage img = (Goodsimage) dao.getByID(id);
+			if(mp.containsKey(img.getGimgurl()))
+				continue;
+			int idx = (int) (Math.random()*transformInit.length);
+			mp.put(img.getGimgurl(), transformInit[idx]);
+			i++;
+			if(i == 4)
+				break;
+		}
+		return mp;
+	}
+	
+	/**
+	 * 验证制定用户名是否已经被使用
+	 * @param logname 指定用户名
+	 * @return 返回true表示已经被使用
+	 */
+	public boolean isExists_Logname(String logname){
+		DAO dao = daoMap.get(USERINFO);
+		int count = dao.getRowCount(Restrictions.eq("uflogname", logname));
+		return count == 1;
+	}
+	
+	/**
+	 * 验证制定手机号码是否已经被使用
+	 * @param number 指定手机号码
+	 * @return 返回true表示已经被使用
+	 */
+	public boolean isExists_Number(String number){
+		DAO dao = daoMap.get(USERINFO);
+		int count = dao.getRowCount(Restrictions.eq("ufnum", number));
+		return count == 1;
+	}
+	
+	/**
+	 * 用户登录方法
+	 * @param userinfo 封住有用户名和密码的userinfo对象
+	 * @return 返回userinfo（数据库信息对应的实体对象）或null（用户名或密码不正确）
+	 */
+	public Userinfo login(Userinfo userinfo){
+		
+		DAO dao = daoMap.get(USERINFO);
+		Criterion criterion1 = Restrictions.eq("uflogname", userinfo.getUflogname());
+		Criterion criterion2 = Restrictions.eq("ufpassword", userinfo.getUfpassword());
+		List<Userinfo> data = dao.getInfoesByProperties(criterion1,criterion2);
+		return data!=null&&data.size()==1 ? data.get(0) : null;
+	}
+	
+	/**
+	 * 根据关键字获取搜索关键字条的方法
+	 * @param keywords 输入的关键字（多个之间用空格分着）
+	 * @return 关键字条的set
+	 */
+	public Set<String> getKeyWordsForSearch(String keywords){
+		DAO dao = daoMap.get(GOODSINFO);
+		//多个关键字用空格分组
+		String[] keys = keywords.split(" ");
+		Criterion[] cts = new Criterion[keys.length];
+		//每个关键字用like匹配一个criterion
+		for (int i = 0; i < keys.length; i++) {
+			cts[i] = Restrictions.like("gtkeywords", "%"+keys[i]+"%");
+		}
+		//将多个criterion放入查询条件获取相应信息
+		List<Goodsinfo> data = dao.getInfoesByProperties(cts);
+		Set<String> keywodsSet = new HashSet<String>();
+		//通过set容器，去除重复项
+		for (Goodsinfo g : data) {
+			keywodsSet.add(g.getGtkeywords());
+		}
+		//根据剩余信息状态返回10个以内的选项
+		if(keywodsSet.size()<=10){
+			return keywodsSet;
+		}else{
+			Set<String> dt = new HashSet<String>();
+			int i = 0;
+			for (String k : keywodsSet) {
+				if(i++ == 10){
+					break;
+				}
+				dt.add(k);
+			}
+			return dt;
+		}
+	}
+	
+	/**
+	 * 根据关键字获取匹配的商品信息
+	 * @param keywords 输入的关键字（多个之间用空格分着）
+	 * @return 匹配的商品信息
+	 */
+	public List<Goodsinfo> getGoodsByKeywords(String keywords){
+		DAO dao = daoMap.get(GOODSINFO);
+		//多个关键字用空格分组
+		String[] keys = keywords.split(" ");
+		Criterion[] cts = new Criterion[keys.length];
+		//每个关键字用like匹配一个criterion
+		for (int i = 0; i < keys.length; i++) {
+			cts[i] = Restrictions.like("gtkeywords", "%"+keys[i]+"%");
+		}
+		//将多个criterion放入查询条件获取相应信息
+		List<Goodsinfo> data = dao.getInfoesByProperties(cts);
+		return data;
+	}
+	
+	
+	public boolean mkOrderInfores(Collection<Orderinfo> orderinfoes){
+		
+		Set<Orderlist> orderlists = new HashSet<Orderlist>();
+		
+		OrderInfoIdMaker mker = new OrderInfoIdMaker();
+		
+		for (Orderinfo orderinfo : orderinfoes) {
+			
+			String id = mker.getOrderInfoId(orderinfo.getUserinfo());
+			
+			orderinfo.setOfid(id);
+			
+			Set<Orderlist> ols = orderinfo.getOrderlists();
+			
+			int i = 1;
+			
+			for (Orderlist ol : ols) {
+				ol.setOfid(id);
+			}
+			
+			orderlists.addAll(ols);
+			
+		}
+		
+		
+		return false;
+	}
+	
+	//利用内部类生成订单编号
+	class OrderInfoIdMaker{
+		
+		private int id_index = 1;
+		
+		public int getIndex(){
+			
+			return id_index++;
+			
+		}
+		
+		public String getOrderInfoId(Userinfo user){
+			
+			return new StringBuffer("of_").append(user.getUfid()).append("_").append(System.currentTimeMillis()).append("_").append(getIndex()).toString();
+			
+		}
+		
+	}
+	
+	
+	
+	
+}

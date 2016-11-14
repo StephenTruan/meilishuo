@@ -22,7 +22,7 @@
 	
 	<style type="text/css">
 		.container{
-			height: 1600px;
+			height: 360px;
 		}
 		#picimg{
 			position: absolute;
@@ -148,7 +148,7 @@
 	
 	<div class="col-lg-10 col-lg-offset-1" 
 		style="font-size: 12px;height: 60px;border: 1px solid #e6e6e6;
-		margin-top: 26px;font-size: 12px;color: #666666;line-height: 60px;">
+		margin-top: 26px;font-size: 12px;color: #666666;line-height: 60px;margin-bottom: 90px;">
 		<div>
 		
 			<div class="col-lg-10" style="float: left;" class="col-lg-1 text-center">
@@ -233,8 +233,12 @@
 		
 	
 		<br><br>
+		
+		
 	</div>
 	
+	<!-- ==================================底部信息========================================= -->
+    <jsp:include page="/main/footer.jsp"></jsp:include>
 	
 	
   </body>

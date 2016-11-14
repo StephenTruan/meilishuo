@@ -1,0 +1,232 @@
+<html>
+  <head>
+    <title>regedit.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="/meilishuo/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/meilishuo/dist/syscss/regedit_and_login.css">
+    
+    <script type="text/javascript" src="/meilishuo/sysjs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/meilishuo/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/meilishuo/sysjs/regedit_and_login.js"></script>
+	
+	
+	<style type="text/css">
+	
+		
+		
+	</style>
+  
+  
+  
+  
+  </head>
+  
+  <body>
+    <div class="container">
+    	<div class="col-lg-8 col-lg-offset-2" style="margin-top: 50px;" >
+    	
+    		<div id="logo1" class="pull-left" ></div>
+    		<div id="logo2" class="pull-left" ></div>
+    	
+    	</div>
+    	
+    	<div class="col-lg-8 well col-lg-offset-1" style="margin-top: 30px;background-color: #ffffff;height: 520px;width: 1060px;padding: 40px;border: 0px;" >
+    		<img src="/meilishuo/imgs/ad_img.jpg" style="float: left;width: 300px;margin-top: 88px;margin-left: 60px;" >
+    		<div class="col-lg-5" id="regedit_div"
+    			style="height: 370px;padding-left: 36px;border: 1px solid #dcdcdc;
+    			float: left;padding-right: 36px;padding-top: 6px;
+    			margin-top: 46px;margin-right: 26px;float: right;">
+    			<h6 style="color: #666666;">
+    				<b>注册AiYi</b>
+    				<a href="/meilishuo/login.html" class="pull-right">已有账号</a>
+    			</h6>
+    			<hr>
+    			<form action="/meilishuo/mls/crol/regedit/doregedit" method="post" id="fm1" >
+    			
+    				<div class="tip" role="ph"></div>
+    			
+    				<div class="form-group has-feedback">
+					  <span class="glyphicon glyphicon-phone form-control-feedback" style="color: #ff6699;"></span>
+					  <input type="text" class="form-control" placeholder="Cell-phone" id="ph" name="userinfo.ufnum">
+					</div>
+    				
+    				<div class="tip" role="nc"></div>
+    				
+    				<div class="form-group has-feedback">
+					  <span class="glyphicon glyphicon-user form-control-feedback" style="color: #ff6699;"></span>
+					  <input type="text" class="form-control" placeholder="Nickname" id="nc" name="userinfo.uflogname">
+					</div>
+    			
+    				<div class="tip" role="pwd"></div>
+    				
+    				<div class="form-group has-feedback">
+					  <span class="glyphicon glyphicon-lock form-control-feedback" style="color: #ff6699;"></span>
+					  <input type="password" class="form-control" placeholder="Password" id="pwd" name="userinfo.ufpassword">
+					</div>
+    			
+    				<div class="tip" role="pwd2"></div>
+    				
+    				<div class="form-group has-feedback hide">
+					  <span class="glyphicon glyphicon-lock form-control-feedback" style="color: #ff6699;"></span>
+					  <input type="password" class="form-control" placeholder="Confirm the password" id="pwd2">
+					</div>
+					
+    				
+    				
+					<button type="button" id="bt_submit" class="btn btn-default form-control" 
+						style="border: 0px;border-radius:0px;background-color: #ff3366;
+						color: #ffffff;height: 50px;margin-top: 8px;">
+						<h5><b>注册</b></h5>
+					</button>
+					
+					<div style="font-size: 12px;margin-top: 10px;float: left;">
+						<input type="checkbox" style="float: left;" checked="checked">&nbsp;同意	<a href="" >AiYi注册条款</a>
+					</div>
+					
+    			</form>
+    		</div>
+    	</div>
+    	
+    </div>
+  </body>
+  
+  <script type="text/javascript">
+  
+  	(function(){
+  		//失去焦点，进行手机非空唯一性验证
+  		$("#ph").blur(function(){
+  			if(isNull(this, $("[role='ph']"),"您还没有填写手机号")){
+  				return ;
+  			}
+  			else{
+  				$.post("/meilishuo/mls/crol/regedit/exists",{'userinfo.ufnum':$("#ph").val()},function(txt){
+					$("[role='ph']").html("");
+					$("#ph").parent().find("i").remove();
+  					if(txt==1){
+							$("[role='ph']").html("手机号码已经被使用");
+							$("#ph").after("<i class='glyphicon glyphicon-minus-sign' style='position: absolute;right: -22px;top: 10px;font-size: 16px;color: #ff6699;' ></i>");
+  					}
+  				});
+  			}
+  		});
+  		
+  		//失去焦点，进行用户名非空唯一性验证
+  		$("#nc").blur(function(){
+  			if(isNull(this, $("[role='nc']"),"您还没有填写昵称")){
+  				return ;
+  			}
+  			else{
+  				$.post("/meilishuo/mls/crol/regedit/exists",{'userinfo.uflogname':$("#nc").val()},function(txt){
+					$("[role='nc']").html("");
+					$("#nc").parent().find("i").remove();
+  					if(txt==1){
+							$("[role='nc']").html("用户名已经被使用");
+							$("#nc").after("<i class='glyphicon glyphicon-minus-sign' style='position: absolute;right: -22px;top: 10px;font-size: 16px;color: #ff6699;' ></i>");
+  					}
+  				});
+  			}
+  		});
+  		
+  		
+  		//失去焦点，进行密码非空验证
+  		$("#pwd").blur(function(){
+  			isNull(this, $("[role='pwd']"),"您还没有填写密码");
+  		})
+  		//密码输入框获取焦点，则显示  重复密码输入框
+  		.focus(function(){
+  			$("#pwd2").parent().removeClass("hide");
+  			$("#regedit_div").css({"height":"420px"});
+  		});
+  		//失去焦点，进行重复密码非空验证
+  		$("#pwd2").blur(function(){
+  			isNull(this, $("[role='pwd2']"),"您还没有填写密码");
+  		});
+  		
+  		
+  		
+  		
+  		//表单提交事件
+  		$("#bt_submit").click(function(){
+  			//判断手机号是否为空
+  			if(isNull($("#ph"), $("[role='ph']"),"您还没有填写手机号")){
+  				return;
+  			}
+  			else{
+  				//判断手机唯一性
+  				$.post("/meilishuo/mls/crol/regedit/exists",{'userinfo.ufnum':$("#ph").val()},function(txt){
+					$("[role='ph']").html("");
+					$("#ph").parent().find("i").remove();
+  					if(txt==1){
+							$("[role='ph']").html("手机号码已经被使用");
+							$("#ph").after("<i class='glyphicon glyphicon-minus-sign' style='position: absolute;right: -22px;top: 10px;font-size: 16px;color: #ff6699;' ></i>");
+							return;
+  					}
+  					else{
+  						//判断用户名是否为空
+  						if(isNull($("#nc"), $("[role='nc']"),"您还没有填写昵称")){
+  							return;
+  						}
+  						else{
+  							//判断用户名唯一性
+  							$.post("/meilishuo/mls/crol/regedit/exists",{'userinfo.uflogname':$("#nc").val()},function(txt){
+								$("[role='nc']").html("");
+								$("#nc").parent().find("i").remove();
+			  					if(txt==1){
+									$("[role='nc']").html("用户名已经被使用");
+									$("#nc").after("<i class='glyphicon glyphicon-minus-sign' style='position: absolute;right: -22px;top: 10px;font-size: 16px;color: #ff6699;' ></i>");
+			  						return;
+			  					}
+			  					else{
+			  						//判断密码是否为空
+			  						if(isNull($("#pwd"), $("[role='pwd']"),"您还没有填写密码")){
+			  							return;
+			  						}
+			  						//判断  重复密码是否为空
+			  						else if(isNull($("#pwd2"), $("[role='pwd2']"),"您还没有填写密码")){
+			  							return;
+			  						}
+			  						//判断两次输入的密码内容是否一致
+			  						else if($("#pwd").val()!=$("#pwd2").val()){
+			  							$("[role='pwd'],[role='pwd2']").html("两次密码输入不一致，请重新输入。");
+			  							return;
+			  						}
+			  						else{
+			  							//验证全部通过，表单提交
+			  							$("#fm1").submit();
+			  						}
+			  					}
+			  				});
+  						}
+  					}
+  				});
+  			}
+  			
+  			
+  		});
+  		
+  		
+  		
+  	
+  	})();
+  
+  </script>
+  
+  
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

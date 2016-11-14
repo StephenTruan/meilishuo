@@ -1,0 +1,51 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+
+
+ <div id="footer" class="col-lg-12" style="background-color: #F5F5F5;">
+ 
+    	<div class="col-lg-2 col-lg-offset-1" style="margin-top: 26px;">
+    		<h4 style="color: #666666;">买家帮助</h4>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/noviceGuide/" target="_blank">新手指南</a>
+    		</div>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/serviceEnsure/" target="_blank">服务保障</a>
+    		</div>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/helpCommon/" target="_blank">常见问题</a>
+    		</div>
+    	</div>
+ 
+    	<div class="col-lg-2 col-lg-offset-1" style="margin-top: 26px;">
+    		<h4 style="color: #666666;">商家帮助</h4>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/noviceGuide/" target="_blank">商家入驻</a>
+    		</div>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/serviceEnsure/" target="_blank">商家后台</a>
+    		</div>
+    	</div>
+ 
+    	<div class="col-lg-2 col-lg-offset-1" style="margin-top: 26px;">
+    		<h4 style="color: #666666;">关于我们</h4>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/noviceGuide/" target="_blank">关于美丽说</a>
+    		</div>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/serviceEnsure/" target="_blank">联系我们</a>
+    		</div>
+    		<div style="margin-top: 16px;padding: 0px;margin-left: 2px;">
+    			<a style="color: #666666;font-size: 14px;" href="http://www.meilishuo.com/helpcenter/helpCommon/" target="_blank">常见问题</a>
+    		</div>
+    	</div>
+    	
+    	
+    	<br>
+    	
+    	<div style="clear: both;margin-top: 180px;">
+    		<hr>
+    	</div>
+    	
+    	
+ </div>

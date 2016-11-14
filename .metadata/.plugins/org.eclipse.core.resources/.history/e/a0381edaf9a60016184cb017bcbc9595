@@ -1,0 +1,43 @@
+package org.meilishuo.test;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.hibernate.criterion.Restrictions;
+import org.meilishuo.dao.GoodsInfoDAO;
+import org.meilishuo.entity.Areainfo;
+import org.meilishuo.entity.ClothingSize;
+import org.meilishuo.entity.Goodsimage;
+import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Specifications;
+import org.meilishuo.entity.Typeinfo;
+import org.meilishuo.entity.Userinfo;
+import org.meilishuo.entity.Usertypeinfo;
+import org.meilishuo.interfaces.DAO;
+import org.meilishuo.mdservice.ModelService;
+import org.meilishuo.webtool.Item;
+import org.meilishuo.webtool.ItemList;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Test {
+	public static void main(String[] args) throws Exception {
+		ApplicationContext app = new ClassPathXmlApplicationContext("app1.xml");
+		
+		ModelService service = app.getBean("modelService",ModelService.class);
+		
+		DAO dao = service.getDaoMap().get(service.GOODSIMAGE);
+		int count = dao.getRowCount();
+		int id = (int) (Math.random()*count)+813;
+		System.out.println(id);
+		Goodsimage img = (Goodsimage) dao.getByID(id);
+		System.out.println(img.getGimgurl());
+		
+		/*Map<String, Integer> mp = service.getIdentifyCode();
+		Set<String> key = mp.keySet();
+		for (String k : key) {
+			System.out.println(k);
+		}*/
+	}
+}

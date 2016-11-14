@@ -15,7 +15,7 @@
     		<a href=""><i class="glyphicon glyphicon-file" style="color: "></i>&nbsp;&nbsp;&nbsp;我的订单</a>
     	</div>
     	<div class="pull-right">
-    		<a href=""><i class="glyphicon glyphicon-shopping-cart" style="color: #ff6699;"></i>&nbsp;&nbsp;&nbsp;我的购物车</a>
+    		<a href="/meilishuo/mls/crol/cart/tocart"><i class="glyphicon glyphicon-shopping-cart" style="color: #ff6699;"></i>&nbsp;&nbsp;&nbsp;我的购物车</a>
     	</div>
     	
     	<cc:if test="${sessionScope.activeUser==null }">

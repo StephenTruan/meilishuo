@@ -1,0 +1,254 @@
+十一月 14, 2016 7:55:47 上午 com.genuitec.pulse.client.deliverypackage.runtime.internal.Activator initializeLoggers
+信息: Package starting up at Mon Nov 14 07:55:47 CST 2016
+十一月 14, 2016 7:55:50 上午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForWorkspaceUpdates
+信息: Latest version of package has already been enabled in the workspace; check finished in 20ms
+十一月 14, 2016 8:04:57 上午 org.hibernate.cfg.Environment <clinit>
+信息: Hibernate 3.2.5
+十一月 14, 2016 8:04:57 上午 org.hibernate.cfg.Environment <clinit>
+信息: hibernate.properties not found
+十一月 14, 2016 8:04:57 上午 org.hibernate.cfg.Environment buildBytecodeProvider
+信息: Bytecode provider name : cglib
+十一月 14, 2016 8:04:57 上午 org.hibernate.cfg.Environment <clinit>
+信息: using JDK 1.4 java.sql.Timestamp handling
+十一月 14, 2016 8:10:34 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 8:10:34 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 8:10:40 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 8:10:40 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 8:17:14 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 8:17:14 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 8:21:41 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 8:21:41 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 8:33:35 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 8:33:35 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 8:34:52 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 8:34:52 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 8:35:02 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 8:35:02 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:10:48 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:10:48 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:16:49 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:16:50 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:19:36 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:19:36 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:21:31 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:21:31 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:25:03 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:25:03 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:34:55 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:34:55 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:43:13 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:43:13 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:45:30 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:45:30 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 9:50:16 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 9:50:16 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 10:30:02 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 10:30:02 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 10:30:56 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 10:30:56 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 10:41:19 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 10:41:48 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 10:41:48 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 10:42:29 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 10:42:29 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 10:43:58 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 10:43:58 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 10:50:38 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 10:50:38 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:00:48 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:00:48 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:05:20 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:05:20 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:09:37 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:09:37 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:09:43 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:09:44 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:12:58 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:12:58 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:19:16 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:19:16 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:21:31 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:21:31 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:27:35 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:27:35 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:47:29 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:47:29 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 11:47:41 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 11:47:41 上午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 12:58:42 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 12:58:42 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:27:58 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:27:58 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:29:04 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:29:04 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:29:23 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:29:23 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:30:21 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:30:22 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:31:14 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:31:14 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:32:58 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:32:58 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:34:55 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:34:55 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:37:26 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:37:26 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:39:31 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:39:31 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:40:55 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:40:55 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:41:15 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:41:15 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:43:33 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:43:33 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 2:44:11 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 2:44:11 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:25:02 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:25:02 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:26:22 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:26:22 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:29:41 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:29:41 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:30:00 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:30:00 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:32:03 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:32:03 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:32:27 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:32:27 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:35:35 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:35:35 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:40:10 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:40:10 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:41:30 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:41:30 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:42:53 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:42:53 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:58:45 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:58:45 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 3:58:55 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 3:58:55 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 4:00:29 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 4:00:29 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]
+十一月 14, 2016 4:00:45 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/app1.xml]
+十一月 14, 2016 4:00:45 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [E:/Program/javaEE/meilishuo/src/specification.xml]

@@ -1,0 +1,140 @@
+package org.meilishuo.action;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.meilishuo.entity.Areainfo;
+import org.meilishuo.entity.Goodsinfo;
+import org.meilishuo.entity.Storeinfo;
+import org.meilishuo.entity.Typeinfo;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Controller;
+
+import com.opensymphony.xwork2.ActionContext;
+/**
+ * 用于商品信息维护的后台
+ * @author JianchuanWu
+ *
+ */
+@Controller
+@Namespace(value = "/mls/becrol/goodsinfo")
+@ParentPackage("struts-default")
+@Results(value = {
+			
+		})
+@Lazy(true)
+public class BE_GoodsInfoAction extends BaseAction {
+	
+	
+	
+	
+	
+	
+	public void getGoodsType() throws JSONException{
+		//通过service获取一级商品类型
+		List<Typeinfo> types = getService().getTypeInfoesOfTopLevel();
+		//拼接json数据
+		JSONArray data = new JSONArray();
+		
+		for (Typeinfo tp : types) {
+			
+			JSONObject jb = new JSONObject();
+			//拼接json中的主键信息属性  以及  拼接类型名称属性
+			jb.put("tpid", tp.getTpid()).put("tpname", tp.getTpname());
+			//根据数据库信息状态，可以获取其从属类型（二级或三级商品类型）
+			if(tp.getBelong()!=null&&tp.getBelong().size()>0){
+				
+				JSONArray bl = new JSONArray();
+				
+				for (Typeinfo t : types) {
+					
+					JSONObject jt = new JSONObject();
+					jt.put("tpid", t.getTpid()).put("tpname", t.getTpname());
+					bl.put(jt);
+					
+				}
+				
+				jb.put("belong", bl);
+				
+			}
+			
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * 通过ajax 返回供应商信息json数据的方法
+	 * @throws JSONException
+	 * @throws IOException 
+	 */
+	@Action(value="store")
+	public void getStore() throws JSONException, IOException{
+		
+		JSONArray data = new JSONArray();
+		//获取所有供应商信息
+		List<Storeinfo> al = getService().getAll(getService().STOREINFO);
+		//拼接json数据
+		for (Storeinfo storeinfo : al) {
+			
+			JSONObject dt = new JSONObject();
+			//供应商主键
+			dt.put("value", storeinfo.getStid());
+			//供应商名称
+			dt.put("text", storeinfo.getStname());
+			
+		}
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setCharacterEncoding("utf-8");
+		
+		PrintWriter out = response.getWriter();
+		out.print(data);
+		out.flush();
+		out.close();
+		
+	}
+	
+	
+	
+	
+	/**============================================================================**/
+	
+	@Override
+	public String getKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getBatch_list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Serializable getEntity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
+}

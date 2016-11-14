@@ -1,0 +1,510 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    
+    <title>商品信息的添加与修改</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	
+	
+	<link rel="stylesheet" type="text/css" href="/meilishuo/dist/css/bootstrap.css">
+    
+    <script type="text/javascript" src="/meilishuo/sysjs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/meilishuo/dist/js/bootstrap.min.js"></script>
+
+	
+	<style type="text/css">
+	
+		.container{padding: 0px;margin: 0px;}
+		.label-default{background-color: #666666;}
+		
+		.dv6{width: 600px;}
+		.dv5{width: 500px;}
+		.dv4{width: 400px;}
+		.dv3{width: 300px;}
+		.dv2{width: 200px;}
+		.dv1{width: 100px;}
+		.form-control,.input-group-addon{font-size: 12px;}
+		.input-group-addon{background-color: #337ab7;color: #ffffff;border-color: #337ab7;}
+		.input-group-addon_care{background-color: #449d44;color: #ffffff;font-size: 14px;border: #449d44;}
+		.label{font-size: 12px;}
+		.label-default{background-color: transparent;color: #222222;font-size: 14px;}
+		.input-group{margin-top: 16px;}
+	</style>
+	
+
+  </head>
+  
+  <body>
+    	<div class="container">
+    		
+    		<form action="/meilishuo/mls/becrol/goodsinfo/doinsert" method="post" id="fm1">
+    		
+    			<div>
+    			
+    			  <!-- 通过选项卡和标签页分隔操作内容  基本信息、图片、价格 -->
+    			
+    				<!-- 标签选项卡 -->
+					<ul class="nav nav-tabs" role="tablist">
+					  <li role="presentation" class="active"><a href="#goods_info" role="tab" data-toggle="tab">基本信息</a></li>
+					  <li role="presentation"><a href="#img_info" role="tab" data-toggle="tab">图片管理</a></li>
+					  <li role="presentation"><a href="#price_info" role="tab" data-toggle="tab">价格管理</a></li>
+					</ul>
+					
+					<!-- 标签内容 -->
+					<div class="tab-content">
+					
+					  <!-- 基本信息 -->
+					  <div role="tabpanel" class="tab-pane " id="goods_info">
+							
+							<div class="dv3" style="float: left;margin-right: 20px;"><h5><label class="label label-default">商品名称</label></h5>
+								<input type="text" class="form-control" name="goodsinfo.gdid">
+							</div>
+
+							<div class="dv3" style="float: left;"><h5><label class="label label-default">供应商</label></h5>
+								<select class="form-control" id="store" style="width: 150px;" name="goodsinfo.storeinfo.stid"></select>
+							</div>
+							
+							
+							<br><br><br>
+							
+							<hr>
+							<div class="dv5">
+							
+								<h5><label class="label label-default">商品种类</label></h5>
+								<select class="form-control pull-left" style="width: 150px;margin-right: 6px;" id="firsttype"></select>
+								<select class="form-control" style="width: 150px;" id="secondtype" name="goodsinfo.typeinfo.tpid"></select>
+							
+							
+							</div>
+							
+							<hr>
+							
+							<h5><label class="label label-default">商品规格</label></h5>
+							<div id="sp">
+							
+							</div>
+							
+														
+					  </div>
+					  
+					  <!-- 图片设置 -->
+					  <div role="tabpanel" class="tab-pane" id="img_info">
+
+					  	<div class="dv1" style="float: left;margin-right: 20px;"><h5><label class="label label-default">商品图片</label></h5>
+					  	
+					  		<img alt="" id="img_main" value='' src="" style="width: 80px;height: 80px;" class="img-rounded">
+					  		
+					  	</div>
+					  	
+					  	<div class="dv1" style="float: left;margin-top: 50px;">
+					  	
+					  		<button class="btn btn-success" type="button" idx="1" id="bt_imgadd"><i class="glyphicon glyphicon-plus"></i></button>
+					  	
+					  	</div>
+					  	
+					  	<div style="width: 100%;height: 300px;float: left;margin-top: 20px;">
+					  	
+					  		<hr>
+					  		<iframe src="" id="imgchoose" name="imgchoose" style="width: 100%;height: 260px;border-radius:6px;"></iframe>
+					  	
+					  	</div>
+					  
+					  </div>
+					  
+					  <!-- 商品价格设置 -->
+					  <div role="tabpanel" class="tab-pane active" id="price_info">
+
+      				  	<div class="dv3" style="float: left;margin-right: 20px;margin-top: 10px;">
+      				  	
+      				  		<h5><label class="label label-default" style="float: left;">价格设置</label></h5>  <label style="font-size: 12px;"><input type="checkbox" id="price_same" style="float: left;margin-right: 10px;margin-top: 3px;margin-left: 20px;">统一价</label>
+      				  		
+      				  		<div class="input-group">
+      				  			<div class="input-group-addon" style="font-size: 14px;">普通会员价</div>
+      				  			<input type="text" class="form-control" placeholder="请填写价格" value="100" name="?" id="price1">
+      				  			<div class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></div>
+      				  		</div>
+      				  		
+      				  		<br>
+      				  		
+      				  		<div class="input-group">
+      				  			<div class="input-group-addon input-group-addon_care">VIP &nbsp;会员</div>
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price2" name="?" value="90">
+      				  			<div class="input-group-addon input-group-addon_care">
+      				  			<input type="range" max="1" min="0" step="0.1" value="0.9" target="#price2" style="width: 30px;"></div>
+      				  		</div>
+      				  		
+      				  		<div class="input-group">
+      				  			<div class="input-group-addon" style="background-color: orange;color: #ffffff;font-size: 14px;border: orange;">黄金会员</div>
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price3" value="80">
+      				  			<div class="input-group-addon" style="background-color: orange;border: orange;">
+      				  				<input type="range" max="1" min="0" step="0.1" value="0.8" target="#price3" style="width: 30px;">
+      				  			</div>
+      				  		</div>
+      				  		
+      				  		<div class="input-group">
+      				  			<div class="input-group-addon" style="background-color: silver;color: #ffffff;border: silver;font-size: 14px;">白金会员</div>
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price4" value="70">
+      				  			<div class="input-group-addon" style="background-color: silver;border: silver;">
+      				  				<input type="range" max="1" min="0" step="0.1" value="0.7" target="#price4" style="width: 30px;">
+      				  			</div>
+      				  		</div>
+      				  		
+      				  		<div class="input-group">
+      				  			<div class="input-group-addon" style="background-color: #31B0D5;color: #ffffff;border: #31B0D5;font-size: 14px;">钻石会员</div>
+      				  			<input type="text" class="form-control" role="prices" readonly="readonly" id="price5" value="60">
+      				  			<div class="input-group-addon" style="background-color: #31B0D5;border: #31B0D5;">
+      				  				<input type="range" max="1" min="0" step="0.1" value="0.6" target="#price5" style="width: 30px;">
+      				  			</div>
+      				  		</div>
+      				  		
+      				  	</div>
+      				  	
+      				  	
+      				  	      				  		
+      				  	<br>
+      				  		
+    				  	<div class="dv5 well text-danger" style="float: left;margin-left: 100px;margin-top: 20px;margin-right: 0px;">
+    				  		<i class="glyphicon glyphicon-info-sign" style="font-size: 14px;font-weight: normal;float: left;margin-top: 2px;"></i><label style="margin-left: 10px;">说&nbsp;明</label>
+    				  			<ul style="list-style: circle;line-height: 30px;">
+    				  				<li>填写"普通会员价",必须为数字.</li>
+    				  				<li>填写"普通会员价",其他价格将自动按照比例进行计算.</li>
+    				  				<li>除会员以外,其他价格可以用对应的滑动按钮调节.</li>
+    				  				<li>除会员以外,其他价格点击后可按
+    				  					<i class="glyphicon glyphicon-arrow-up"></i>
+    				  					<i class="glyphicon glyphicon-arrow-down"></i>
+    				  					<i class="glyphicon glyphicon-arrow-left"></i>
+    				  					<i class="glyphicon glyphicon-arrow-right"></i>
+    				  				进行调节.</li>
+    				  				<li>可用"统一价格"选项,将所有用户类型的价格设置为"普通会员价".</li>
+    				  			</ul>
+    				  			
+    				  			<br><br>
+    				  			<div style="clear: both;text-align: center;">
+    				  				<button class="btn btn-danger" type="submit" style="margin-right: 30px;">保存</button>
+    				  				<button class="btn btn-default" style="">重置</button>
+    				  			</div>
+    				  	</div>
+      				  	
+      				  	<div style="clear: both;">
+      				  		<br><br>
+      				  		<hr>
+      				  		
+      				  	</div>
+      				  	
+					  </div>
+					</div>
+    			
+    			</div>
+    		
+    		</form>
+    		
+    	</div>
+  </body>
+  
+  
+  
+  
+  <script type="text/javascript">
+  
+  
+  (function(){
+  	
+  	var types;
+  	
+  	$("").ready(function(){
+  	
+  		//页面根据分辨率进行适应性调制
+	  	var sc_width=$(window).width();
+	  	var sc_height=$(window).height();
+	  	
+	  	$(".container").width(sc_width*0.98);
+	  	$(".container").height(sc_height*0.9);
+	  	
+	  	
+	  	
+	  	//通过ajax获取供应商信息
+	  	$.post("/meilishuo/mls/becrol/goodsinfo/store",function(txt11){
+	  	
+	  		var sts = eval(txt11);
+	  		
+	  		$(sts).each(function(){
+	  		
+	  			var op = "<option value='"+this.value+"'>"+this.text+"</option>";
+	  			$("#store").append(op);
+	  		
+	  		});
+	  	
+	  	});
+	  	
+	  	//通过ajax获取商品类型信息（一级类型）
+	  	$.post("/meilishuo/mls/becrol/goodsinfo/firstLeveltype",function(txt){
+	  	
+	  		types=eval(txt);
+	  		
+	  		$(types).each(function(i){
+	  		
+	  			var op = "<option value='"+this.tpid+"'>"+this.tpname+"</option>";
+	  			$("#firsttype").append(op);
+	  			
+	  			if(i==0){
+	  			
+	  				var belong=this.belong;
+	  				
+	  				$(belong).each(function(){
+	  				
+	  					$("#secondtype").append("<option value='"+this.tpid+"'>"+this.tpname+"</option>");
+	  				
+	  				});
+	  				
+	  				getSp();
+	  			
+	  			}
+	  		
+	  		});
+	  	
+	  	});
+	  	
+	  	
+	  	//设置一级商品类型change事件
+	  	$("#firsttype").change(function(){
+	  	
+	  		getSp();
+	  	
+	  	});
+	  	
+	  	
+	  	//根据一级商品类型的切换，调整二级商品类型以及类型规格的方法
+	  	function getSp(){
+	  	
+	  		var firsttype=$("#firsttype");
+	  		
+	  		$(types).each(function(){
+	  		
+	  			if(this.tpid==firsttype.val()){
+	  				
+	  				//清除二级类型下拉菜单现有项，准备添加对应数据
+	  				$("#secondtype option").remove();
+	  				
+	  				//获取从属类型
+	  				var belong=this.belong;
+	  				
+	  				//遍历添加二级类型下拉菜单
+	  				$(belong).each(function(){
+	  				
+	  					$("#secondtype").append("<option value='"+this.tpid+"'>"+this.tpname+"</option>");
+	  				
+	  				});
+	  			
+	  			}
+	  			
+	  		});
+	  		
+	  		
+	  		//根据页面加载时一级商品的状态，获取对应的规格信息
+	  		$.post("/meilishuo/mls/becrol/goodsinfo/spfortype",{'goodsinfo.typeinfo.tpid':$("#firsttype").val()},function(txt){
+	  		
+	  			$("#sp").html("");
+	  			var data=eval(txt);
+	  			
+	  			$(data).each(function(idx){
+	  				//类目信息不予拼接（由之前的一级类型切换已经完成，不需要重复设置）
+	  				if(this.text!="类目"){
+	  				
+	  					var sps="<div class='input-group' style='float:left;width:200px;margin-right:26px'><div class='input-group-addon'>"+this.text+"</div>";
+	  					sps+="<select class='form-control' name='goodsinfo.'"+this.name+"></select></div>"
+	  				
+	  					$("#sp").append(sps);
+	  					
+	  					if(idx%3==0){
+	  					
+	  						$("#sp").append("<br/><br/><br/>");
+	  					
+	  					}
+	  					
+	  					var items=this.items;
+	  					
+	  					$(items).each(function(){
+	  					
+	  						var opt="<option value='"+this.value+"'>"+this.text+"</option>";
+	  						$("#sp select:last").append(opt);
+	  					
+	  					});
+	  				
+	  				}
+	  			
+	  			});
+	  		
+	  		
+	  		});
+	  		
+	  		
+	  	
+	  	}
+	  	
+	  	
+	  	
+	  	
+	  	//设置商品主图以及幅图（如存储） 的点击事件，已选择要添加的图片
+	  	$("#img_main,[role='imgs'] img").click(function(){
+	  		
+	  		//除去正在别指定的图片以外的其他图片边框为0
+	  		$("#img_info img").css("border","0px");
+	  		
+	  		//设置正在选择图片项的边框为红色
+	  		$(this).css("border","5px solid #337ab7");
+	  		//通过相应页面加载选择要指定的图片     this.id指的就是这个img标签现有的id  第一个为img_main
+	  		window.open("/meilishuo/mls/becrol/goodsinfo/imgs?imgid="+this.id,"imgchoose");
+	  		
+	  	});
+	  	
+	  	$("#bt_imgadd").click(function(){
+	  		
+	  		//除去正在别指定的图片以外的其他图片边框为0
+	  		$("#img_info img").css("border","0px");
+	  		
+	  		//如发现之前有图片的路径未制定，则停止添加新图片
+	  		if($("[role='imgs'] img:last").attr("src")==""||$("#img_main").attr("src")==""){
+	  		
+	  			return;
+	  		
+	  		}
+	  		
+	  		//设置新产生图片的id索引
+	  		var idx=$(this).attr("idx");
+	  		
+	  		//产生新节点，以便添加图片
+	  		var nimg="<div class='dv1' style='float:left;margin-right:20px;margin-top:26px;' role='imgs'><h5><label class='label label-default'></label></h5>";
+	  		nimg+="<a href='javascript:return(0)' role='imgremove' class='pull-right'><i class='glyphicon glyphicon-remove'></i></a>";
+	  		nimg+="<img id='img"+(idx++)+"' value='' src='' style='width:80px;height:80px;' class='img-rounded' /></div>";
+	  		
+	  		//设置新图片节点的id（关键字+索引）
+	  		$(this).attr("idx",idx);
+	  		
+	  		//添加节点到现有的“加号按钮”之前
+	  		$(this).parent().before(nimg);
+	  		
+	  		//为新节点添加事件
+	  		$("[role='imgs'] img").unbind("click");
+	  		$("[role='imgs'] img").click(function(){
+	  			
+	  			$("#img_info img").css("border","0px");
+	  			$(this).css("border","5px solid #337ab7");
+	  			window.open("/meilishuo/mls/becrol/goodsinfo/imgs?imgid="+this.id,"imgchoose");
+	  		
+	  		});
+	  		
+	  		$("[role='imgs'] img:last").click();
+	  		
+	  		//为商品副图中的“移除按钮”添加时间
+	  		$("[role='imgremove']").unbind("click");
+	  		$("[role='imgremove']").click(function(){
+	  		
+	  			$(this).parent().remove();
+	  			
+	  			var ct=$("#bt_imgadd").attr("count");
+	  			
+	  			//如果商品图片已经有6个则不允许添加
+	  			if($("[role='imgs'] img").size()+1<16){
+	  			
+	  				$("#bt_imgadd").show();
+	  			
+	  			}
+	  		
+	  		});
+	  		
+	  		//如果商品已经有六个，则不允许添加
+	  		if($("[role='imgs'] img").size+1==6){
+	  			$(this).hide();
+	  		}
+	  		
+	  	});
+	  	
+	  	
+	  	//商品的普通会员价格
+	  	$("#price1").keyup(function(){
+	  		
+	  		//当输入内容为非数字时货位空值时，自动设置内容为100
+	  		if(isNaN(this.value)){
+	  			this.value=100;
+	  		}
+	  		if(this.value==""){
+	  			this.value=100;
+	  		}
+	  		
+	  		//如“统一价格”被选中，则设置所有价格统一
+	  		if($("#price_same")[0].checked){
+	  			$("[role='prices']").val($("#price1").val());
+	  			return;
+	  		}
+	  		
+	  		//如“统一价格”没有被选中，则根据不同用户类型，设置折扣比例
+	  		var p=parseInt(this.value);
+	  		
+	  		$("#price2").val((p*0.9).toFixed());
+	  		$("#price3").val((p*0.8).toFixed());
+	  		$("#price4").val((p*0.7).toFixed());
+	  		$("#price5").val((p*0.6).toFixed());
+	  		
+	  	});
+	  	
+	  	//非普通用户以外价格的调节
+	  	$("[type=range]").change(function(){
+	  	
+	  		//如设置过“统一价格”则取消操作
+	  		if($("#price_same")[0].checked){
+	  			$("[role='prices']").val($("#price1").val());
+	  			return;
+	  		}
+	  		
+	  		//如“统一价格”没有被选中，则进行对应价格的调节
+	  		var pp=$(this).val()* parseInt($("#price1").val());
+	  		$($(this).attr("target")).val(pp.toFixed());
+	  	
+	  	});
+	  	
+	  	//点击“统一价格”时间
+	  	$("#price_same").click(function(){
+	  	
+	  		if(this.checked){
+	  			$("[role='prices']").val($("#price1").val());
+	  		}
+	  		else{
+	  			$("[type=range]").change();
+	  		}
+	  	
+	  	});
+	  	
+	  	
+	  	$("[role='prices']").focus(function(){
+	  	
+	  		$(this).next().find("input").focus();
+	  	
+	  	});
+	  	
+	  	
+	  	$("#fm1").submit(function(){
+	  	
+	  		var img_main=$("img_main");
+	  		
+	  	
+	  	});
+	  	
+	  	
+	  	
+	  	
+	  	
+	  });
+  
+  })();
+  
+  
+  
+  </script>
+  
+  
+</html>

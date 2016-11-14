@@ -27,7 +27,7 @@
 	/**最外层容器**/
 		.container{
 			width: 1346px;
-			height: 5000px;
+			height: 1260px;
 			padding: 0px;
 			font-family: SimHei;
 		}
@@ -217,8 +217,11 @@
 	    </div>
 	    
 	    
-	    
 	  </div>
+	  
+	    <!-- ==================================底部信息========================================= -->
+   		<jsp:include page="/main/footer.jsp"></jsp:include>
+   		
   </body>
   
   

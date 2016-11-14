@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.1.xsd
+						http://www.springframework.org/schema/util
+						http://www.springframework.org/schema/util/spring-util-3.1.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+						">
+	 
+	
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory"
+	></bean>
+	
+
+	<import resource="specification.xml"/>
+
+	
+	
+	<!-- 用注解方式 -->
+	<context:annotation-config></context:annotation-config>
+	
+	<!-- 自动扫描并注入Bean -->
+	<context:component-scan base-package="org.meilishuo"></context:component-scan>
+	
+	<!-- 与ModelService中的daoMap相对应，用了注解@Resource(name="daoMap") -->
+	<util:map id="daoMap" map-class="java.util.HashMap">
+		<entry key="goodsInfoDAO" value-ref="goodsInfoDAO"></entry>
+		<entry key="clothingCollarDAO" value-ref="clothingCollarDAO"></entry>
+		<entry key="clothingElementDAO" value-ref="clothingElementDAO"></entry>
+		<entry key="clothingSizeDAO" value-ref="clothingSizeDAO"></entry>
+		<entry key="clothingTypeversionDAO" value-ref="clothingTypeversionDAO"></entry>
+		<entry key="materialDAO" value-ref="materialDAO"></entry>
+		<entry key="typeinfoDAO" value-ref="typeinfoDAO"></entry>
+		<entry key="areaInfoDAO" value-ref="areaInfoDAO"></entry>
+		<entry key="goodsImageDAO" value-ref="goodsImageDAO"></entry>
+		<entry key="userInfoDAO" value-ref="userInfoDAO"></entry>
+		<entry key="userTypeInfoDAO" value-ref="userTypeInfoDAO"></entry>
+		<entry key="storeInfoDAO" value-ref="storeInfoDAO"></entry>
+		<entry key="orderInfoDAO" value-ref="orderInfoDAO"></entry>
+		<entry key="orderListDAO" value-ref="orderListDAO"></entry>
+	</util:map>
+	
+	<!-- 规格 -->
+	<util:map id="specificationMap" map-class="java.util.LinkedHashMap" >
+		<entry key="类目" value-ref="typeinfo_sps"></entry>
+		<entry key="衣长" value-ref="clothingsize_sps"></entry>
+		<entry key="版型" value-ref="clothingTypeversion_sps"></entry>
+		<entry key="领型" value-ref="clothingCollar_sps"></entry>
+		<entry key="元素" value-ref="clothingElement_sps"></entry>
+		
+		<entry key="裙长" value-ref="clothingSkirtsize_sps"></entry>
+		<entry key="腰线高度" value-ref="clothingLineheight_sps"></entry>
+		<entry key="材质" value-ref="material_sps"></entry>
+		<entry key="裙子厚度" value-ref="clothingSkirthoudu_sps"></entry>
+		<entry key="摆型" value-ref="clothingSkirtbaixing_sps"></entry>
+		<entry key="开衩" value-ref="clothingSkirtkaicha_sps"></entry>
+		
+		<entry key="裤长" value-ref="clothingTrouserssize_sps"></entry>
+		<entry key="裤子厚度" value-ref="clothingTrousersHoudu_sps"></entry>
+		
+		<entry key="闭合方式" value-ref="clothingClosed_sps"></entry>
+		
+		<entry key="鞋底材质" value-ref="sole_sps"></entry>
+		
+		<entry key="箱包外形" value-ref="packagetype_sps"></entry>
+		<entry key="内部结构" value-ref="packageStructure_sps"></entry>
+	</util:map>
+	
+	<!-- 配置数据源 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl"
+			value="jdbc:mysql://127.0.0.1:3306/mls">
+		</property>
+		<property name="user" value="root"></property>
+		<property name="password" value="root"></property>
+		<property name="maxPoolSize" value="200"></property>
+		<property name="minPoolSize" value="50"></property>
+		<property name="initialPoolSize" value="100"></property>
+		<property name="maxIdleTime" value="1000"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">false</prop>  
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>org/meilishuo/entity/Typeinfo.hbm.xml</value>
+				<value>org/meilishuo/entity/Goodsimage.hbm.xml</value>
+				<value>org/meilishuo/entity/Goodsoftheme.hbm.xml</value>
+				<value>org/meilishuo/entity/Goodsinfo.hbm.xml</value>
+				<value>
+					org/meilishuo/entity/ClothingElement.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/Goodscollection.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/Typeinfoandspecifications.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/Advertisement.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/PackageStructure.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/ClothingLineheight.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/ClothingSkirtbaixing.hbm.xml
+				</value>
+				<value>org/meilishuo/entity/ClothingSize.hbm.xml</value>
+				<value>
+					org/meilishuo/entity/Goodspricehistory.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/ClothingTrousersHoudu.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/ClothingSkirtsize.hbm.xml
+				</value>
+				<value>org/meilishuo/entity/Orderinfo.hbm.xml</value>
+				<value>org/meilishuo/entity/Orderlist.hbm.xml</value>
+				<value>org/meilishuo/entity/Goodsprice.hbm.xml</value>
+				<value>
+					org/meilishuo/entity/ClothingTrouserssize.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/Specifications.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/ClothingClosed.hbm.xml
+				</value>
+				<value>org/meilishuo/entity/Storeinfo.hbm.xml</value>
+				<value>org/meilishuo/entity/Goodscomment.hbm.xml</value>
+				<value>org/meilishuo/entity/Packagetype.hbm.xml</value>
+				<value>
+					org/meilishuo/entity/ClothingSkirthoudu.hbm.xml
+				</value>
+				<value>org/meilishuo/entity/Areainfo.hbm.xml</value>
+				<value>org/meilishuo/entity/Goodstag.hbm.xml</value>
+				<value>org/meilishuo/entity/Goodssize.hbm.xml</value>
+				<value>
+					org/meilishuo/entity/Rollingadvertisement.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/ClothingTypeversion.hbm.xml
+				</value>
+				<value>
+					org/meilishuo/entity/ClothingSkirtkaicha.hbm.xml
+				</value>
+				<value>org/meilishuo/entity/Keywordinfo.hbm.xml</value>
+				<value>org/meilishuo/entity/Material.hbm.xml</value>
+				<value>org/meilishuo/entity/Userinfo.hbm.xml</value>
+				<value>org/meilishuo/entity/Sole.hbm.xml</value>
+				<value>
+					org/meilishuo/entity/ClothingCollar.hbm.xml
+				</value>
+				<value>org/meilishuo/entity/Usertypeinfo.hbm.xml</value>
+				<value>org/meilishuo/entity/Theme.hbm.xml</value></list>
+		</property></bean></beans>

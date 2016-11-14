@@ -1,0 +1,186 @@
+<html>
+  <head>
+    <title>后台管理</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="/meilishuo/dist/css/bootstrap.css">
+    
+    <script type="text/javascript" src="/meilishuo/sysjs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/meilishuo/dist/js/bootstrap.min.js"></script>
+	
+	
+	<style type="text/css">
+		
+		body{padding: 0px;}
+		
+		.container{
+			width: 100%;
+			padding: 0px;
+		}
+		
+		.btn-group .dropdown-menu{left: 60%;top: 26px;}
+		
+		#left_items i{margin: 10px;}
+		
+		#left_items .btn{font-size: 13px;width: 70%;padding-left: 0px;}
+		
+		.dropdown-menu{font-size: 12px;background-color: #337AB7;opacity: 0.96;}
+		
+		.dropdown-menu>li>a{color: #ffffff;}
+		
+		.dropdown-menu>li>a:HOVER {color: #337AB7;}
+		
+		.dropdown-menu>li:FIRST-CHILD{border-top: 0px dashed #ffffff;}
+		.dropdown-menu>li{border-top: 1px solid #ffffff;}
+		
+		
+	</style>
+  
+  
+  </head>
+  
+  <body >
+    <div class="container" >
+    
+    	<div class="col-lg-12 bg-primary" id="top_item" style="font-size: 36px;" >
+    		<i class="glyphicon glyphicon-globe" style="margin: 26px;float: left;"></i>
+    		<div style="font-size: 26px;margin: 26px;float: left;">SYSTEM - BACKEND</div>
+    	</div>
+    	
+    		<div class="col-lg-2" style="height: 80%;padding: 0px;" id="left_items">
+    		
+    			<br><br>
+    			<div class="btn-group-vertical col-lg-10" role="group" style="padding: 0px;">
+    			
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-home"></i>
+					               首页信息
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>广告管理</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品搜索管理</a></li>
+				    </ul>
+				  </div>
+				  
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-gift"></i>
+					               商品信息
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品信息添加</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品信息关键字</a></li>
+				    </ul>
+				  </div>
+				  
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-tower"></i>
+					               店铺信息
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>广告管理</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品搜索管理</a></li>
+				    </ul>
+				  </div>
+				  
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-list"></i>
+					               订单信息
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>广告管理</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品搜索管理</a></li>
+				    </ul>
+				  </div>
+				  
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-user"></i>
+					               用户信息
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>广告管理</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品搜索管理</a></li>
+				    </ul>
+				  </div>
+				  
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-globe"></i>
+					               地区信息
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>广告管理</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品搜索管理</a></li>
+				    </ul>
+				  </div>
+				  
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-road"></i>
+					               导航信息
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>广告管理</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品搜索管理</a></li>
+				    </ul>
+				  </div>
+				  
+				  <div class="btn-group" role="group">
+				    <button type="button" class="btn btn-primary dropdown-toggle" 
+				    	  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					      <i class="glyphicon glyphicon-question-sign"></i>
+					               系统帮助
+					      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu" >
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>广告管理</a></li>
+				      <li><a target="showarea"><i class="glyphicon glyphicon-log-out"></i>商品搜索管理</a></li>
+				    </ul>
+				  </div>
+				  
+				</div>
+    		
+    		<div class="col-lg-10" style="height: 80%;padding: 0px;">
+    			<iframe id="showarea" name="showarea" style="width: 100%;height: 100%;border: 1px;" src="backend/b_d_welcome.html"></iframe>
+    		</div>
+    		
+    	</div>
+    	
+    </div>
+  </body>
+  
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
